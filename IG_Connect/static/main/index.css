@@ -1,0 +1,47 @@
+.head{height:5em;
+background-color:black;
+color:white;}
+html, body {
+	margin: 0;
+	padding: 0;
+}
+h4{position:relative;
+top:2em;
+left:1em;
+color:violet;}
+.heading{font-size:2em;
+font-family:Courier
+;}
+#horiline{border-bottom:solid;
+border-width:2px;}
+.hugebox{background-color:#F0F8FF;
+height:20em;
+position:relative;
+bottom:1em;}
+.confhead{font-size:3em;
+position:relative;
+top:1.4em;}
+.date{position:relative;
+left:2.2em;
+font-size:70%;}
+.desc{position:relative;
+left:1.5em;}
+.homebox{position:relative;
+background-color:#F0F8FF;
+left:3em;
+height:7em;
+}
+.Announcebox{position:relative;
+background-color:#F0F8FF;
+right:3em;
+height:7em;
+}
+.foot{ position:static;
+  bottom:0px;
+ width:150%;
+ height:2em;
+background-color:black;
+color:white;
+}
+.bigimg{position:relative;
+bottom:9em;}

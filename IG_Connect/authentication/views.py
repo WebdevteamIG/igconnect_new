@@ -7,9 +7,7 @@ from django.contrib.auth.models import User
 from models import Userprofile
 
 def index(request):
-    if request.user.is_authenticated() and request.user.is_active == True :
-        return redirect('/projects/')
-    return redirect('/auth/login')
+    return render(request,'homepage.djt',{})
 
 def login(request):
     if request.user.is_authenticated() and request.user.is_active == True :
