@@ -27,7 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+#REGISTRATION_OPEN = True
+#ACCOUNT_ACTIVATION_DAYS = 7
+#REGISTRATION_AUTO_LOGIN = True
+#LOGIN_REDIRECT_URL = '/index/' # The page you want users to arrive at after they successful log in
+#LOGIN_URL = '/auth/login'
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication',
-    'projects',
-    'events',
+    'authentication.apps.AuthenticationConfig',
+    'projects.apps.ProjectsConfig',
+    'events.apps.EventsConfig',
+    #'registration'
 ]
 
 MIDDLEWARE = [

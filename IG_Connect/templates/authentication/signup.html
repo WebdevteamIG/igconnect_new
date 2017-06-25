@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block main %}
+    <div class='row'>
+        <div class='col-sm-12'>
+            <form method='POST' action="">
+                <input class='form-control' name='username' placeholder="User-Name">
+                <input class='form-control' type="email" name="email" placeholder="Email">
+                <input class='form-control' type="password" name="password" placeholder="Password">
+                <input class='form-control' type="password" name="password2" placeholder="Re-Enter Password">
+                <input class='form-control' type="text" name="first_name" placeholder="First Name">
+                <input type='submit' value='Submit' class='btn btn-success btn-block'>
+            </form>
+        </div>
+    </div>
+{% endblock %}
