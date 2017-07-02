@@ -1,0 +1,60 @@
+html, body 
+{
+  height:100vh;
+}
+.left {
+                background-color: RGBA(21, 26, 33, 1.00);
+                padding-top: 7%;
+                padding-bottom: 12%;
+                padding-left: 7%;
+                padding-right: 7%;
+            }
+            .right {
+                background-color: RGBA(0, 168, 122, 1.00);
+            }
+            #heading {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 2em;
+                color:white;
+            }
+            #full-screen {
+                position: absolute;
+                min-width: 100%;
+                min-height: 100%;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 10;
+            }
+            .btn {
+                padding:10px 15px;font-size:15px;font-weight:400;line-height:1.4;border:none;border-radius:4px;-webkit-transition:border .25s linear,color .25s linear,background-color .25s linear;transition:border .25s linear,color .25s linear,background-color .25s linear;-webkit-font-smoothing:subpixel-antialiased
+            }
+            .text {
+                 border-top-width: 0px;
+                 border-left-width: 0px;
+                 border-bottom-width: 2px;
+                 border-right-width: 0px;
+                 color: white;
+                 font-family: 'Open Sans';
+                 background-color: transparent;
+                 border-bottom-color: white;
+                 margin-left: 7%;
+                 padding-right: 10%;
+            }
+            ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+               color:    #FFFFFF;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color:    #FFFFFF;
+                opacity:  1;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color:    #FFFFFF;
+                opacity:  1;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color:    #FFFFFF;
+            }
+            ::-ms-input-placeholder { /* Microsoft Edge */
+                color:    #FFFFFF;
+            }
