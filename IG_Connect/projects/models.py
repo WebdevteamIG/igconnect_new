@@ -11,7 +11,7 @@ def get_project_pic_path(instance,filename):
 class Project(models.Model) : 
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	projectName = models.CharField(max_length=50)
-	projectDescription = models.TextField(max_length=50)
+	projectDescription = models.TextField(max_length=500)
 	shortDesc = models.CharField(max_length=25)
 	projectImage = models.ImageField(upload_to=get_project_pic_path,null=True,blank=True)
 	publishedDate = models.DateField(auto_now=False, auto_now_add=False)

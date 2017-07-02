@@ -1,1 +1,200 @@
+{% extends "projects/header.djt" %}
 {% load staticfiles %}
+
+{% block content %}
+
+<div class="ui container" style="background-image: url({% static 'pictures/slideshow/bg.svg' %})">
+
+	<div class="ui grid">
+		<div class="two wide column">
+		<!-- {% for project in projects %}
+			{% ifequal forloop.counter0|divisibleby:2 0 %}
+				<p>Hello {{project}}</p>
+			{% else %}
+				<p>Hi {{project}} </p>
+			{% endifequal %}
+		{% endfor %} -->
+		</div>
+		
+		<div class="twelve wide column">
+			<div class="ui raised segment">
+
+				<!-- --------------------- -->
+		{% for project in projects %}
+			{% ifequal forloop.counter0|divisibleby:2 0 %}
+			<a href="/projects/show_project" style="color: black;">
+				<div class="ui grid">
+					<div class="one wide column"></div>
+					<div class="ten wide column">
+						<br><center><h2>{{project.projectName}}</h2></center><br>
+						<p>
+							{{project.shortDesc}}
+							This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
+						</p>
+						<div class="ui grid">
+							<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+							<div class="six wide column"> 
+								<h4>Contributors : </h4>
+								<ul>
+									<li>{{project.user.first_name}}</li>
+									{% for c in project.contributorsList.all %}
+									<li>{{c.first_name}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="one wide column"></div>
+					<div class="four wide column">
+						<img class="ui medium circular image" 
+						src="{{project.projectImage.url}}" style="height:150px; margin-top:20px;">
+					</div>
+				</div>
+			</a>				
+			{% else %}
+				<a href="/projects/show_project" style="color: black;">
+				<div class="ui grid">
+					<div class="four wide column">
+						<img class="ui medium circular image" 
+						src="{{project.projectImage.url}}" style="height:150px; margin-top:20px;">
+					</div>
+					
+					<div class="ten wide column">
+						<br><center><h2>{{project.projectName}}</h2></center><br>
+						<p>
+							{{project.shortDesc}}
+							This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
+						</p>
+						<div class="ui grid">
+							<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+							<div class="six wide column"> 
+								<h4>Contributors : </h4>
+								<ul>
+									<li>{{project.user.first_name}}</li>
+									{% for c in project.contributorsList.all %}
+									<li>{{c.first_name}}</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				</a>
+				<hr><hr>
+			{% endifequal %}
+		{% endfor %}
+
+		<!-- --------------------- -->
+
+				<div class="ui grid">
+					<div class="four wide column">
+						<img class="ui medium circular image" 
+						src="{% static 'pictures/slideshow/background1.jpg' %}" style="height:150px; margin-top:20px;">
+					</div>
+					
+					<div class="ten wide column">
+						<br><center><h2>My First Project</h2></center><br>
+						<p>
+							This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
+						</p>
+						<div class="ui grid">
+							<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+							<div class="six wide column"> 
+								<h4>Contributors : </h4>
+								<ul>
+									<li>Priyam Khandelwal</li>
+									<li>Dhruv Ramani</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr><hr>
+
+				<div class="ui grid">
+					<div class="one wide column"></div>
+					<div class="ten wide column">
+						<br><center><h2>My First Project</h2></center><br>
+						<p>
+							This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
+						</p>
+						<div class="ui grid">
+							<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+							<div class="six wide column"> 
+								<h4>Contributors : </h4>
+								<ul>
+									<li>Priyam Khandelwal</li>
+									<li>Dhruv Ramani</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="one wide column"></div>
+					<div class="four wide column">
+						<img class="ui medium circular image" 
+						src="{% static 'pictures/slideshow/background1.jpg' %}" style="height:150px; margin-top:20px;">
+					</div>
+					
+				</div>
+
+				<hr><hr>
+
+				<div class="ui grid">
+					<div class="four wide column">
+						<img class="ui medium circular image" 
+						src="{% static 'pictures/slideshow/background1.jpg' %}" style="height:150px; margin-top:20px;">
+					</div>
+					
+					<div class="ten wide column">
+						<br><center><h2>My First Project</h2></center><br>
+						<p>
+							This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
+						</p>
+						<div class="ui grid">
+							<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+							<div class="six wide column"> 
+								<h4>Contributors : </h4>
+								<ul>
+									<li>Priyam Khandelwal</li>
+									<li>Dhruv Ramani</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr><hr>
+
+				<div class="ui grid">
+					<div class="one wide column"></div>
+					<div class="ten wide column">
+						<br><center><h2>My First Project</h2></center><br>
+						<p>
+							This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
+						</p>
+						<div class="ui grid">
+							<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+							<div class="six wide column"> 
+								<h4>Contributors : </h4>
+								<ul>
+									<li>Priyam Khandelwal</li>
+									<li>Dhruv Ramani</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="one wide column"></div>
+					<div class="four wide column">
+						<img class="ui medium circular image" 
+						src="{% static 'pictures/slideshow/background1.jpg' %}" style="height:150px; margin-top:20px;">
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

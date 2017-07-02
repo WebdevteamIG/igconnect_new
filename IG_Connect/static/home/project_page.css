@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+#heading{
+	margin-right: 10%;
+	margin-left: 10%;
+	width: 80%;
+	text-align: center;
+	margin-top: 24px;
+}
+
+#short_desc{
+	margin-right: 5%;
+	margin-left: 5%;
+	width: 90%;
+	text-align: center;
+	margin-top: 18px;
+	font-style: italic;
+	font-weight: 200;
+}
+#details{
+	margin-left: 15px;
+	margin-top: 60px;
+}
+dt{
+	font-family: "Gotham", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	font-size: large;
+	float: left;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+
+dd{
+font
+	font-size: 0px;
+	font-size: 17px;
+}
+
+hr{
+	width: 95%;
+}
+
+
+

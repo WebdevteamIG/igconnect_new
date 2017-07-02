@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Innovation Garage</title>
+<title>Project desc</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Itim|Righteous" rel="stylesheet">
 
-<link href = "{% static 'home/style-homepage.css' %}" rel = "stylesheet">
+<link href = "{% static 'home/project_desc.css' %}" rel = "stylesheet">
 <script>
 
 
@@ -29,23 +29,6 @@
 
 
 $(document).ready(function($) {
-$('#myCarousel').carousel({interval: 1000});
-
-$('#myCarousel').carousel({
-		pause: '9000'
-	})
-	
-
-	function removeHidden(para){
-		$(para).removeClass('is-hidden');
-	}
-   
-	setTimeout(removeHidden,300, '.badge');
-   setTimeout(removeHidden,1000, '#innovate');
-   setTimeout(removeHidden,2000, '#work');
-   setTimeout(removeHidden,3000, '#enjoy');
-
-	
 
 
 	
@@ -94,7 +77,7 @@ $(window).scroll(function() {
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="projects">PROJECTS</a>
+                <a class="nav-link" href="#">PROJECTS</a>
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
@@ -111,10 +94,7 @@ $(window).scroll(function() {
         <ul class="navbar-nav ml-auto">
 
         	<!-- This item to appear only when the user is not logged in. -->
-            <li class="nav-item">
-
-                <a class="nav-link login btn-before" id="login-btn" href="#">LOGIN&nbsp;<i class="fa fa-user-o" aria-hidden="true"></i> </a>  
-            </li>
+         
 
             <!-- This to appear when the user is loggid in. Will have things like settings ans stuff. -->
             <li class="nav-ite dropdown">
@@ -132,66 +112,69 @@ $(window).scroll(function() {
     <div class="navline"></div>
 </nav>
 
-<div id = "myCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="10000">
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-    </div>
-</div>
-
-<div class="header">
-	
-	<div class="inner text-center">
-					<header class="ig-badge">
-					<span class="badge is-hidden">
-						<h2>INNOVATION</h2>
-						<h1>GARAGE </h1>
-						</span>
-					</header>
-
-					<div class="row flex">
-
-						<div class="col-sm-4 is-hidden" id="innovate">
-
-							<span><i class="fa fa-lightbulb-o  fa-3x"></i></span>
-
-							<h3>INNOVATE</h3>
-							<p>awd  awdwa awd</p>
-						</div>
-
-						<div class="col-sm-4  is-hidden" id = "work">
-							<span><i class="fa fa-cogs  fa-3x"></i></span>
-							<h3>WORK</h3>
-							<p>awda awdawd wad aw</p>
-						</div>
-
-						<div class="col-sm-4  is-hidden" id="enjoy">
-							<span><i class="fa boun fa-child fa-3x"></i></span>
-							<h3>ENJOY</h3>
-							<p>awdwa awdwa awda</p>
-						</div>
-
-					</div>
-
-					
-	</div>
-
-
-</div>
 
 
 
 
+<div class="container-fluid">
 	
 
     <div class="main text-center">
-    
+    	<div class="heading">
+    		<h2>{{proj.projectName}}</h2>
+    	</div>
+    	
+
+        <div class="bod row">
+            <div class="col-sm-4 details">
+
+                <!-- -->
+                <img src="{{ proj.projectImage.url }}"/>
+
+
+
+                <div class = "info">
+                    <ul>
+                        <li>Created by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;
+                         {{proj.user}}</li>
+                        <li>Published Date : &nbsp;&nbsp;{{proj.publishedDate}}</li>
+                        <li>Branch List &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;
+                        {{proj.branchList}}</li>
+                        {% if contrib %}
+
+                        
+                            <li>
+                                
+                                <div>Contributors &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                                </div>
+                                        <ul>
+                                            {% for con in contrib%}
+                                                <li>{{con}}</li>
+                                            {%endfor%}
+                                        </ul>
+                                
+                                
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class = "col-sm-8 desc">
+                <div class="head">
+                    <h3>Description</h3>
+                </div>
+                <p>
+                    {{proj.projectDescription}}
+                <p>
+            </div>
+        </div>  
+    </div>
+
+    <div class="data">
+
+
+    </div>
     </div>
 
  	<footer class="footer">
