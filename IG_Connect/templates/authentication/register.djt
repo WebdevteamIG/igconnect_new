@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% block main %}
+    <div class='row'>
+        <div class='col-sm-12'>
+            <form method='POST'>
+                <input type='text' name='reg_num' placeholder="Registration Number">
+                <!-- Will do Later -->
+                <input type='submit' class='btn btn-success'>
+            </form>
+{% endblock %}
