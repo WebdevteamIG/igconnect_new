@@ -206,7 +206,7 @@ $(window).scroll(function() {
                            </tr>
                            <tr>
                                <td style="width: 30%;">Materials Used</td>
-                               <td style="width: 70%;">{{project.desc.materialUsed}}</td>
+                               <td style="width: 70%;">{{project.desc.materialsUsed}}</td>
                            </tr>
                             <tr>
                                <td style="width: 30%;">Development Phases</td>
