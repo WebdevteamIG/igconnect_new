@@ -1,0 +1,186 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IG Connect</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <meta name="author" content="IG WebDev Team">
+    <meta name="description" content="Innovation Garage NIT WARANGAL Website">
+    <meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+
+    <script type="text/javascript" src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/components/form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/components/transition.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <style type="text/css">
+        .d {
+            background-color: rgba(170, 55, 183, 0.31) !important;
+        }
+    </style>
+
+</head>
+
+<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+
+<div class="ui fluid container">
+
+<div class="ui grid" style="margin-top: 50px;">
+    <div class="four wide column">
+        <center>
+        <a href="/"><button class="ui teal button"><i class="home icon"></i>HOME</button></a>
+        {% if request.user.is_superuser %}
+        <br><br>
+        <a href="/borrow/addItem"><button class="ui youtube button">Add Item</button></a>
+        {% endif %}
+        </center>
+    </div>
+    <div class="ten wide column">
+        <div class="ui two item menu">
+          <a class="item active" id="equipment">Equipments</a>
+          <a class="item" id="book">Books</a>
+        </div>
+        <table class="ui celled padded table" id="listTable">
+            <thead>
+                <tr>
+                    <th class="d">Name of Item</th>
+                    <th class="d">Status</th>
+                    <th class="d">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    {% ifequal item.itemType|stringformat:"s" "book" %}
+                    <tr class="bookRows">
+                        <td>{{item.itemName}}</td>
+                        <td>
+                            {% ifequal item.status 1 %}
+                                Available
+                            {% else %}
+                                {% ifequal item.status 2 %}
+                                    Requested
+                                {% else %}
+                                    Borrowed
+                                {% endifequal %}
+                            {% endifequal %}
+                        </td>
+                        <td>
+                            {% ifequal item.status 1 %}
+                            <a href="/borrow/requestItem/{{item.id}}">
+                            <button class="small ui teal button"> Make Request</button>
+                            </a>
+                            {% else %}
+                                {% ifequal item.correspondingRequest.all.0.user request.user %}
+                                    {% ifequal item.status 2 %}
+                                    <a href="/borrow/cancelItemRequest/{{item.id}}">
+                                    <button class="small ui red button">Cancel Request</button>
+                                    </a>
+                                    {% else %}
+                                    <button class="small ui default button" disabled>Cancel Request</button>
+                                    {% endifequal %}
+                                {% else %}
+                                <button class="small ui default button" disabled>Requested</button>
+                                {% endifequal %}
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr class="equipmentRows">
+                        <td>{{item.itemName}}</td>
+                        <td>
+                            {% ifequal item.status 1 %}
+                                Available
+                            {% else %}
+                                {% ifequal item.status 2 %}
+                                    Requested
+                                {% else %}
+                                    Borrowed
+                                {% endifequal %}
+                            {% endifequal %}
+                        </td>
+                        <td>
+                            {% ifequal item.status 1 %}
+                            <a href="/borrow/requestItem/{{item.id}}">
+                            <button class="small ui teal button"> Make Request</button>
+                            </a>
+                            {% else %}
+                                {% ifequal item.correspondingRequest.all.0.user request.user %}
+                                    {% ifequal item.status 2 %}
+                                    <a href="/borrow/cancelItemRequest/{{item.id}}">
+                                    <button class="small ui red button">Cancel Request</button>
+                                    </a>
+                                    {% else %}
+                                    <button class="small ui default button" disabled>Cancel Request</button>
+                                    {% endifequal %}
+                                {% else %}
+                                <button class="small ui default button" disabled>Requested</button>
+                                {% endifequal %}
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                    {% endifequal %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    $('.bookRows').hide();
+    $('.eqiupmentRows').show();
+
+    $('#equipment').click(function(){
+        $(this).addClass('active');
+        $('#book').removeClass('active');
+        $('.bookRows').hide();
+        $('.equipmentRows').show();
+    });
+
+    $('#book').click(function(){
+        $(this).addClass('active');
+        $('#equipment').removeClass('active');
+        $('.bookRows').show();
+        $('.equipmentRows').hide();
+    });
+</script>
+
+</html>

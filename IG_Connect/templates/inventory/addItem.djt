@@ -59,57 +59,42 @@
         <div class="ui large buttons">
           <a href="/"><button class="ui facebook button">Home</button></a>
           <div class="or"></div>
-          <a href="/updates/addNews"><button class="ui youtube button">Add New Update</button></a>
-        </div>
-        </center>
-        <br><br>
-        <center>
-        <div class="ui large buttons">
-          <a href="/borrow/listRequests"><button class="ui facebook button">Requests Page</button></a>
+          <a href="/borrow/listRequests"><button class="ui youtube button">Requests Page</button></a>
         </div>
         </center>
     </div>
-    <div class="ten wide column">
-        <table class="ui celled padded table">
-            <thead>
-                <tr>
-                    <th class="d">Title</th>
-                    <th class="d">Date Added</th>
-                    <th class="d">Date Published (or) <br> Date Last Published</th>
-                    <th class="d">Action</th>
-                    <th class="d">AddLink</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for news in updates %}
-                <tr>
-                    <td>{{news.title}}</td>
-                    <td>{{news.dateAdded}}</td>
-                    <td>{{news.publishedDate}}</td>
-                    <td>
-                        {% if news.isPublished %}
-                        <a href="/updates/unpublish/{{news.id}}">
-                        <button class="small ui red button">Unpublish from page</button>
-                        </a>
-                        {% else %}
-                        <a href="/updates/publish/{{news.id}}">
-                        <button class="small ui green button">Publish on page</button>
-                        </a>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="#">
-                        <button class="small ui teal button">Add Link</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="eight wide column">
+        <div class="ui fluid segment" style="background-color:beige;">
+            <form action="/borrow/addItem/" method="post" class="ui form">
+            {% csrf_token %}
+            <div class="field">
+                <label>Item Name</label>
+                <input type="text" name="itemName" required>
+            </div>
+            <div>
+                <label>Category</label>
+                <select name="itemType" class="ui fluid dropdown" required>
+                    <option value="" hidden>---</option>
+                    <option value="book">Book</option>
+                    <option value="equipment">Equipment</option>
+                </select>
+            </div>
+            <br><br>
+            <center>
+            <button class="ui red button" type="submit">
+                <i class="plus icon"></i> Add Item
+            </button>
+            </center>
+            </form>
+        </div>
     </div>
 </div>
 </div>
 
 </body>
+
+<script type="text/javascript">
+     $('select.dropdown').dropdown();
+</script>
 
 </html>

@@ -90,6 +90,12 @@ $(window).scroll(function() {
     <a class="navbar-brand d-flex mx-auto" href="#">IG connect</a>
     <div class="navbar-collapse collapse dual-collapse text-center">
         <ul class="navbar-nav mr-auto  ">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/borrow">Dashboard</a>
+                <div class="nav-border"></div>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="/projects">PROJECTS</a>
                 <div class="nav-border"></div>

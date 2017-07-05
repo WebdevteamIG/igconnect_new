@@ -22,7 +22,7 @@ def index(request):
 
 def signin(request):
     if request.user.is_authenticated() and request.user.is_active == True :
-        return redirect('/projects/')
+        return redirect('/')
     if request.method == 'POST':
         user_name = request.POST['user_name']
         password = request.POST['password']
@@ -34,7 +34,7 @@ def signin(request):
             return redirect('/auth/register')
         else : 
             login(request, user)
-            return redirect('/projects/')
+            return redirect('/')
     return render(request, 'authentication/login.djt', None)
 
 def signout(request):
@@ -43,7 +43,7 @@ def signout(request):
 
 def register(request):
     if request.user.is_active == True:
-        return redirect('/projects/')
+        return redirect('/')
     if request.method == 'POST':
         regNum = request.POST['regNum']
         course = request.POST['course']
@@ -58,12 +58,12 @@ def register(request):
         user_.save()
         request.user.is_active = True
         request.user.save()
-        return redirect('/projects/')
+        return redirect('/')
     return render(request, 'authentication/register.djt', None)
 
 def signup(request):
     if request.user.is_active == True and request.user.is_authenticated():
-        return redirect('/projects/')
+        return redirect('/')
     if request.method == 'POST':
         username  = request.POST['username'].lower()
         emailadr  = request.POST['email']

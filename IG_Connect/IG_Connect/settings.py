@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'events.apps.EventsConfig',
     'updates',
+    'inventory',
 ]
 
 MIDDLEWARE = [
