@@ -343,7 +343,7 @@ nav.navbar.shrink {
 .main{
   background-color:   #F1F3F2;
   background-image: url('../pictures/slideshow/bg.svg');
-  height:100vh;
+  min-height:100vh;
 }
 .main:before{
   content:"";

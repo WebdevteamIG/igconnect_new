@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'projects.apps.ProjectsConfig',
     'events.apps.EventsConfig',
+    'updates',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,14 @@ DATABASES = {
         'PASSWORD': 'priyam123',
     }
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'speakerstedxnitw@gmail.com'
+EMAIL_HOST_PASSWORD = 'speakerstedx'
+EMAIL_PORT = 587
 
 
 # Password validation

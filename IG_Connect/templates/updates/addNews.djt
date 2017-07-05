@@ -1,0 +1,132 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IG Connect</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <meta name="author" content="IG WebDev Team">
+    <meta name="description" content="Innovation Garage NIT WARANGAL Website">
+    <meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+
+    <script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'main/semantic.js' %}"></script>
+    <script src="{% static 'main/components/form.js' %}"></script>
+    <script src="{% static 'main/components/transition.js' %}"></script>
+
+    <style type="text/css">
+        .d {
+            background-color: rgba(170, 55, 183, 0.31) !important;
+        }
+    </style>
+
+</head>
+
+<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+
+<div class="ui fluid container">
+
+<div class="ui grid" style="margin-top: 50px;">
+    <div class="four wide column">
+        <center>
+        <div class="ui large buttons">
+          <a href="/"><button class="ui facebook button">Home</button></a>
+          <div class="or"></div>
+          <a href="/updates"><button class="ui youtube button">Dashboard</button></a>
+        </div>
+        </center>
+    </div>
+    <div class="eight wide column">
+        <div class="ui fluid segment" style="background-color:beige;">
+            <form action="/updates/addNews/" method="post" class="ui form">
+            {% csrf_token %}
+            <div class="field">
+                <label>Title</label>
+                <input type="text" name="title">
+            </div>
+            <div class="field">
+                <label>Content</label>
+                <textarea name="content" rows="3"></textarea>
+            </div>
+            <div class="inline field">
+                <div class="ui checkbox">
+                  <input type="checkbox" tabindex="0" name="fbLink" id="fb">
+                  <label>Add FB Link</label>
+                </div>
+            </div>
+            <div class="field c1">
+                <label>FbLink Name</label>
+                <input type="text" name="fblinkName">
+            </div>
+            <div class="field c1">
+                <label>FbLink Url</label>
+                <input type="text" name="fburlToPage">
+            </div>
+            <div class="inline field">
+                <div class="ui checkbox">
+                  <input type="checkbox" tabindex="0" name="otherLink" id="other">
+                  <label>Add Other Link</label>
+                </div>
+            </div>
+            <div class="field d1">
+                <label>Other Link Name</label>
+                <input type="text" name="linkName">
+            </div>
+            <div class="field d1">
+                <label>Other Link Url</label>
+                <input type="text" name="urlToPage">
+            </div>
+            <center>
+            <button class="ui red button" type="submit">
+                <i class="plus icon"></i> Add NewsUpdate
+            </button>
+            </center>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    $('.ui.checkbox').checkbox();
+    $('.c1').hide();
+    $('.d1').hide();
+
+    $('#fb').change(function(){
+        $('.c1').toggle();
+    });
+
+    $('#other').change(function(){
+        $('.d1').toggle();
+    });
+</script>
+</html>

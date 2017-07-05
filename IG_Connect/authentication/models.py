@@ -31,14 +31,22 @@ class Userprofile(models.Model) :
 		('PHD','Phd'),
 	)
 
-	user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+	user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='profile')
 	regNum = models.CharField(max_length=10)
 	course = models.CharField(max_length=10,choices = course_choices,default='BTech')
 	branch = models.CharField(max_length=10,choices = branch_choices)
 	contact = models.CharField(max_length=20)
-	aboutMe = models.CharField(max_length=200)
+	aboutMe = models.TextField(max_length=1000)
 	profile_pic = models.ImageField(upload_to=get_profilepic_path,null=True,blank=True)
 	resume = models.FileField(upload_to=get_resume_path,null=True,blank=True)
 
 	def __str__(self):
 		return (self.user.first_name + "_" + self.regNum)
+
+class ParticipatedEvent(models.Model) :
+	user = models.ForeignKey(User, related_name='events')
+	eventName = models.CharField(max_length=255)
+	eventDesc = models.TextField(max_length=1000)
+
+	def __str__(self):
+		return (self.user.first_name+ "-" + self.eventName)

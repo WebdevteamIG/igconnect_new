@@ -1,0 +1,127 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IG Connect</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <meta name="author" content="IG WebDev Team">
+    <meta name="description" content="Innovation Garage NIT WARANGAL Website">
+    <meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+
+    <script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'main/semantic.js' %}"></script>
+    <script src="{% static 'main/components/form.js' %}"></script>
+    <script src="{% static 'main/components/transition.js' %}"></script>
+</head>
+
+<body style="background-image:url({% static 'pictures/bg1.jpg' %});">
+
+<div class="ui fluid container">
+<div class="ui grid" style="margin-top: 100px;">
+    <div class="four wide column">
+        <center>
+        <div class="ui large buttons">
+          <a href="/"><button class="ui facebook button">Home</button></a>
+          <div class="or"></div>
+          <a href="/projects"><button class="ui youtube button">Projects</button></a>
+        </div>
+        </center>
+    </div>
+    <div class="eight wide column">
+        <div class="ui fluid segment" style="background-color:beige;">
+            <form action="/auth/updateProfile/" method="post" class="ui form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="field">
+                <label>Registration Number</label>
+                <input type="text" name="regNum" value="{{request.user.profile.regNum}}">
+            </div>    
+            <div class="field">
+                <label>Course</label>
+                <select name="course" class="ui dropdown" id="course">
+                  <option value="">Select Category</option>
+                  <option value="BTech">B.Tech</option>
+                  <option value="MTech">M.Tech</option>
+                  <option value="MCA">MCA</option>
+                  <option value="MBA">MBA</option>
+                  <option value="PHD">PHD</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Branch</label>
+                <select name="branch" class="ui dropdown" id="branch">
+                  <option value="">Select Category</option>
+                  <option value="CSE">CSE</option>
+                  <option value="ECE">ECE</option>
+                  <option value="MECH">MECH</option>
+                  <option value="ME">ME</option>
+                  <option value="CHE">CHE</option>
+                  <option value="CIVIL">CIVIL</option>
+                  <option value="EEE">EEE</option>
+                  <option value="BIO">BIOTECH</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Contact</label>
+                <input type="text" name="contact" value="{{request.user.profile.contact}}">
+            </div>
+            <div class="field">
+                <label>About Me</label>
+                <textarea name="aboutMe">{{request.user.profile.aboutMe}}</textarea>
+            </div>
+            <div class="field">
+                <label>Profile Pic</label>
+                <input type="file" name="profilepic">
+            </div>
+            <div class="field">
+                <label>Upload Resume</label>
+                <input type="file" name="resume">
+            </div>
+            <center>
+            <button class="ui red button" type="submit">
+                <i class="heart icon"></i> Save Changes
+            </button>
+            </center>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+    $('select.dropdown').dropdown();
+
+    $('#course').val({{request.user.profile.course}});
+    $('#branch').val({{request.user.profile.branch}});
+</script>
+</html>

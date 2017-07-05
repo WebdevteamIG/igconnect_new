@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IG Connect</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <meta name="author" content="IG WebDev Team">
+    <meta name="description" content="Innovation Garage NIT WARANGAL Website">
+    <meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+
+    <script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'main/semantic.js' %}"></script>
+    <script src="{% static 'main/components/form.js' %}"></script>
+    <script src="{% static 'main/components/transition.js' %}"></script>
+
+    <style type="text/css">
+        .d {
+            background-color: rgba(170, 55, 183, 0.31) !important;
+        }
+    </style>
+
+</head>
+
+<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+
+<div class="ui fluid container">
+
+<div class="ui grid" style="margin-top: 50px;">
+    <div class="four wide column">
+        <center>
+        <div class="ui large buttons">
+          <a href="/"><button class="ui facebook button">Home</button></a>
+          <div class="or"></div>
+          <a href="/updates/addNews"><button class="ui youtube button">Add New Update</button></a>
+        </div>
+        </center>
+    </div>
+    <div class="ten wide column">
+        <table class="ui celled padded table">
+            <thead>
+                <tr>
+                    <th class="d">Title</th>
+                    <th class="d">Date Added</th>
+                    <th class="d">Date Published (or) <br> Date Last Published</th>
+                    <th class="d">Action</th>
+                    <th class="d">AddLink</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for news in updates %}
+                <tr>
+                    <td>{{news.title}}</td>
+                    <td>{{news.dateAdded}}</td>
+                    <td>{{news.publishedDate}}</td>
+                    <td>
+                        {% if news.isPublished %}
+                        <a href="/updates/unpublish/{{news.id}}">
+                        <button class="small ui red button">Unpublish from page</button>
+                        </a>
+                        {% else %}
+                        <a href="/updates/publish/{{news.id}}">
+                        <button class="small ui green button">Publish on page</button>
+                        </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="#">
+                        <button class="small ui teal button">Add Link</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+</body>
+
+</html>

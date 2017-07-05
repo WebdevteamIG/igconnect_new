@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', authentication.views.index),
     url(r'^auth/', include('authentication.urls', namespace = 'authentication')),
-    url(r'^projects/', include('projects.urls', namespace = 'projects'))
+    url(r'^projects/', include('projects.urls', namespace = 'projects')),
+    url(r'^updates/',include('updates.urls', namespace = 'updates')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

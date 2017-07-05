@@ -227,8 +227,7 @@ nav.navbar.shrink {
 
 
 .main{
-  background-color:   rgba(134, 181, 224, 0.25);
-  background-color:   #F1F3F2;
+  background-color: white;
   
   padding-top: 100px;
 }
@@ -253,7 +252,7 @@ nav.navbar.shrink {
   height: 70vh;
 }
 
-.main .bod .details{
+.details{
   padding-top: 10px;
   border-right: 1.5px solid #727a87;
 }
@@ -344,3 +343,7 @@ footer{
     color : white;
 }
 
+.memberName {
+  color: black !important;
+  font-weight: 600;
+}
