@@ -40,6 +40,13 @@ def requestItem(request,id) :
 		requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
 		requestObj.save()
 
+		logObj = requestActionLog()
+		logObj.item = item
+		logObj.user = request.user
+		logObj.dateOfAction = datetime.datetime.now().strftime("%Y-%m-%d")
+		logObj.content = 'Request Made by user'
+		logObj.save()
+
 	except Exception as e :
 		print e
 		return HttpResponse("There is no such Item, Sorry :) !!!")
@@ -55,6 +62,13 @@ def approveItemRequest(request,id) :
 	requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
 	requestObj.save()
 
+	logObj = requestActionLog()
+	logObj.item = item
+	logObj.user = requestObj.user
+	logObj.dateOfAction = datetime.datetime.now().strftime("%Y-%m-%d")
+	logObj.content = 'Request Approved by admin'
+	logObj.save()
+
 	return redirect('/borrow/listRequests')
 
 def cancelItemRequest(request,id) : 
@@ -63,16 +77,35 @@ def cancelItemRequest(request,id) :
 	requestObj = ItemRequest.objects.get(item=item)
 	item.status = 1
 	item.save()
+
+	logObj = requestActionLog()
+	logObj.item = item
+	logObj.user = request.user
+	logObj.dateOfAction = datetime.datetime.now().strftime("%Y-%m-%d")
+	logObj.content = 'Request Cancelled by user'
+	logObj.save()
+
 	requestObj.delete()
 
 	return redirect('/borrow')
 
-def getItemBack(request,id) : 
+def getItemBack(request,id,Actiontype) : 
 	response = {}
 	item = Item.objects.get(id=id)
 	requestObj = ItemRequest.objects.get(item=item)
 	item.status = 1
 	item.save()
+
+	logObj = requestActionLog()
+	logObj.item = item
+	logObj.user = requestObj.user
+	logObj.dateOfAction = datetime.datetime.now().strftime("%Y-%m-%d")
+	if Actiontype == '1' :
+		logObj.content = 'Request Rejected by admin'
+	else :
+		logObj.content = 'Item returned and collected safely'
+	logObj.save()
+
 	requestObj.delete()
 
 	return redirect('/borrow/listRequests')
@@ -81,3 +114,8 @@ def listRequests(request) :
 	response = {}
 	response['itemRequests'] = ItemRequest.objects.all()
 	return render(request,'inventory/requestHandlePage.djt',response)
+
+def viewLogs(request) :
+	response = {}
+	response['logs'] = requestActionLog.objects.all()
+	return render(request,'inventory/logsPage.djt',response)

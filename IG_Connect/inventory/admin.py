@@ -7,3 +7,4 @@ from .models import *
 
 admin.site.register(Item)
 admin.site.register(ItemRequest)
+admin.site.register(requestActionLog)

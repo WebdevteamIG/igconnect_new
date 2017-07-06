@@ -26,3 +26,12 @@ class ItemRequest(models.Model) :
 
 	def __str__(self) :
 		return (self.user.username + "-" + self.item.itemName)
+
+class requestActionLog(models.Model) :
+	item = models.ForeignKey(Item)
+	user = models.ForeignKey(User,related_name='logs')
+	dateOfAction = models.DateField(auto_now=False, auto_now_add=False)
+	content = models.CharField(max_length=255)
+
+	def __str__(self) :
+		return (self.user.username+" "+self.item.itemName+" "+self.content)
