@@ -26,10 +26,12 @@
 					</div>
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
-					    <select multiple="multiple" name="contributorList" class="ui dropdown">
+					    <select multiple="multiple" name="contributorList" class="ui dropdown" id="contibutorsSelectBox">
 					      <option value="">Select Category</option>
 					      {% for person in contributors %}
-					      	<option value="{{person.username}}">{{person.first_name}}</option>
+					      	<option value="{{person.username}}" 
+					      	{% if person in project.contributorsList.all %} selected {% endif %}
+					      	>{{person.first_name}}</option>
 					      {% endfor %}
 					 	</select>
 					</div>
@@ -113,8 +115,6 @@
 {% block script %}
 <script type="text/javascript">
 	$('select.dropdown').dropdown();
-
-	$('select.dropdown').dropdown('set selected',{{project.contributorsList.all}});
 
     $('#projectpicbutton').click(function(){
 		$('#projectpic').click();

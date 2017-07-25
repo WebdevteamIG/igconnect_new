@@ -49,7 +49,7 @@
 
 </head>
 
-<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+<body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 
 <div class="ui fluid container">
 

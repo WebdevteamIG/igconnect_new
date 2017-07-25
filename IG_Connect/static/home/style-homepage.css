@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body{
-	font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar{
-	
+  
   padding-right: 17%;
-	-webkit-transition: all 0.3s ease;
-  	 transition: all 0.3s ease;
-   	font-family: 'Roboto', sans-serif;
-	 
+  -webkit-transition: all 0.3s ease;
+     transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+   
 }
 
 
@@ -24,10 +24,10 @@ body{
 }
 
 .navbar li a{
-	color:white !important;
-	font-weight:600;
-	letter-spacing: 1px;
-	font-size: 0.75em;
+  color:white !important;
+  font-weight:600;
+  letter-spacing: 1px;
+  font-size: 0.75em;
   white-space: nowrap;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
@@ -59,17 +59,17 @@ body{
 
 
 .nav-item{
-	margin:0 1%;
-	color:white;
+  margin:0 1%;
+  color:white;
  
 }
 
 .navbar-brand{
 
   font-family: 'Itim', cursive;
-	font-size: 2em;
-	margin-left:20% !important;
-	margin-right: 2% !important;
+  font-size: 2em;
+  margin-left:20% !important;
+  margin-right: 2% !important;
   position: relative;
   top:-10%;
 }
@@ -361,8 +361,37 @@ nav.navbar.shrink {
 /* footer */
 
 footer{
-  height : 150px ;
+  
   background-color:  rgba(19, 35, 47, 1);
+  padding: 2% 0;
+}
+
+footer .for {
+  width: 35%;
+  margin: auto;
+}
+
+footer .for h3{
+color: #a5a9ad ;
+padding-bottom: 20px;
+width: 50%;
+border-bottom: 1px solid #a5a9ad;
+margin: auto;
+}
+
+
+footer .for form{
+  padding-top: 5%;
+}
+
+footer .for form .form-group input{
+
+  border-bottom: 2px solid white;
+ 
+}
+
+footer .inner{
+
   padding-top: 3%;
 }
 

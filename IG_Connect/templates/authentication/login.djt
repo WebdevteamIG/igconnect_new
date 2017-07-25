@@ -18,9 +18,6 @@
         <div class='row' style="height:10vh;">
             <div class='col-sm-8' style="background-color: RGBA(21, 26, 33, 1.00); padding-top: 1%; padding-left: 1%;">
             <span id='heading'><code>$ ./ig_connect</code></span>
-            <span id="heading" style="float:right;">
-                <a href='/' class="btn btn-success" style="background-color: #00A87A; font-family: 'Roboto'; ">HOME</a>
-            </span>
             </div>
             <div class='col-sm-4' style="background-color: RGBA(0, 168, 122, 1.00);">
             </div>
@@ -37,6 +34,8 @@
                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p style="margin-top: 5%;">
+                    <a href='/' class="btn btn-success" style="background-color: #00A87A; font-family: 'Roboto'; ">HOME</a>
+                    &nbsp&nbsp&nbsp&nbsp
                     <a href='/auth/signup' class="btn btn-success" style="background-color: #00A87A; font-family: 'Roboto'; ">REGISTER HERE</a>
                 </p>
             </div>
@@ -46,12 +45,12 @@
                 <br><br><br>
                 <form method="POST" action="">
                     {% csrf_token %}
-                    <input type="text" name="user_name" placeholder="Your Username" class='text'>
+                    <input type="text" name="user_name" placeholder="Your Username" class='text' required>
                     <br><br>
-                    <input type="password" name="password" placeholder="Your Password" class='text'>
+                    <input type="password" name="password" placeholder="Your Password" class='text' required>
                     <br><br>
                     <p style="margin-left: 7%;">
-                        <input type='submit' class="btn btn-success" style="color: #00A87A; background-color: #FFFFFF; font-family: 'Open Sans'; padding-left: 10%; padding-right: 10%;">
+                        <input type='submit' class="btn btn-success" style="color: #00A87A; background-color: #FFFFFF; font-family: 'Open Sans'; padding-left: 10%; padding-right: 10%; cursor:pointer;">
                     </p>
                 </form>
 

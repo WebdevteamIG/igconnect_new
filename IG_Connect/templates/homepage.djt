@@ -203,7 +203,7 @@ $(window).scroll(function() {
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8" style="margin:10px 0px 5px 0px;">
-            <div class="card" style="overflow-y: auto; max-height: 300px;">
+            <div class="card" style="overflow-y: auto; max-height: 500px;">
             {% for news in updates %}
               <div class="card-block" {% if not forloop.last %} style="border-bottom:5px solid;" {% endif %}>
                 <h5 class="card-title" style="color:green">{{news.title}}</h5>
@@ -222,6 +222,27 @@ $(window).scroll(function() {
 </div>
 
 <footer class="footer">
+    <div class="for text-center">
+        <h3>Contact Us</h3>
+        <form class="form-horizontal" method="post" action="/auth/contactUs/">
+            {% csrf_token %}
+            <div class="form-group text-center">
+                <input type="text" class="form-control" id="inpname" name="name" placeholder="name" required>
+            </div>
+            <div class="form-group text-center">    
+                <input type="text" class="form-control" id="inpemail" name="email" placeholder="email"
+                required>
+            </div>
+            <div class="form-group text-center">   
+                <textarea rows="5" class="form-control" id="inpmessage" name="message" placeholder="message" required></textarea>
+            </div>
+            <div class="form-group text-center ">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div> 
+        </form>
+
+    </div>
+
 	<div class="inner text-center">
     	<ul class="icons">
     		<li><a href="#" class="icon">
@@ -238,7 +259,7 @@ $(window).scroll(function() {
     		</a></li>
     	</ul>
     	<ul class="copyright">
-    		<li>&copy; Something</li>
+    		<li>&copy; Innovation Garage</li>
     	</ul>
     </div>
 </footer>

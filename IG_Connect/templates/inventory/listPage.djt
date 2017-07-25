@@ -54,13 +54,19 @@
 
     <style type="text/css">
         .d {
-            background-color: rgba(170, 55, 183, 0.31) !important;
+            background-color: black !important;
+        }
+        td{
+            color: white !important;
+        }
+        .dataTables_filter label {
+            font-weight: 900;
         }
     </style>
 
 </head>
 
-<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+<body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 
 <div class="ui fluid container">
 
@@ -70,7 +76,7 @@
         <a href="/"><button class="ui teal button"><i class="home icon"></i>HOME</button></a>
         {% if request.user.is_superuser %}
         <br><br>
-        <a href="/borrow/addItem"><button class="ui youtube button">Add Item</button></a>
+        <a href="/borrow/addItem"><button class="ui facebook button">Add Item</button></a>
         {% endif %}
         </center>
     </div>
@@ -79,7 +85,7 @@
           <a class="item active" id="equipment">Equipments</a>
           <a class="item" id="book">Books</a>
         </div>
-        <table class="ui celled padded table" id="listTable">
+        <table class="ui celled padded inverted table" id="listTable">
             <thead>
                 <tr>
                     <th class="d">Name of Item</th>

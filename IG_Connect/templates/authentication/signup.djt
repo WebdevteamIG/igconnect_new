@@ -2,113 +2,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IG Connect</title>
+    <title>IG Connect | Register</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
     <meta name="author" content="IG WebDev Team">
     <meta name="description" content="Innovation Garage NIT WARANGAL Website">
     <meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
-
     <script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
-    <script src="{% static 'main/semantic.js' %}"></script>
-    <script src="{% static 'main/components/form.js' %}"></script>
-    <script src="{% static 'main/components/transition.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Space+Mono" rel="stylesheet">
+    <link href = "{% static 'auth/login.css' %}" rel = "stylesheet">
+
+    <style type="text/css">
+        .text{
+            width: 60%;
+        }
+    </style>
 </head>
 
-<body style="background-image:url({% static 'pictures/bg1.jpg' %});">
+<body>
+    <div class='container-fluid' id="full-screen">
+        <div class='row' style="height:10vh;">
+            <div class='col-sm-4' style="background-color: RGBA(21, 26, 33, 1.00); padding-top: 1%; padding-left: 1%;">
+            <span id='heading'><code>$ ./ig_connect</code></span>
+            </div>
+            <div class='col-sm-8' style="background-color: RGBA(0, 168, 122, 1.00);">
+            </div>
+        </div>
 
-<div class="ui fluid container">
-<div class="ui grid">
-    {% if error %}
-        <div class="ui negative message">
-          <i class="close icon"></i>
-          <div class="header">
-            {{error}}
-          </div>
-        </div>
-    {% endif %}
-</div>
-<div class="ui grid" style="margin-top: 100px;">
-    <div class="four wide column">
-        <center>
-        <div class="ui large buttons">
-          <a href="/"><button class="ui facebook button">Home</button></a>
-          <div class="or"></div>
-          <a href="/auth/login"><button class="ui youtube button">Login</button></a>
-        </div>
-        </center>
-    </div>
-    <div class="eight wide column">
-        <div class="ui fluid segment" style="background-color:beige;">
-            <form action="/auth/signup/" method="post" class="ui form">
-            {% csrf_token %}
-            <div class="field">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="User-Name">
-            </div>    
-            <div class="field">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="example@example.com">
+        <div class='row' style="height:90vh;">
+            <div class='col-sm-4 left'>
+                <h1 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(255, 255, 255, 1.00);">Welcome</h1>
+                <h4 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(61, 66, 72, 0.8);">We need your information, so that we can play around with your Privacy !!!</h4>
+                <small style="color:white;">Privacy on the Internet is a MYTH ;)</small>
+                <br>
+                <p style="margin-top: 5%;">
+                    <a href='/' class="btn btn-success" style="background-color: #00A87A; font-family: 'Roboto'; ">HOME</a>
+                    &nbsp&nbsp
+                    <a href='/auth/login' class="btn btn-success" style="background-color: #00A87A; font-family: 'Roboto'; ">LOGIN HERE</a>
+                </p>
             </div>
-            <div class="field">
-                <label>Password</label>
-                <input type="password" name="password1">
+            <div class='col-sm-8 right'>
+
+                {% if error %}
+                <div class="alert alert-danger alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>{{error}}</strong>
+                </div>
+                {% endif %}
+
+                <form method="POST" action="/auth/signup/" style="padding:10% 0% 0% 25%;">
+                {% csrf_token %}
+                    <input type="text" name="username" placeholder="User-Name" class="text" required> <br><br>
+                    <input type="email" name="email" placeholder="example@example.com" class="text" required> <br><br>
+                    <input type="password" name="password1" placeholder="Password1" class="text" required> <br><br>
+                    <input type="password" name="password2" placeholder="Password2" class="text" required> <br><br>
+                    <input type="text" name="first_name" placeholder="First Name" class="text" required> <br><br>
+                    <input type="text" name="last_name" placeholder="Last Name" class="text" required> <br><br>
+                    <p style="margin-left: 7%;">
+                        <input type='submit' class="btn btn-success" style="color: #00A87A; background-color: #FFFFFF; font-family: 'Open Sans'; padding-left: 10%; padding-right: 10%; cursor:pointer;" value="Register">
+                    </p>
+                </form>
             </div>
-            <div class="field">
-                <label>Confirm Password ( Re-enter )</label>
-                <input type="password" name="password2">
-            </div>
-            <div class="field">
-                <label>First Name</label>
-                <input type="text" name="first_name">
-            </div>
-            <div class="field">
-                <label>Last Name</label>
-                <input type="text" name="last_name">
-            </div>
-            <center>
-            <button class="ui red button" type="submit">
-                <i class="heart icon"></i> Register
-            </button>
-            </center>
-            </form>
         </div>
     </div>
-</div>
-</div>
-
 </body>
-
-<script type="text/javascript">
-    $('.message .close').on('click', function() {
-        $(this).closest('.message').transition('fade');
-    });
-</script>
 </html>

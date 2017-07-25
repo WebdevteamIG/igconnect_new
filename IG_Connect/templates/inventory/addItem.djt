@@ -41,15 +41,9 @@
     <script src="{% static 'main/components/form.js' %}"></script>
     <script src="{% static 'main/components/transition.js' %}"></script>
 
-    <style type="text/css">
-        .d {
-            background-color: rgba(170, 55, 183, 0.31) !important;
-        }
-    </style>
-
 </head>
 
-<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+<body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 
 <div class="ui fluid container">
 
@@ -64,8 +58,8 @@
         </center>
     </div>
     <div class="eight wide column">
-        <div class="ui fluid segment" style="background-color:beige;">
-            <form action="/borrow/addItem/" method="post" class="ui form">
+        <div class="ui fluid inverted segment">
+            <form action="/borrow/addItem/" method="post" class="ui inverted form">
             {% csrf_token %}
             <div class="field">
                 <label>Item Name</label>

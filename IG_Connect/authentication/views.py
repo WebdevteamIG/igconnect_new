@@ -70,7 +70,7 @@ def signup(request):
         password  = request.POST['password1']
         password2 = request.POST['password2']
         first_name = request.POST['first_name']
-        last_name  = request.POST['last_name'] 
+        last_name  = request.POST['last_name']
         if password != password2 :
             return render(request, 'authentication/signup.djt', {'error' : 'Passwords don\'t match'})
         try:
@@ -117,8 +117,8 @@ def forgotPassword(request) :
                     user.set_password(newpass)
                     user.save()
                     return redirect('/auth/login')
-                except BadHeaderError:
-                    response['error'] = 'Error restting password , Sorry !!!'
+                except :
+                    response['error'] = 'Error resetting password , Sorry !!!'
             else : 
                 response['error'] = 'Email doesn\'t Match with the registered email !!!'
         except Exception as e:
@@ -143,3 +143,30 @@ def updateProfile(request) :
 
         return redirect('/auth/profile/'+profile.regNum)
     return render(request,'authentication/updateProfile.djt',response)
+
+def webteam(request) :
+    response = {}
+    return render(request,'webTeam.djt',response)
+
+def contactUs(request) :
+    response = {}
+    if request.method == 'POST' :
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+
+        Content = 'Name : ' + name + '\n\n'
+        Content = Content + 'Email : ' + email + '\n\n'
+        Content = Content + 'Message : ' + message + '\n\n'
+        
+        receiver = "priyam@thelakshyafoundation.org"
+        sender = "speakerstedxnitw@gmail.com"
+        rlist = []
+        rlist.append(receiver)
+        try:
+            send_mail('IG Connect Contact Us Message',Content,sender,rlist,fail_silently=False,)
+            return redirect('/')
+        except :
+            print 'error sending message'
+            response['error'] = 'Error sending Message , Sorry !!!'
+    return redirect('/')

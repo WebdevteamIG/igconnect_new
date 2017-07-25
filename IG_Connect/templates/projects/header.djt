@@ -50,11 +50,11 @@
 
 </head>
 <!-- rgba(27, 188, 191, 1) -->
-<body style="background-image: url({% static 'pictures/slideshow/bg.svg' %})">
-	<div class="ui menu" style="background-color:rgba(170, 55, 183, 0.56); font-size:15px;">
+<body style="background-image: url({% static 'pictures/defaults/bg3.jpg' %})">
+	<div class="ui inverted menu" style="font-size:15px;">
 		<a class="item" href="/">Home</a>
-		<a class="active focused item" href="/projects">Projects</a>
-		<center><a href="/"> <h3 style="padding: 10px 400px; color:black;"> Innovation Garage </h4> </a></center>
+		<a class="item" href="/projects">Projects</a>
+		<center><a href="/"> <h3 style="padding: 10px 400px; color:white;"> Innovation Garage </h4> </a></center>
 		<div class="right menu">
 			{% if not request.user.is_authenticated %}
 			<a class="item" href="/auth/login">Login</a>

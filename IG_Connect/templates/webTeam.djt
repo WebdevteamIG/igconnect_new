@@ -1,0 +1,173 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Team</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Itim|Righteous" rel="stylesheet">
+
+<link href = "{% static 'home/style_teampage.css' %}" rel = "stylesheet">
+<script>
+	
+
+
+$(document).ready(function($) {
+   
+	
+
+	 
+
+});
+</script>
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse">
+
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".dual-collapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand d-flex mx-auto" href="/">IG connect</a>
+    <div class="navbar-collapse collapse dual-collapse text-center">
+        <ul class="navbar-nav mr-auto  ">
+            <li class="nav-item">
+                <a class="nav-link" href="/borrow">DASHBOARD</a>
+                <div class="nav-border"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">PROJECTS</a>
+                <div class="nav-border"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">ABOUT</a>
+                <div class="nav-border"></div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">CONTACT&nbsp;US</a>
+                <div class="nav-border"></div>
+            </li>
+            
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+
+        	<!-- This item to appear only when the user is not logged in. -->
+            
+
+            <!-- This to appear when the user is loggid in. Will have things like settings ans stuff. -->
+            <li class="nav-ite dropdown">
+		        <a class="nav-link dropdown-toggle" href="http://example.com" data-target="navbarDropdownMenuLink" data-toggle="dropdown"  aria-expanded="false">
+		          Options
+		        </a>
+		        <div class="dropdown-menu text-center" id="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="#">Action</a>
+		          <a class="dropdown-item" href="#">Log Out</a>
+		        </div>
+     		 </li>
+        </ul>
+    </div>
+    <div class="navline"></div>
+</nav>
+
+
+
+
+
+	
+
+    <div class="main text-center">
+
+
+        <div class="sec web_dev text-center">
+
+            <div class="heading">
+                <h2>WEB-DEV TEAM</h2>
+            </div>
+
+            <figure class="cap">
+                <div><img src="{% static 'pictures/teampics/webteam/priyam.jpg' %}" alt="Priyam Khandelwal" /></div>
+                <figcaption>
+                    <div class="vertical">
+                    <h3>PRIYAM KHANDELWAL</h3>
+                    <br/>
+                    <p>Manager
+
+                    </p>
+                    </div>
+                </figcaption>
+            </figure>
+            <br>
+            <figure class="team_mem">
+                <div><img src="{% static 'pictures/teampics/webteam/linked.jpg' %}" alt="Tauhid Anjum" /></div>
+                <figcaption>
+                    <div class="horizontal">
+                    <h3>Tauhid Anjum </h3>
+                  
+                    <p>Web Developer
+
+                    </p>
+                    </div>
+                </figcaption>
+            </figure>
+
+            <figure class="team_mem">
+                <div><img src="{% static 'pictures/teampics/webteam/Dhruv.jpg' %}" alt="Dhruv Ramani" /></div>
+                <figcaption>
+                    <div class="horizontal">
+                    <h3>Dhruv Ramani</h3>
+                    
+                    <p>Web Developer
+
+                    </p>
+                    </div>
+                </figcaption>
+            </figure>
+        </div>
+    
+    </div>
+
+ 	<footer class="footer">
+        <div class="inner text-center">
+                    <ul class="icons">
+                        <li><a href="https://www.facebook.com/TheInnovationGarage/" target="_blank" class="icon">
+                            <span><i class="fa fa-facebook  fa-2x"></i></span>
+                        </a></li>
+                        <li><a href="#" class="icon">
+                            <span><i class="fa fa-twitter  fa-2x"></i></span>
+                        </a></li>
+                        <li><a href="https://www.instagram.com/ig_nitw/" target="_blank" class="icon">
+                            <span><i class="fa fa-instagram  fa-2x"></i></span>
+                        </a></li>
+                        <li><a href="mailto:ig-nitw@student.nitw.ac.in" class="icon">
+                            <span><i class="fa fa-envelope   fa-2x"></i></span>
+                        </a></li>
+                    </ul>
+                    <ul class="copyright">
+                        <li>&copy; Something</li>
+                    </ul>
+                </div>
+
+    </footer>
+
+
+
+</body>
+</html>

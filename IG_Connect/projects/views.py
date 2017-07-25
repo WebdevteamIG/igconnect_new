@@ -85,6 +85,10 @@ def editProject(request,projectname) :
 			project.teampic = request.FILES.get('teampicture')
 			project.save()
 
+			for contributor in request.POST.getlist('contributorList') :
+				person = User.objects.get(username=contributor)
+				project.contributorsList.add(person)
+
 			projectpics = request.FILES.getlist('projectpictures')
 			for pic in projectpics :
 				imgObj = ProjectImage()
@@ -93,6 +97,7 @@ def editProject(request,projectname) :
 				imgObj.save()
 		else :
 			response['project'] = project
+			response['contributors'] = User.objects.all().exclude(username=request.user.username);
 			return render(request,'projects/editProject.djt',response)
 	except:
 		print "Project Doesn't exist Error"

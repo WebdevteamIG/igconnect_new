@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^profile/(?P<regNum>[^/]+)/$',views.profile,name='profile'),
     url(r'^forgotPassword/$',views.forgotPassword,name='forgotPassword'),
     url(r'^updateProfile/$',views.updateProfile,name="updateProfile"),
+    url(r'^webteam/$',views.webteam,name='webteam'),
+    url(r'^contactUs/$',views.contactUs,name='contactUs'),
 ]

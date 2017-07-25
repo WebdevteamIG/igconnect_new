@@ -54,13 +54,19 @@
 
     <style type="text/css">
         .d {
-            background-color: rgba(170, 55, 183, 0.31) !important;
+            background-color: black !important;
+        }
+        td{
+            color: white !important;
+        }
+        .dataTables_filter label {
+            font-weight: 900;
         }
     </style>
 
 </head>
 
-<body style="background-image:url({% static 'pictures/slideshow/bg.svg' %});">
+<body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 
 <div class="ui fluid container">
 
@@ -70,12 +76,12 @@
         <div class="ui large buttons">
           <a href="/"><button class="ui facebook button">Home</button></a>
           <div class="or"></div>
-          <a href="/borrow/listRequests"><button class="ui youtube button">Requests Page</button></a>
+          <a href="/borrow/listRequests"><button class="ui green button">Requests Page</button></a>
         </div>
         </center>
     </div>
     <div class="ten wide column">
-        <table class="ui celled padded table" id="logsTable">
+        <table class="ui celled padded inverted table" id="logsTable">
             <thead>
                 <tr>
                     <th colspan="5" class="d"><center>Logs</center></th>
