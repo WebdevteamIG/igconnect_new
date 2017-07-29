@@ -31,7 +31,7 @@ def signin(request):
             return render(request, 'authentication/login.djt', {'error' : 'User-Name/Password Invalid'})
         elif user.is_active == False :
             login(request, user)
-            return redirect('/auth/register')
+            return redirect('/auth/updateProfile')
         else : 
             login(request, user)
             return redirect('/')
@@ -82,9 +82,11 @@ def signup(request):
             user.save()
             profile = Userprofile()
             profile.user = user
+            profile.regNum = request.POST['regNum']
             profile.save()
 
-        return redirect('/auth/login')
+        # return redirect('/auth/login')
+        return redirect('/auth/updateProfile')
     return render(request, 'authentication/signup.djt', None)
 
 def profile(request,regNum) :

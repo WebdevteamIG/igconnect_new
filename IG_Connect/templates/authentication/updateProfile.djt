@@ -42,7 +42,7 @@
     <script src="{% static 'main/components/transition.js' %}"></script>
 </head>
 
-<body style="background-image:url({% static 'pictures/bg1.jpg' %});">
+<body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 
 <div class="ui fluid container">
 <div class="ui grid" style="margin-top: 100px;">
@@ -61,11 +61,11 @@
             {% csrf_token %}
             <div class="field">
                 <label>Registration Number</label>
-                <input type="text" name="regNum" value="{{request.user.profile.regNum}}">
+                <input type="text" name="regNum" value="{{request.user.profile.regNum}}" required>
             </div>    
             <div class="field">
                 <label>Course</label>
-                <select name="course" class="ui dropdown" id="course">
+                <select name="course" class="ui dropdown" id="course" required>
                   <option value="">Select Category</option>
                   <option value="BTech">B.Tech</option>
                   <option value="MTech">M.Tech</option>
@@ -76,7 +76,7 @@
             </div>
             <div class="field">
                 <label>Branch</label>
-                <select name="branch" class="ui dropdown" id="branch">
+                <select name="branch" class="ui dropdown" id="branch" required>
                   <option value="">Select Category</option>
                   <option value="CSE">CSE</option>
                   <option value="ECE">ECE</option>
@@ -90,7 +90,7 @@
             </div>
             <div class="field">
                 <label>Contact</label>
-                <input type="text" name="contact" value="{{request.user.profile.contact}}">
+                <input type="text" name="contact" value="{{request.user.profile.contact}}" required>
             </div>
             <div class="field">
                 <label>About Me</label>
@@ -121,7 +121,7 @@
 
     $('select.dropdown').dropdown();
 
-    $('#course').val({{request.user.profile.course}});
-    $('#branch').val({{request.user.profile.branch}});
+    $('#course').val('{{request.user.profile.course}}').change();
+    $('#branch').val('{{request.user.profile.branch}}').change();
 </script>
 </html>

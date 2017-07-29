@@ -134,7 +134,11 @@ $(window).scroll(function() {
             <div class="col-sm-4 details">
 
                 <!-- -->
+                {% if userProfile.profile_pic %}
                 <img src="{{userProfile.profile_pic.url}}"/>
+                {% else %}
+                <img src="{% static 'pictures/defaults/default.jpg' %}"/>
+                {% endif %}
 
                 <p id = "name">{{userProfile.user.first_name}} {{userProfile.user.last_name}}</p>
                 <p id = "branch">{{userProfile.branch}} , {{userProfile.course}}</p>
@@ -157,7 +161,7 @@ $(window).scroll(function() {
                     </ul>
 
                 </div>
-                <a href="{{userProfile.resume.url}}">Resume </a>
+                <a {% if userProfile.resume %} href="{{userProfile.resume.url}} {% endif %}">Resume </a>
             </div>
 
             <div class = "col-sm-8 desc">
