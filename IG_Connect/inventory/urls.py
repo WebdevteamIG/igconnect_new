@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'^viewLogs/$',views.viewLogs,name='viewLogs'),
 	url(r'^initialApproval/$',views.initialApproval,name='initialApproval'),
 	url(r'^approveUser/(?P<regNum>[^/]+)/$',views.approveUser,name='approveUser'),
+	url(r'^borrowedItems/$',views.borrowedItems,name='borrowedItems'),
 ]

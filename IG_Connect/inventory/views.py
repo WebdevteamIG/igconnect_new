@@ -14,6 +14,12 @@ import datetime
 def listItems(request) :
 	response = {}
 	response['items'] = Item.objects.all()
+	borrowedItems = ItemRequest.objects.filter(user=request.user)
+	countOfItems = len(borrowedItems)
+	if countOfItems<4 :
+		response['allowed'] = True
+	else :
+		response['allowed'] = False
 	return render(request,'inventory/listPage.djt',response)
 
 def addItem(request) :
@@ -61,6 +67,7 @@ def approveItemRequest(request,id) :
 	item.status = 3
 	item.save()
 	requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
+	requestObj.returnDate = datetime.datetime.now().strftime("%Y-%m-%d") + timedelta(days=7)
 	requestObj.save()
 
 	logObj = requestActionLog()
@@ -135,3 +142,8 @@ def approveUser(request,regNum) :
 	except :
 		print "error occured"
 	return redirect('/borrow/initialApproval')
+
+def borrowedItems(request) : 
+	response = {}
+	response['borrowedItems'] = ItemRequest.objects.filter(user=request.user)
+	return render(request,'inventory/borrowedItems.djt',response)

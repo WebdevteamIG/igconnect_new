@@ -78,12 +78,26 @@
         <br><br>
         <a href="/borrow/addItem"><button class="ui facebook button">Add Item</button></a>
         {% endif %}
+        <br><br>
+        <a href="/borrow/borrowedItems"><button class="ui facebook button">My Items</button></a>
         </center>
     </div>
 
     {% if request.user.profile.isApproved %}
 
     <div class="ten wide column">
+        {% if not allowed %}
+        <div class="ui message">
+          <div class="header">
+            Maximum Limit Reached
+          </div>
+          <p>You can borrow maximum of 4 items at a time.</p>
+        </div>
+        <br>
+        <hr><hr>
+        <br>
+        {% endif %}
+
         <div class="ui two item menu">
           <a class="item active" id="equipment">Equipments</a>
           <a class="item" id="book">Books</a>
@@ -116,9 +130,13 @@
                         </td>
                         <td>
                             {% ifequal item.status 1 %}
-                            <a href="/borrow/requestItem/{{item.id}}">
-                            <button class="small ui teal button"> Make Request</button>
-                            </a>
+                                {% if allowed %}
+                                <a href="/borrow/requestItem/{{item.id}}">
+                                <button class="small ui teal button"> Make Request</button>
+                                </a>
+                                {% else %}
+                                <button class="small ui teal button" disabled>Make Request</button>
+                                {% endif %}
                             {% else %}
                                 {% ifequal item.correspondingRequest.all.0.user request.user %}
                                     {% ifequal item.status 2 %}
@@ -170,9 +188,13 @@
                         </td>
                         <td>
                             {% ifequal item.status 1 %}
-                            <a href="/borrow/requestItem/{{item.id}}">
-                            <button class="small ui teal button"> Make Request</button>
-                            </a>
+                                {% if allowed %}
+                                <a href="/borrow/requestItem/{{item.id}}">
+                                <button class="small ui teal button"> Make Request</button>
+                                </a>
+                                {% else %}
+                                <button class="small ui teal button" disabled>Make Request</button>
+                                {% endif %}
                             {% else %}
                                 {% ifequal item.correspondingRequest.all.0.user request.user %}
                                     {% ifequal item.status 2 %}
