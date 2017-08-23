@@ -3,7 +3,10 @@
 
 body{
   font-family: 'Roboto', sans-serif;
+  height: auto;
+
 }
+
 
 .navbar{
   
@@ -31,6 +34,7 @@ body{
   white-space: nowrap;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  text-transform: uppercase;
 }
 /*
 .navbar li a:hover{

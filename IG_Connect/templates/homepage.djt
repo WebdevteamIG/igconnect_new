@@ -25,6 +25,29 @@
 
 <script>
 
+window.smoothScroll = function(target) {
+    var scrollContainer = target;
+    do { //find scroll container
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+    
+    var targetY = 0;
+    do { //find the top of target relatively to the container
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop;
+    } while (target = target.offsetParent);
+    
+    scroll = function(c, a, b, i) {
+        i++; if (i > 30) return;
+        c.scrollTop = a + (b - a) / 30 * i;
+        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+    }
+    // start scrolling
+    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+}
+
 
 	
 
@@ -46,12 +69,19 @@ $('#myCarousel').carousel({
    setTimeout(removeHidden,2000, '#work');
    setTimeout(removeHidden,3000, '#enjoy');
 
-	
+	$(".contact").on('click', function(event) {
+    event.preventDefault();
+
+
+        smoothScroll(document.getElementById('foot'));
+
+        
+  });
 
 
 	
 
-
+    
 $(window).scroll(function() {
   if ($(document).scrollTop() > 10) {
     $('nav').addClass('shrink');
@@ -81,6 +111,7 @@ $(window).scroll(function() {
 </head>
 <body>
 
+
 <nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse">
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".dual-collapse">
@@ -105,7 +136,7 @@ $(window).scroll(function() {
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">CONTACT&nbsp;US</a>
+                <a class="nav-link contact" href="#foot">CONTACT&nbsp;US</a>
                 <div class="nav-border"></div>
             </li>
             {% if request.user.is_superuser %}
@@ -221,7 +252,7 @@ $(window).scroll(function() {
 </div>
 </div>
 
-<footer class="footer">
+<footer class="footer" id ="foot">
     <div class="for text-center">
         <h3>Contact Us</h3>
         <form class="form-horizontal" method="post" action="/auth/contactUs/">

@@ -84,9 +84,12 @@ def signup(request):
             profile.user = user
             profile.regNum = request.POST['regNum']
             profile.save()
-
+            user = authenticate(username = username, password = password)
+            login(request, user)
+            
+            return redirect('/auth/updateProfile')
         # return redirect('/auth/login')
-        return redirect('/auth/updateProfile')
+        
     return render(request, 'authentication/signup.djt', None)
 
 def profile(request,regNum) :

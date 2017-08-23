@@ -85,7 +85,9 @@
           <a class="item active" id="equipment">Equipments</a>
           <a class="item" id="book">Books</a>
         </div>
-        <table class="ui celled padded inverted table" id="listTable">
+
+        <div id="bookHolder">
+        <table class="ui celled padded inverted table" id="bookTable">
             <thead>
                 <tr>
                     <th class="d">Name of Item</th>
@@ -129,6 +131,26 @@
                             {% endifequal %}
                         </td>
                     </tr>
+                    
+                    {% endifequal %}
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+        <div id="equipmentHolder">
+        <table class="ui celled padded inverted table" id="equipmentTable">
+            <thead>
+                <tr>
+                    <th class="d">Name of Item</th>
+                    <th class="d">Status</th>
+                    <th class="d">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    {% ifequal item.itemType|stringformat:"s" "book" %}
+
                     {% else %}
                     <tr class="equipmentRows">
                         <td>{{item.itemName}}</td>
@@ -167,6 +189,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
+
     </div>
 </div>
 </div>
@@ -175,26 +199,31 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#listTable').DataTable({
+        $('#bookTable').DataTable({
             "info": false
         });
+
+        $('#equipmentTable').DataTable({
+            "info": false
+        });
+
     } );
 
-    $('.bookRows').hide();
-    $('.eqiupmentRows').show();
+    $('#bookHolder').hide();
+    $('#equipmentHolder').show();
 
     $('#equipment').click(function(){
         $(this).addClass('active');
         $('#book').removeClass('active');
-        $('.bookRows').hide();
-        $('.equipmentRows').show();
+        $('#bookHolder').hide();
+        $('#equipmentHolder').show();
     });
 
     $('#book').click(function(){
         $(this).addClass('active');
         $('#equipment').removeClass('active');
-        $('.bookRows').show();
-        $('.equipmentRows').hide();
+        $('#bookHolder').show();
+        $('#equipmentHolder').hide();
     });
 </script>
 
