@@ -10,4 +10,6 @@ urlpatterns = [
 	url(r'^addItem/$',views.addItem,name='addItem'),
 	url(r'^listRequests/$',views.listRequests,name='listRequests'),
 	url(r'^viewLogs/$',views.viewLogs,name='viewLogs'),
+	url(r'^initialApproval/$',views.initialApproval,name='initialApproval'),
+	url(r'^approveUser/(?P<regNum>[^/]+)/$',views.approveUser,name='approveUser'),
 ]

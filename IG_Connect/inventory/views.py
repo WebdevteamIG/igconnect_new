@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth.models import User
 from .models import *
+from authentication.models import *
 import datetime
 
 # Create your views here.
@@ -119,3 +120,18 @@ def viewLogs(request) :
 	response = {}
 	response['logs'] = requestActionLog.objects.all()
 	return render(request,'inventory/logsPage.djt',response)
+
+def initialApproval(request) :
+	response = {}
+	response['pendingUsers'] = Userprofile.objects.filter(isApproved=False)
+	return render(request,'inventory/initialApprovalPage.djt',response)
+
+def approveUser(request,regNum) : 
+	response = {}
+	try :
+		userProfile = Userprofile.objects.get(regNum=regNum)
+		userProfile.isApproved = True
+		userProfile.save()
+	except :
+		print "error occured"
+	return redirect('/borrow/initialApproval')
