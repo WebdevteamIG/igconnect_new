@@ -77,7 +77,7 @@ def signup(request):
             user = User._default_manager.get(username__iexact = username.lower())
             return render(request, 'authentication/signup.djt', {'error':'User-Name Already Exists'})
         except User.DoesNotExist:
-            user = User.objects.create_user(username = username, email = emailadr, first_name = first_name, last_name = first_name)
+            user = User.objects.create_user(username = username, email = emailadr, first_name = first_name, last_name = last_name)
             user.set_password(password)
             user.save()
             profile = Userprofile()
