@@ -7,12 +7,19 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth.models import User
 from .models import *
+from authentication.models import *
 import datetime
 
 # Create your views here.
 def listItems(request) :
 	response = {}
 	response['items'] = Item.objects.all()
+	borrowedItems = ItemRequest.objects.filter(user=request.user)
+	countOfItems = len(borrowedItems)
+	if countOfItems<4 :
+		response['allowed'] = True
+	else :
+		response['allowed'] = False
 	return render(request,'inventory/listPage.djt',response)
 
 def addItem(request) :
@@ -60,6 +67,7 @@ def approveItemRequest(request,id) :
 	item.status = 3
 	item.save()
 	requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
+	requestObj.returnDate = datetime.datetime.now().strftime("%Y-%m-%d") + timedelta(days=7)
 	requestObj.save()
 
 	logObj = requestActionLog()
@@ -119,3 +127,23 @@ def viewLogs(request) :
 	response = {}
 	response['logs'] = requestActionLog.objects.all()
 	return render(request,'inventory/logsPage.djt',response)
+
+def initialApproval(request) :
+	response = {}
+	response['pendingUsers'] = Userprofile.objects.filter(isApproved=False)
+	return render(request,'inventory/initialApprovalPage.djt',response)
+
+def approveUser(request,regNum) : 
+	response = {}
+	try :
+		userProfile = Userprofile.objects.get(regNum=regNum)
+		userProfile.isApproved = True
+		userProfile.save()
+	except :
+		print "error occured"
+	return redirect('/borrow/initialApproval')
+
+def borrowedItems(request) : 
+	response = {}
+	response['borrowedItems'] = ItemRequest.objects.filter(user=request.user)
+	return render(request,'inventory/borrowedItems.djt',response)

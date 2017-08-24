@@ -36,12 +36,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
 
-    <script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
-    <script src="{% static 'main/semantic.js' %}"></script>
-    <script src="{% static 'main/components/form.js' %}"></script>
-    <script src="{% static 'main/components/transition.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/components/form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/components/transition.js' %}"></script>
 
-<!-- for datatable -->
+<!-- for Datatable -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
@@ -50,7 +50,7 @@
 
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css">
-<!-- ///////// -->
+<!-- ///////////// -->
 
     <style type="text/css">
         .d {
@@ -73,111 +73,61 @@
 <div class="ui grid" style="margin-top: 50px;">
     <div class="four wide column">
         <center>
-        <div class="ui large buttons">
-          <a href="/"><button class="ui facebook button">Home</button></a>
-          <div class="or"></div>
-          <a href="/borrow/addItem"><button class="ui youtube button">Add Items</button></a>
-        </div>
-        </center>
+        <a href="/"><button class="ui teal button"><i class="home icon"></i>HOME</button></a>
         <br><br>
-        <center>
-        <div class="ui large buttons">
-          <a href="/updates"><button class="ui facebook button">Updates Page</button></a>
-        </div>
-        </center>
-        <br><br>
-        <center>
-        <div class="ui large buttons">
-          <a href="/borrow/viewLogs"><button class="ui youtube button">Logs Page</button></a>
-        </div>
+        <a href="/borrow"><button class="ui facebook button">Back</button></a>
         </center>
     </div>
+
     <div class="ten wide column">
-        <table class="ui celled padded inverted table" id="pendingTable">
+
+        <table class="ui celled padded inverted table" id="itemsTable">
             <thead>
                 <tr>
-                    <th colspan="5" class="d"><center>Pending Requests</center></th>
-                </tr>
-                <tr>
-                    <th class="d">Item Name</th>
-                    <th class="d">Requested By</th>
-                    <th class="d">Date of Request</th>
-                    <th class="d">Approve</th>
-                    <th class="d">Cancel</th>
+                    <th class="d">Name of Item</th>
+                    <th class="d">Status</th>
+                    <th class="d">Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for itemRequest in itemRequests %}
-                {% ifequal itemRequest.item.status 2 %}
-                <tr>
-                    <td>{{itemRequest.item.itemName}}</td>
-                    <td><a href="/auth/profile/{{itemRequest.user.profile.regNum}}">
-                        {{itemRequest.user.username}}</a>
-                    </td>
-                    <td>{{itemRequest.dateOfRequest}}</td>
-                    <td>
-                        <a href="/borrow/approve/{{itemRequest.item.id}}">
-                        <button class="small ui green button">Approve</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/borrow/getItemBack/{{itemRequest.item.id}}/1">
-                        <button class="small ui green button">Reject</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endifequal %}
+                {% for borrowedItem in borrowedItems %}
+                    
+                    <tr>
+                        <td>{{borrowedItem.item.itemName}}</td>
+                        <td>
+                            {% ifequal borrowedItem.item.status 2 %}
+                                Requested
+                            {% else %}
+                                Borrowed
+                            {% endifequal %}
+                        </td>
+                        <td>
+                            {% ifequal borrowedItem.item.status 2 %}
+                            <a href="/borrow/cancelItemRequest/{{borrowedItem.item.id}}">
+                            <button class="small ui red button">Cancel Request</button>
+                            </a>
+                            {% else %}
+                            <button class="small ui default button" disabled>Cancel Request</button>
+                            {% endifequal %}
+                        </td>
+                    </tr>
+                    
                 {% endfor %}
             </tbody>
         </table>
-        <br><br>
-        <hr><hr>
-        <br><br>
-        <table class="ui celled padded inverted table" id="approvalTable">
-            <thead>
-                <tr>
-                    <th colspan="6" class="d"><center>Approved Requests</center></th>
-                </tr>
-                <tr>
-                    <th class="d">Item Name</th>
-                    <th class="d">Requested By</th>
-                    <th class="d">Date of Request</th>
-                    <th class="d">Date of Approval</th>
-                    <th class="d">Expected Date of Return</th>
-                    <th class="d">Returned Back</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for itemRequest in itemRequests %}
-                {% ifequal itemRequest.item.status 3 %}
-                <tr>
-                    <td>{{itemRequest.item.itemName}}</td>
-                    <td><a href="/auth/profile/{{itemRequest.user.profile.regNum}}">
-                        {{itemRequest.user.username}}</a>
-                    </td>
-                    <td>{{itemRequest.dateOfRequest}}</td>
-                    <td>{{itemRequest.approvalDate}}</td>
-                    <td>{{itemRequest.returnDate}}</td>
-                    <td>
-                        <a href="/borrow/getItemBack/{{itemRequest.item.id}}/2">
-                        <button class="small ui green button">Returned Safely</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endifequal %}
-                {% endfor %}
-            </tbody>
-        </table>
+
     </div>
 </div>
+
 </div>
 
 </body>
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#pendingTable').DataTable();
-        $('#approvalTable').DataTable();
+        $('#itemsTable').DataTable({
+            "info": false
+        });
     } );
 </script>
 

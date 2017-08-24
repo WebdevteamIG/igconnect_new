@@ -156,7 +156,7 @@ $(window).scroll(function() {
             </li>
             {% if request.user.is_superuser %}
             <li class="nav-item">
-                <a class="nav-link" href="/updates">Admin Portal</a>
+                <a class="nav-link" href="/borrow/initialApproval">Admin Portal</a>
                 <div class="nav-border"></div>
             </li>
             {% endif %}
