@@ -361,6 +361,36 @@ nav.navbar.shrink {
 
 
 
+/* about */
+
+#about{
+
+  background-color: rgba(19, 35, 47, 1);
+  color: #d4d8db;
+  padding: 5% 10%;
+}
+
+#about h2{
+
+color: #a5a9ad ;
+padding-bottom: 20px;
+width: 20%;
+border-bottom: 1px solid #a5a9ad;
+margin: auto;
+
+}
+
+#about .content{
+  padding-top: 3%;
+  padding-bottom: 5%;
+}
+#about .content p{
+background-color: rgba(19, 35, 47, 1);
+  padding: 10px;
+  margin: 0;
+  font-size: 1.2em;
+}
+
 
 /* footer */
 

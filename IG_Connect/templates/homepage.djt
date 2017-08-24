@@ -36,7 +36,7 @@ window.smoothScroll = function(target) {
     var targetY = 0;
     do { //find the top of target relatively to the container
         if (target == scrollContainer) break;
-        targetY += target.offsetTop;
+        targetY += target.offsetTop - 70;
     } while (target = target.offsetParent);
     
     scroll = function(c, a, b, i) {
@@ -69,14 +69,17 @@ $('#myCarousel').carousel({
    setTimeout(removeHidden,2000, '#work');
    setTimeout(removeHidden,3000, '#enjoy');
 
-	$(".contact").on('click', function(event) {
-    event.preventDefault();
-
-
-        smoothScroll(document.getElementById('foot'));
-
-        
+	$("#contact_btn").on('click', function(event) {
+        event.preventDefault();
+        smoothScroll(document.getElementById('foot'));        
   });
+
+    $("#about_btn").on('click', function(event) {
+        event.preventDefault();
+        smoothScroll(document.getElementById('about_scroll'));        
+  });
+
+
 
 if ($(document).scrollTop() > 10) {
     $('nav').addClass('shrink');
@@ -147,11 +150,11 @@ $(window).scroll(function() {
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ABOUT</a>
+                <a class="nav-link" id="about_btn" href="#about">ABOUT</a>
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link contact" href="#foot">CONTACT&nbsp;US</a>
+                <a class="nav-link" id="contact_btn" href="#foot">CONTACT&nbsp;US</a>
                 <div class="nav-border"></div>
             </li>
             {% if request.user.is_superuser %}
@@ -268,6 +271,28 @@ $(window).scroll(function() {
     </div>
     
 </div>
+
+
+</div>
+<div id="about_scroll">
+
+</div>
+
+<div class="text-center" id="about">
+
+    <h2>About Us</h2>
+    <div class="content">
+    <p>
+    Innovation Garage is an awesome place to be in. The working hub for brilliant minds with the coolest projects.It’s a place to hack. <br>It’s a room to innovate. Most importantly, it’s a space where you challenge yourself.
+    </p>
+    <p>
+    The working space is usually packed with devout students, 
+    each showing off their creative best. The synergy of the atmosphere further inspires the individuals to commit to their work.
+    </p>
+    <p>
+    Ever since its inception around 3 years ago, it has given rise to lots of projects, friendships, mentors, startups and reasons for many to work harder than ever before.  Join IG and come find a reason to turn procrastination into innovation.
+    </p>
+    </div>
 </div>
 
 <footer class="footer" id ="foot">
