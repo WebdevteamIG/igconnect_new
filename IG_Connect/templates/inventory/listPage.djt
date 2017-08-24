@@ -78,14 +78,33 @@
         <br><br>
         <a href="/borrow/addItem"><button class="ui facebook button">Add Item</button></a>
         {% endif %}
+        <br><br>
+        <a href="/borrow/borrowedItems"><button class="ui facebook button">My Items</button></a>
         </center>
     </div>
+
+    {% if request.user.profile.isApproved %}
+
     <div class="ten wide column">
+        {% if not allowed %}
+        <div class="ui message">
+          <div class="header">
+            Maximum Limit Reached
+          </div>
+          <p>You can borrow maximum of 4 items at a time.</p>
+        </div>
+        <br>
+        <hr><hr>
+        <br>
+        {% endif %}
+
         <div class="ui two item menu">
           <a class="item active" id="equipment">Equipments</a>
           <a class="item" id="book">Books</a>
         </div>
-        <table class="ui celled padded inverted table" id="listTable">
+
+        <div id="bookHolder">
+        <table class="ui celled padded inverted table" id="bookTable">
             <thead>
                 <tr>
                     <th class="d">Name of Item</th>
@@ -111,9 +130,13 @@
                         </td>
                         <td>
                             {% ifequal item.status 1 %}
-                            <a href="/borrow/requestItem/{{item.id}}">
-                            <button class="small ui teal button"> Make Request</button>
-                            </a>
+                                {% if allowed %}
+                                <a href="/borrow/requestItem/{{item.id}}">
+                                <button class="small ui teal button"> Make Request</button>
+                                </a>
+                                {% else %}
+                                <button class="small ui teal button" disabled>Make Request</button>
+                                {% endif %}
                             {% else %}
                                 {% ifequal item.correspondingRequest.all.0.user request.user %}
                                     {% ifequal item.status 2 %}
@@ -129,6 +152,26 @@
                             {% endifequal %}
                         </td>
                     </tr>
+                    
+                    {% endifequal %}
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+        <div id="equipmentHolder">
+        <table class="ui celled padded inverted table" id="equipmentTable">
+            <thead>
+                <tr>
+                    <th class="d">Name of Item</th>
+                    <th class="d">Status</th>
+                    <th class="d">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    {% ifequal item.itemType|stringformat:"s" "book" %}
+
                     {% else %}
                     <tr class="equipmentRows">
                         <td>{{item.itemName}}</td>
@@ -145,9 +188,13 @@
                         </td>
                         <td>
                             {% ifequal item.status 1 %}
-                            <a href="/borrow/requestItem/{{item.id}}">
-                            <button class="small ui teal button"> Make Request</button>
-                            </a>
+                                {% if allowed %}
+                                <a href="/borrow/requestItem/{{item.id}}">
+                                <button class="small ui teal button"> Make Request</button>
+                                </a>
+                                {% else %}
+                                <button class="small ui teal button" disabled>Make Request</button>
+                                {% endif %}
                             {% else %}
                                 {% ifequal item.correspondingRequest.all.0.user request.user %}
                                     {% ifequal item.status 2 %}
@@ -167,34 +214,55 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
+
     </div>
+
+    {% else %}
+
+    <div class="eight wide column">
+        <div class="ui message">
+          <div class="header">
+            Approval Needed
+          </div>
+          <p>You have to pay the minimum amount of fee and get your account approved. Kindly contact administrator.</p>
+        </div>
+    </div>
+
+    {% endif %}
 </div>
+
 </div>
 
 </body>
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#listTable').DataTable({
+        $('#bookTable').DataTable({
             "info": false
         });
+
+        $('#equipmentTable').DataTable({
+            "info": false
+        });
+
     } );
 
-    $('.bookRows').hide();
-    $('.eqiupmentRows').show();
+    $('#bookHolder').hide();
+    $('#equipmentHolder').show();
 
     $('#equipment').click(function(){
         $(this).addClass('active');
         $('#book').removeClass('active');
-        $('.bookRows').hide();
-        $('.equipmentRows').show();
+        $('#bookHolder').hide();
+        $('#equipmentHolder').show();
     });
 
     $('#book').click(function(){
         $(this).addClass('active');
         $('#equipment').removeClass('active');
-        $('.bookRows').show();
-        $('.equipmentRows').hide();
+        $('#bookHolder').show();
+        $('#equipmentHolder').hide();
     });
 </script>
 

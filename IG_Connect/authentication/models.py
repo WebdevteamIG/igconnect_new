@@ -39,6 +39,7 @@ class Userprofile(models.Model) :
 	aboutMe = models.TextField(max_length=1000)
 	profile_pic = models.ImageField(upload_to=get_profilepic_path,null=True,blank=True)
 	resume = models.FileField(upload_to=get_resume_path,null=True,blank=True)
+	isApproved = models.BooleanField(default=False)
 
 	def __str__(self):
 		return (self.user.first_name + "_" + self.regNum)

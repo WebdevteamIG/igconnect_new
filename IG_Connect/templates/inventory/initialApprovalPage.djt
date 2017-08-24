@@ -73,98 +73,46 @@
 <div class="ui grid" style="margin-top: 50px;">
     <div class="four wide column">
         <center>
+        <div class="ui medium buttons">
+          <a href="/updates"><button class="ui facebook button">Updates Page</button></a>
+          <div class="or"></div>
+          <a href="/borrow/listRequests"><button class="ui facebook button">Requests Page</button></a>
+        </div>
+        </center>
+        <br><br>
+        <center>
         <div class="ui large buttons">
           <a href="/"><button class="ui facebook button">Home</button></a>
-          <div class="or"></div>
-          <a href="/borrow/addItem"><button class="ui youtube button">Add Items</button></a>
         </div>
         </center>
         <br><br>
         <center>
         <div class="ui large buttons">
-          <a href="/updates"><button class="ui facebook button">Updates Page</button></a>
-        </div>
-        </center>
-        <br><br>
-        <center>
-        <div class="ui large buttons">
-          <a href="/borrow/viewLogs"><button class="ui youtube button">Logs Page</button></a>
+          <a href="/borrow/viewLogs"><button class="ui facebook button">Logs Page</button></a>
         </div>
         </center>
     </div>
     <div class="ten wide column">
-        <table class="ui celled padded inverted table" id="pendingTable">
-            <thead>
-                <tr>
-                    <th colspan="5" class="d"><center>Pending Requests</center></th>
-                </tr>
-                <tr>
-                    <th class="d">Item Name</th>
-                    <th class="d">Requested By</th>
-                    <th class="d">Date of Request</th>
-                    <th class="d">Approve</th>
-                    <th class="d">Cancel</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for itemRequest in itemRequests %}
-                {% ifequal itemRequest.item.status 2 %}
-                <tr>
-                    <td>{{itemRequest.item.itemName}}</td>
-                    <td><a href="/auth/profile/{{itemRequest.user.profile.regNum}}">
-                        {{itemRequest.user.username}}</a>
-                    </td>
-                    <td>{{itemRequest.dateOfRequest}}</td>
-                    <td>
-                        <a href="/borrow/approve/{{itemRequest.item.id}}">
-                        <button class="small ui green button">Approve</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/borrow/getItemBack/{{itemRequest.item.id}}/1">
-                        <button class="small ui green button">Reject</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endifequal %}
-                {% endfor %}
-            </tbody>
-        </table>
-        <br><br>
-        <hr><hr>
-        <br><br>
         <table class="ui celled padded inverted table" id="approvalTable">
             <thead>
                 <tr>
-                    <th colspan="6" class="d"><center>Approved Requests</center></th>
+                    <th colspan="2" class="d"><center>Users Pending for Approval</center></th>
                 </tr>
                 <tr>
-                    <th class="d">Item Name</th>
-                    <th class="d">Requested By</th>
-                    <th class="d">Date of Request</th>
-                    <th class="d">Date of Approval</th>
-                    <th class="d">Expected Date of Return</th>
-                    <th class="d">Returned Back</th>
+                    <th class="d">Name</th>
+                    <th class="d">Approve</th>
                 </tr>
             </thead>
             <tbody>
-                {% for itemRequest in itemRequests %}
-                {% ifequal itemRequest.item.status 3 %}
+                {% for pendingUser in pendingUsers %}
                 <tr>
-                    <td>{{itemRequest.item.itemName}}</td>
-                    <td><a href="/auth/profile/{{itemRequest.user.profile.regNum}}">
-                        {{itemRequest.user.username}}</a>
-                    </td>
-                    <td>{{itemRequest.dateOfRequest}}</td>
-                    <td>{{itemRequest.approvalDate}}</td>
-                    <td>{{itemRequest.returnDate}}</td>
+                    <td>{{pendingUser.user.first_name}} {{pendingUser.user.last_name}}</td>
                     <td>
-                        <a href="/borrow/getItemBack/{{itemRequest.item.id}}/2">
-                        <button class="small ui green button">Returned Safely</button>
+                        <a href="/borrow/approveUser/{{pendingUser.regNum}}">
+                        <button class="small ui green button">Approve</button>
                         </a>
                     </td>
                 </tr>
-                {% endifequal %}
                 {% endfor %}
             </tbody>
         </table>

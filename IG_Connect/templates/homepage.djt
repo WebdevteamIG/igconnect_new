@@ -25,6 +25,29 @@
 
 <script>
 
+window.smoothScroll = function(target) {
+    var scrollContainer = target;
+    do { //find scroll container
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+    
+    var targetY = 0;
+    do { //find the top of target relatively to the container
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop - 70;
+    } while (target = target.offsetParent);
+    
+    scroll = function(c, a, b, i) {
+        i++; if (i > 30) return;
+        c.scrollTop = a + (b - a) / 30 * i;
+        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+    }
+    // start scrolling
+    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+}
+
 
 	
 
@@ -46,12 +69,37 @@ $('#myCarousel').carousel({
    setTimeout(removeHidden,2000, '#work');
    setTimeout(removeHidden,3000, '#enjoy');
 
+	$("#contact_btn").on('click', function(event) {
+        event.preventDefault();
+        smoothScroll(document.getElementById('foot'));        
+  });
+
+    $("#about_btn").on('click', function(event) {
+        event.preventDefault();
+        smoothScroll(document.getElementById('about_scroll'));        
+  });
+
+
+
+if ($(document).scrollTop() > 10) {
+    $('nav').addClass('shrink');
+    $('.login').removeClass('btn-brfore');
+    $('.login').addClass('btnclr');
+    $('.navline').css("opacity", "0");
+    $('.navline').css("top", "80px");
+
+
+
+  } else {
+    $('nav').removeClass('shrink');
+    $('.login').addClass('btn-before');
+    $('.login').removeClass('btnclr');
+    $('.navline').css("opacity", "1");
+    $('.navline').css("top", "120px");
+  }
 	
 
-
-	
-
-
+    
 $(window).scroll(function() {
   if ($(document).scrollTop() > 10) {
     $('nav').addClass('shrink');
@@ -81,6 +129,7 @@ $(window).scroll(function() {
 </head>
 <body>
 
+
 <nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse">
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".dual-collapse">
@@ -101,16 +150,16 @@ $(window).scroll(function() {
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">ABOUT</a>
+                <a class="nav-link" id="about_btn" href="#about">ABOUT</a>
                 <div class="nav-border"></div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">CONTACT&nbsp;US</a>
+                <a class="nav-link" id="contact_btn" href="#foot">CONTACT&nbsp;US</a>
                 <div class="nav-border"></div>
             </li>
             {% if request.user.is_superuser %}
             <li class="nav-item">
-                <a class="nav-link" href="/updates">Admin Portal</a>
+                <a class="nav-link" href="/borrow/initialApproval">Admin Portal</a>
                 <div class="nav-border"></div>
             </li>
             {% endif %}
@@ -173,19 +222,19 @@ $(window).scroll(function() {
 							<span><i class="fa fa-lightbulb-o  fa-3x"></i></span>
 
 							<h3>INNOVATE</h3>
-							<p>awd  awdwa awd</p>
+							<p>Challenge the convention</p>
 						</div>
 
 						<div class="col-sm-4  is-hidden" id = "work">
 							<span><i class="fa fa-cogs  fa-3x"></i></span>
 							<h3>WORK</h3>
-							<p>awda awdawd wad aw</p>
+							<p>Make it happen</p>
 						</div>
 
 						<div class="col-sm-4  is-hidden" id="enjoy">
 							<span><i class="fa boun fa-child fa-3x"></i></span>
 							<h3>ENJOY</h3>
-							<p>awdwa awdwa awda</p>
+							<p>Priceless Experiences</p>
 						</div>
 					</div>			
 	</div>
@@ -197,6 +246,9 @@ $(window).scroll(function() {
 	
 
 <div class="main text-center">
+<div class="background">
+
+</div>
 <div class="container">
     <br>
     <center><h3><b>UPDATES</b></h3></center>
@@ -219,9 +271,31 @@ $(window).scroll(function() {
     </div>
     
 </div>
+
+
+</div>
+<div id="about_scroll">
+
 </div>
 
-<footer class="footer">
+<div class="text-center" id="about">
+
+    <h2>About Us</h2>
+    <div class="content">
+    <p>
+    Innovation Garage is an awesome place to be in. The working hub for brilliant minds with the coolest projects.It’s a place to hack. <br>It’s a room to innovate. Most importantly, it’s a space where you challenge yourself.
+    </p>
+    <p>
+    The working space is usually packed with devout students, 
+    each showing off their creative best. The synergy of the atmosphere further inspires the individuals to commit to their work.
+    </p>
+    <p>
+    Ever since its inception around 3 years ago, it has given rise to lots of projects, friendships, mentors, startups and reasons for many to work harder than ever before.  Join IG and come find a reason to turn procrastination into innovation.
+    </p>
+    </div>
+</div>
+
+<footer class="footer" id ="foot">
     <div class="for text-center">
         <h3>Contact Us</h3>
         <form class="form-horizontal" method="post" action="/auth/contactUs/">
@@ -242,26 +316,41 @@ $(window).scroll(function() {
         </form>
 
     </div>
-
+<div class="container">
 	<div class="inner text-center">
+
+    <ul class="contacts">
+            <li>
+                    Level-2, Center for Innovation and Development,<br> NITW
+            Warangal, India 506004
+            </li>
+            <br>
+            <li>Phone : 7893528632</li>
+            <li>Email : ig-nitw@student.nitw.ac.in</li>
+        </ul>
+        <br>
     	<ul class="icons">
-    		<li><a href="#" class="icon">
+    		<li><a href="https://www.facebook.com/TheInnovationGarage/" target="_blank" class="icon">
     			<span><i class="fa fa-facebook  fa-2x"></i></span>
     		</a></li>
-    		<li><a href="#" class="icon">
-    			<span><i class="fa fa-twitter  fa-2x"></i></span>
+    		<li><a href="https://ignitw.wordpress.com/" target="_blank" class="icon">
+    			<span><i class="fa fa-wordpress  fa-2x"></i></span>
     		</a></li>
-    		<li><a href="#" class="icon">
+    		<li><a href="https://www.instagram.com/ig_nitw/" target="_blank" class="icon">
     			<span><i class="fa fa-instagram  fa-2x"></i></span>
     		</a></li>
-    		<li><a href="#" class="icon">
+    		<li><a href="mailto:ig-nitw@student.nitw.ac.in" class="icon">
     			<span><i class="fa fa-envelope   fa-2x"></i></span>
     		</a></li>
     	</ul>
+
+        
     	<ul class="copyright">
+
     		<li>&copy; Innovation Garage</li>
     	</ul>
     </div>
+</div>
 </footer>
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
