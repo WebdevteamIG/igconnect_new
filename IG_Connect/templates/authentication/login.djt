@@ -25,14 +25,15 @@
         <div class='row' style="height:90vh;">
             <div class='col-sm-8 left'>
                 <h1 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(255, 255, 255, 1.00);">Welcome</h1>
-                <h4 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(61, 66, 72, 0.8);">Register for an IG account here.</h4>
+                
                 <br>
-                <p style="font-family: 'Open Sans', 'Space Mono'; font-weight: lighter; color: RGBA(61, 66, 72, 0.8);">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                <h5 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(121, 126, 132, 0.8);">Smash that Login Button to dive into plethora of ‘geeky’ projects. </h5>
+                <br>
+                 <h5 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(121, 126, 132, 0.8);">Don’t got no account? Fret not.  Just Register.</h5>
+
+
+                <h4 style="font-family: 'Space Mono', 'Open Sans'; font-weight: lighter; color: RGBA(121, 126, 132, 0.8);">It’s simple. It’s easy. It’s FREE. And will always be.</h4>
                 <p style="margin-top: 5%;">
                     <a href='/' class="btn btn-success" style="background-color: #00A87A; font-family: 'Roboto'; ">HOME</a>
                     &nbsp&nbsp&nbsp&nbsp

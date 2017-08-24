@@ -58,8 +58,8 @@
                 {% csrf_token %}
                     <input type="text" name="username" placeholder="User-Name" class="text" required> <br><br>
                     <input type="email" name="email" placeholder="example@example.com" class="text" required> <br><br>
-                    <input type="password" name="password1" placeholder="Password1" class="text" required> <br><br>
-                    <input type="password" name="password2" placeholder="Password2" class="text" required> <br><br>
+                    <input type="password" name="password1" placeholder="Password" class="text" required> <br><br>
+                    <input type="password" name="password2" placeholder="Confirm Password" class="text" required> <br><br>
                     <input type="text" name="first_name" placeholder="First Name" class="text" required> <br><br>
                     <input type="text" name="last_name" placeholder="Last Name" class="text" required> <br><br>
                     <input type="text" name="regNum" placeholder="Registration Number" class="text" required> <br><br>
