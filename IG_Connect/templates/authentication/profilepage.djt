@@ -162,7 +162,9 @@ $(window).scroll(function() {
                     </ul>
 
                 </div>
-                <a {% if userProfile.resume %} href="{{userProfile.resume.url}} {% endif %}">Resume </a>
+                {% if userProfile.resume %}
+                <a  href="{{userProfile.resume.url}}">Resume </a>
+                {% endif %}
             </div>
 
             <div class = "col-sm-8 desc">
