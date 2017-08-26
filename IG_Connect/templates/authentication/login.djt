@@ -41,6 +41,14 @@
                 </p>
             </div>
             <div class='col-sm-4 right'>
+            
+                {% if error %}
+                <div class="alert alert-danger alert-dismissable">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>{{error}}</strong>
+                </div>
+                {% endif %}
+
                 <p style="margin-top: 20%; padding-left: 7%; font-weight: lighter; font-family: 'Open Sans'; color:white; font-size: 1.2em;">
                     Or, log in into your account  &nbsp&nbsp :)</p>
                 <br><br><br>
