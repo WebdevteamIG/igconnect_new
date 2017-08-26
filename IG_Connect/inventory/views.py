@@ -67,7 +67,7 @@ def approveItemRequest(request,id) :
 	item.status = 3
 	item.save()
 	requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
-	requestObj.returnDate = (datetime.datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
+	requestObj.returnDate = (datetime.datetime.now() + datetime.timedelta(days=7)).strftime("%Y-%m-%d")
 	requestObj.save()
 
 	logObj = requestActionLog()
