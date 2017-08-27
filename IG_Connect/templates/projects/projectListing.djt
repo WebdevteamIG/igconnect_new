@@ -35,7 +35,6 @@
 							<br><center><h2>{{project.projectName}}</h2></center><br>
 							<p>
 								{{project.shortDesc}}
-								This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
 							</p>
 							<div class="ui grid">
 								<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
@@ -70,7 +69,6 @@
 							<br><center><h2>{{project.projectName}}</h2></center><br>
 							<p>
 								{{project.shortDesc}}
-								This is an opportunity to be a part of arguably the finest programming camp to be held in the country. 
 							</p>
 							<div class="ui grid">
 								<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
