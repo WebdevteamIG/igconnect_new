@@ -45,6 +45,10 @@ def register(request):
     if request.user.is_active == True:
         return redirect('/')
     if request.method == 'POST':
+        post_keys = ['regNum', 'course', 'branch', 'email', 'about_me']
+        for i in post_keys:
+            if(request.POST[i] == None or request.POST[i] == '')
+                return render('authentication/register.djt', {'error' : "Authentication Error, Please Try Again."})
         regNum = request.POST['regNum']
         course = request.POST['course']
         branch = request.POST['branch']
@@ -65,6 +69,10 @@ def signup(request):
     if request.user.is_active == True and request.user.is_authenticated():
         return redirect('/')
     if request.method == 'POST':
+        post_keys = ['username', 'email', 'password1', 'password2', 'last_name', 'first_name']
+        for i in post_keys:
+            if(request.POST[i] == None or request.POST[i] == '')
+                return render('authentication/signup.djt', {'error' : "Authentication Error, Please Try Again."})
         username  = request.POST['username'].lower()
         emailadr  = request.POST['email']
         password  = request.POST['password1']
