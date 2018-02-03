@@ -47,7 +47,7 @@ def register(request):
     if request.method == 'POST':
         post_keys = ['regNum', 'course', 'branch', 'email', 'about_me']
         for i in post_keys:
-            if(request.POST[i] == None or request.POST[i] == '')
+            if(request.POST[i] == None or request.POST[i] == '') :
                 return render('authentication/register.djt', {'error' : "Authentication Error, Please Try Again."})
         regNum = request.POST['regNum']
         course = request.POST['course']
@@ -69,9 +69,14 @@ def signup(request):
     if request.user.is_active == True and request.user.is_authenticated():
         return redirect('/')
     if request.method == 'POST':
+        if Userprofile.objects.filter(regNum=request.POST['regNum']).count() > 0 :
+            response = {}
+            response['error'] = 'This Registration Number Has Already Been Registered'
+            return render(request, 'authentication/signup.djt', response)
+
         post_keys = ['username', 'email', 'password1', 'password2', 'last_name', 'first_name']
         for i in post_keys:
-            if(request.POST[i] == None or request.POST[i] == '')
+            if(request.POST[i] == None or request.POST[i] == '') :
                 return render('authentication/signup.djt', {'error' : "Authentication Error, Please Try Again."})
         username  = request.POST['username'].lower()
         emailadr  = request.POST['email']
