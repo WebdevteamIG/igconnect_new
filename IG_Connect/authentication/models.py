@@ -16,7 +16,7 @@ class Userprofile(models.Model) :
 		('CSE','Computer Science & Engineering'),
 		('ECE','Electronics and Communication Engineering'),
 		('MECH','Mechanical Engineering'),
-		('ME','Metallurgy Engineering'),
+		('MME','Metallurgy Engineering'),
 		('CHE','Chemical Engineering'),
 		('CIVIL','Civil Engineering'),
 		('EEE','Electrical and Electronics Engineering'),

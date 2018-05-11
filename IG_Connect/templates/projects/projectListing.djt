@@ -37,7 +37,7 @@
 								{{project.shortDesc}}
 							</p>
 							<div class="ui grid">
-								<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+								<div class="eight wide column"> </div>
 								<div class="six wide column"> 
 									<h4>Contributors : </h4>
 									<ul>
@@ -71,7 +71,7 @@
 								{{project.shortDesc}}
 							</p>
 							<div class="ui grid">
-								<div class="eight wide column"> Start Date : 23-Mar-2017 </div>
+								<div class="eight wide column">  </div>
 								<div class="six wide column"> 
 									<h4>Contributors : </h4>
 									<ul>

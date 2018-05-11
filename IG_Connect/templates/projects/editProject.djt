@@ -68,7 +68,7 @@
 						<textarea name="plans" rows="4">{{project.plans}}</textarea>
 					</div>
 					<div class="field">
-						<label>Team Picture</label>
+						<label>Project Picture</label>
 						<div class="ui grid">
 							<div class="seven wide column">
 								<button type="button" id="teampicbutton" class="ui icon blue button">
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 
-					<div class="field">
+					<!--<div class="field">
 						<label>Project Images (hold down the CTRL or SHIFT key while selecting for multiple files)
 						</label>
 						<div class="ui grid">
@@ -95,7 +95,7 @@
 							<div class="six wide column" style="display:none;" id="projectpicName"></div>
 						</div>
 						<input type="file" name="projectpictures" id="projectpic" multiple hidden>
-					</div>
+					</div>-->
 					<hr><hr>
 					<div class="field">
 						<center>

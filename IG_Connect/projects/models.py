@@ -13,7 +13,7 @@ def get_team_pic_path(instance,filename):
 # Create your models here.
 class Project(models.Model) : 
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	projectName = models.CharField(max_length=50)
+	projectName = models.CharField(max_length=200)
 	teampic = models.ImageField(upload_to=get_team_pic_path,null=True,blank=True)
 	shortDesc = models.CharField(max_length=100)
 	objective = models.TextField(max_length=1000)

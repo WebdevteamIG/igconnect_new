@@ -10,6 +10,12 @@ from .models import *
 from authentication.models import *
 import datetime
 
+def checkuserifsuperuser(user):
+    if user.is_superuser:
+        return True
+    else:
+        return False
+
 # Create your views here.
 def listItems(request) :
 	response = {}
@@ -22,6 +28,7 @@ def listItems(request) :
 		response['allowed'] = False
 	return render(request,'inventory/listPage.djt',response)
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def addItem(request) :
 	response= {}
 	if request.method == 'POST' :
@@ -60,6 +67,7 @@ def requestItem(request,id) :
 
 	return redirect('/borrow')
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def approveItemRequest(request,id) :
 	response = {}
 	item = Item.objects.get(id=id)
@@ -97,6 +105,7 @@ def cancelItemRequest(request,id) :
 
 	return redirect('/borrow')
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def getItemBack(request,id,Actiontype) : 
 	response = {}
 	item = Item.objects.get(id=id)
@@ -118,21 +127,25 @@ def getItemBack(request,id,Actiontype) :
 
 	return redirect('/borrow/listRequests')
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def listRequests(request) :
 	response = {}
 	response['itemRequests'] = ItemRequest.objects.all()
 	return render(request,'inventory/requestHandlePage.djt',response)
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def viewLogs(request) :
 	response = {}
 	response['logs'] = requestActionLog.objects.all()
 	return render(request,'inventory/logsPage.djt',response)
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def initialApproval(request) :
 	response = {}
 	response['pendingUsers'] = Userprofile.objects.filter(isApproved=False)
 	return render(request,'inventory/initialApprovalPage.djt',response)
 
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def approveUser(request,regNum) : 
 	response = {}
 	try :

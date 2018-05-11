@@ -56,12 +56,12 @@ def addProject(request):
 			projectDesc.developmentPhases = request.POST['phases']
 			projectDesc.save()
 
-			projectpics = request.FILES.getlist('projectpictures')
-			for pic in projectpics :
-				imgObj = ProjectImage()
-				imgObj.image = pic
-				imgObj.project = project
-				imgObj.save()
+			#projectpics = request.FILES.getlist('projectpictures')
+			#for pic in projectpics :
+			#	imgObj = ProjectImage()
+			#	imgObj.image = pic
+			#	imgObj.project = project
+			#	imgObj.save()
 
 			return redirect('/projects')
 
@@ -89,12 +89,12 @@ def editProject(request,projectname) :
 				person = User.objects.get(username=contributor)
 				project.contributorsList.add(person)
 
-			projectpics = request.FILES.getlist('projectpictures')
-			for pic in projectpics :
-				imgObj = ProjectImage()
-				imgObj.image = pic
-				imgObj.project = project
-				imgObj.save()
+			#projectpics = request.FILES.getlist('projectpictures')
+			#for pic in projectpics :
+			#	imgObj = ProjectImage()
+			#	imgObj.image = pic
+			#	imgObj.project = project
+			#	imgObj.save()
 		else :
 			response['project'] = project
 			response['contributors'] = User.objects.all().exclude(username=request.user.username);

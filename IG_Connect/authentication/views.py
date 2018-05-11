@@ -65,7 +65,12 @@ def signup(request):
     if request.user.is_active == True and request.user.is_authenticated():
         return redirect('/')
     if request.method == 'POST':
-        username  = request.POST['username'].lower()
+	if Userprofile.objects.filter(regNum=request.POST['regNum']).count() > 0 :
+            response = {}
+            response['error'] = 'This Registration Number Has Already Been Registered'
+            return render(request, 'authentication/signup.djt', response)
+	
+        username  = request.POST['username']
         emailadr  = request.POST['email']
         password  = request.POST['password1']
         password2 = request.POST['password2']
