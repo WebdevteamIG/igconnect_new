@@ -2,3 +2,4 @@ env
 *.pyc
 media/*
 documents/*
+IG_Connect/media/*
