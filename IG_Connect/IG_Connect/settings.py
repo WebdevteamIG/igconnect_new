@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'IG_Connect.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'ig_db',
+        'USER': 'root',
+        'PASSWORD': 'priyam123',
     }
 }
 
@@ -95,8 +95,8 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'speakerstedxnitw@gmail.com'
+EMAIL_HOST_PASSWORD = 'speakerstedx'
 EMAIL_PORT = 587
 
 
