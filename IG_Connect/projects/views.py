@@ -84,6 +84,7 @@ def editProject(request,projectname) :
 			project.awards = request.POST['awards']
 			project.plans = request.POST['plans']
 			project.teampic = request.FILES.get('teampicture')
+			project.projecturl = request.POST['projecturl']
 			project.save()
 
 			for contributor in request.POST.getlist('contributorList') :
@@ -98,7 +99,7 @@ def editProject(request,projectname) :
 			#	imgObj.save()
 		else :
 			response['project'] = project
-			response['contributors'] = User.objects.all().exclude(username=request.user.username);
+			response['contributors'] = User.objects.all().exclude(username=request.user.username)
 			return render(request,'projects/editProject.djt',response)
 	except:
 		print( "Project Doesn't exist Error" )
