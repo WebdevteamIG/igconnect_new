@@ -75,6 +75,10 @@
 						<textarea name="plans" rows="4"></textarea>
 					</div>
 					<div class="field">
+						<label>Project url( Enter github link, or any site url if available)</label>
+						<input type="url" name="projecturl">
+					</div>
+					<div class="field">
 						<label>Project Picture</label>
 						<div class="ui grid">
 							<div class="seven wide column">

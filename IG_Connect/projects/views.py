@@ -29,7 +29,7 @@ def addProject(request):
 		
 		try:
 			existingProj = Project.objects.get(projectName=projectname)
-			print "Name exists, select other name"
+			print ('Name exists, select other name')
 			response['errorNameExist'] = True
 		except:
 			project = Project()
@@ -45,6 +45,7 @@ def addProject(request):
 			project.awards = request.POST['awards']
 			project.plans = request.POST['plans']
 			project.teampic = request.FILES.get('teampicture')
+			project.projecturl = request.POST["projecturl"]
 			project.save()
 			for contributor in request.POST.getlist('contributorList') :
 				person = User.objects.get(username=contributor)
@@ -100,7 +101,7 @@ def editProject(request,projectname) :
 			response['contributors'] = User.objects.all().exclude(username=request.user.username);
 			return render(request,'projects/editProject.djt',response)
 	except:
-		print "Project Doesn't exist Error"
+		print( "Project Doesn't exist Error" )
 	
 	return redirect('/projects')
 	

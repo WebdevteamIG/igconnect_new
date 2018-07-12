@@ -228,6 +228,10 @@ $(window).scroll(function() {
                                <td style="width: 30%;">Awards</td>
                                <td style="width: 70%;">{{project.awards}}</td>
                            </tr>
+                           <tr>
+                               <td style="width: 30%;">project links</td>
+                               <td style="width: 70%;">{{project.projecturl}}</td>
+                           </tr>
                        </tbody>
                    </table>
                 </div>

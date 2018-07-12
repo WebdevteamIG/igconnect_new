@@ -25,6 +25,7 @@ class Project(models.Model) :
 	impact = models.TextField(max_length=500)
 	awards = models.TextField(max_length=1000)
 	plans = models.TextField(max_length=1000)
+	projecturl = models.URLField(max_length=500,default=None)
 
 	def __str__(self) : 
 		return self.projectName
