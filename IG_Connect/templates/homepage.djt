@@ -157,6 +157,10 @@ $(window).scroll(function() {
                 <a class="nav-link" id="contact_btn" href="#foot">CONTACT&nbsp;US</a>
                 <div class="nav-border"></div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="about_btn" href="/exp">EXPERIENCES</a>
+                <div class="nav-border"></div>
+            </li>
             {% if request.user.is_superuser %}
             <li class="nav-item">
                 <a class="nav-link" href="/borrow/initialApproval">Admin Portal</a>
