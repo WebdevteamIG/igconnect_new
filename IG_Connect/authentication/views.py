@@ -139,6 +139,11 @@ def forgotPassword(request) :
 def updateProfile(request) :
     response = {}
     if request.method == 'POST' :
+
+        if Userprofile.objects.filter(regNum=request.POST['regNum']).count() > 0 and Userprofile.objects.get(regNum=request.POST['regNum']).user != request.user:
+            response['error'] = 'The Registration Number( %s ) Has Already Been Registered' % request.POST['regNum']
+            return render(request, 'authentication/updateProfile.djt', response)
+
         profile = Userprofile.objects.get(user=request.user)
         profile.regNum = request.POST['regNum']
         profile.course = request.POST['course']

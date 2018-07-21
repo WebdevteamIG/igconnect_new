@@ -70,7 +70,7 @@
 
 <div class="ui fluid container">
 
-<div class="ui grid" style="margin-top: 50px;">
+<div class="ui two column stackable grid" style="margin-top: 50px;">
     <div class="four wide column">
         <center>
         <a href="/"><button class="ui teal button"><i class="home icon"></i>HOME</button></a>
@@ -81,7 +81,7 @@
 
     <div class="ten wide column">
 
-        <table class="ui celled padded inverted table" id="itemsTable">
+        <table class="ui unstackable celled padded inverted table" id="itemsTable">
             <thead>
                 <tr>
                     <th class="d">Name of Item</th>

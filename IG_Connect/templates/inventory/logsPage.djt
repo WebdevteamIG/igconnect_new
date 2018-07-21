@@ -70,7 +70,7 @@
 
 <div class="ui fluid container">
 
-<div class="ui grid" style="margin-top: 50px;">
+<div class="ui stackable grid" style="margin-top: 50px;">
     <div class="four wide column">
         <center>
         <div class="ui large buttons">
@@ -81,7 +81,7 @@
         </center>
     </div>
     <div class="ten wide column">
-        <table class="ui celled padded inverted table" id="logsTable">
+        <table class="ui unstackable celled padded inverted table" id="logsTable">
             <thead>
                 <tr>
                     <th colspan="5" class="d"><center>Logs</center></th>

@@ -16,7 +16,16 @@ def checkuserifsuperuser(user):
     else:
         return False
 
+def checkuserifallowed(user):
+	borrowedItems = ItemRequest.objects.filter(user = user)
+	countOfItems = len(borrowedItems)
+	if countOfItems<4 and user.profile.isApproved:
+		return True
+	else:
+		return False
+
 # Create your views here.
+@login_required(login_url='/auth/login')	
 def listItems(request) :
 	response = {}
 	response['items'] = Item.objects.all()
@@ -40,6 +49,8 @@ def addItem(request) :
 		return redirect('/borrow')
 	return render(request,'inventory/addItem.djt',response)
 
+@login_required(login_url='/auth/login')
+@user_passes_test(checkuserifallowed, login_url='/auth/login')
 def requestItem(request,id) :
 	response = {}
 	try:
@@ -87,22 +98,26 @@ def approveItemRequest(request,id) :
 
 	return redirect('/borrow/listRequests')
 
+@login_required(login_url='/auth/login')
 def cancelItemRequest(request,id) : 
 	response = {}
-	item = Item.objects.get(id=id)
-	requestObj = ItemRequest.objects.get(item=item)
-	item.status = 1
-	item.save()
+	try:
+		item = Item.objects.get(id=id)
+		requestObj = ItemRequest.objects.get(item=item)
+		if requestObj.user == request.user:
+			item.status = 1
+			item.save()
 
-	logObj = requestActionLog()
-	logObj.item = item
-	logObj.user = request.user
-	logObj.dateOfAction = datetime.datetime.now().strftime("%Y-%m-%d")
-	logObj.content = 'Request Cancelled by user'
-	logObj.save()
+			logObj = requestActionLog()
+			logObj.item = item
+			logObj.user = request.user
+			logObj.dateOfAction = datetime.datetime.now().strftime("%Y-%m-%d")
+			logObj.content = 'Request Cancelled by user'
+			logObj.save()
 
-	requestObj.delete()
-
+			requestObj.delete()
+	except:
+		print( "Error while cencelling item request" )
 	return redirect('/borrow')
 
 @user_passes_test(checkuserifsuperuser, login_url='/')
@@ -153,9 +168,10 @@ def approveUser(request,regNum) :
 		userProfile.isApproved = True
 		userProfile.save()
 	except :
-		print "error occured"
+		print "error occured while approving user"
 	return redirect('/borrow/initialApproval')
 
+@login_required(login_url='/auth/login')
 def borrowedItems(request) : 
 	response = {}
 	response['borrowedItems'] = ItemRequest.objects.filter(user=request.user)
