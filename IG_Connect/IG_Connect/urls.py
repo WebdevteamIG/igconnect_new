@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^projects/', include('projects.urls', namespace = 'projects')),
     url(r'^updates/',include('updates.urls', namespace = 'updates')),
     url(r'^borrow/',include('inventory.urls',namespace='inventory')),
+    url(r'^events/',include('events.urls',namespace='events')),
     url(r'^exp/', include('experience.urls', namespace='experience')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

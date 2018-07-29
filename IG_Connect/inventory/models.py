@@ -24,7 +24,7 @@ class ItemRequest(models.Model) :
 	dateOfRequest = models.DateField(auto_now=False, auto_now_add=False)
 	item = models.ForeignKey(Item,related_name='correspondingRequest')
 	approvalDate = models.DateField(auto_now=False, auto_now_add=False)
-	returnDate = models.DateField(auto_now=False, auto_now_add=False,default=datetime.now().strftime("%Y-%m-%d"))
+	returnDate = models.DateField(auto_now=False, auto_now_add=False)
 
 	def __str__(self) :
 		return (self.user.username + "-" + self.item.itemName)

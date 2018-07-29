@@ -1,0 +1,154 @@
+{% extends "events/base.djt" %}
+{% load staticfiles %}
+
+
+{% block head %}
+<style>
+.eventcolumn{
+	text-align: center !important;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+	<div class="ui stackable four column padded centered grid container" style="height:100%">
+		<div class="six wide centered column eventcolumn" style="background: url('{%if event.banner_image%}/media/{{event.banner_image}}{%else%}/static/main/banner.png{%endif%}');">
+			<div class="row">
+				<div class="column">
+					<img class="ui small centered circular image" src="{%if event.logo%}/media/{{event.logo}}{%else%}/static/main/logo.jpg{%endif%}">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="column">
+					<div class="ui segment">
+						<h2>{{event.eventName}}</h2>
+						<div class="ui divider"></div>
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Start Date :</div>
+							    </div>
+								<div class="right floated content">
+								  {{event.startdate}}
+							    </div>
+							</div>
+						</div>
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Timings :</div>
+							    </div>
+								<div class="right floated content">
+								  {{event.timings}}
+							    </div>
+							</div>
+						</div>
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Organiser :</div>
+							    </div>
+								<div class="right floated content">
+								  {{event.organiser}}
+							    </div>
+							</div>
+						</div>
+						
+						<br>
+
+						<h4 class="ui horizontal divider header">
+						  <i class="call icon"></i>
+						  Contact Details
+						</h4>
+						{%if event.contact_members%}
+							<div class="ui middle aligned animated selection list" >
+							{%for contact in event.contact_members.all %}
+								<div class="item">
+									<div class="right floated content">
+									  {{contact.phone_no}}
+								      <a href="tel: {{contact.phone_no}}"> <i class="call icon"></i></a>
+								      <a href="{{contact.facebook_link}}"> <i class="facebook icon"></i></a>
+								    </div>
+								    <div class="left floated content">
+								      <div class="header">{{contact.name}}</div>
+								    </div>
+								</div>
+							{%endfor%}
+							</div>
+						{%else%}
+							<h4>Contacts coming soon.</h4>
+						{%endif%}
+
+						<br>
+						<div class="ui divider"></div>
+						<!-- <div class="ui equal width grid">
+							<div class="equal width row">
+								<div class="column">
+									<a class="ui fluid blue basic button" href="https://www.facebook.com/technozion.nitw"> <i class="facebook icon"></i> Like Our Page</a>
+								</div>
+								<div class="column">
+						  			<a class="ui fluid red basic button" href="mailto: vivek@technozion.org"> <i class="mail icon"></i>Mail Us</a>
+						  		</div>
+							</div>
+						</div> -->
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="ten wide centered column">
+			{% if message %}
+	        <div class="eight wide column">
+	            <div class="ui message">
+	              <div class="header">
+	                Message
+	              </div>
+	              <p>{{message}}</p>
+	            </div>
+	        </div>
+	        {% endif %}
+
+			<div class="ui segment">
+				{% if event.isRegisterationOpen %}
+
+				<form action="/events/register/{{event.pk}}/" method="post" class="ui form">
+	            {% csrf_token %}
+
+	            {% for question in questions %}
+	            <div class="field">
+	                <label>{{question.question}}</label>
+	                <small>[{{question.description}}]</small>
+	                <input type="text" name="ques{{question.pk}}" maxlength="1000" value="{{question.response}}" required>
+	            </div>
+	            {% endfor %}
+	            
+	            <br><br>
+	            <center>
+	            <button class="ui green button" type="submit">
+	                <i class="plus icon"></i>
+	                {% if regRequest %}Update{% else %}Register{% endif %}
+	            </button>
+	            </center>
+	            </form>
+	            {% elif regRequest %}         			             
+		        <p>{{regRequest.message}}</p>
+	            {% else %}
+	            <p>Registeration for this event has been closed.</p>
+	            {% endif %}
+			</div>
+		</div>
+	</div> 
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,270 @@
+{% extends "events/base.djt" %}
+{% load staticfiles %}
+
+{% block head %}
+<!-- for Datatable -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css">
+<!-- ///////////// -->
+
+{% endblock %}
+
+{% block content %}
+<div class="ui fluid container">
+
+	<div class="ui two column stackable grid" style="margin-top: 50px;">
+	    <div class="one wide column">
+	        <center>
+	        <div class="three wide column"> 
+	        	<a href="/events/manageevent/{{event.pk}}">
+	        		<button class="ui facebook button">Back</button>
+	        	</a>
+
+			</div>
+	        </center>
+	    </div>
+	    <div class="fourteen wide column">
+	    	<div class="ui fluid center aligned 	segment">
+	        	<h3>{{event.eventName}}</h3>
+
+	        </div>
+	        <table class="ui unstackable striped celled  padded inverted table" id="responseTable">
+	        <thead>
+	        	<tr>
+                    <th>Timestamp</th>
+                    <th>Reg No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Course</th>
+                    <th>Status</th>
+                    <th>Response</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+            </thead>
+            <tbody>
+            	{% for response in regRequests %}
+	        	<tr>
+	        		<td>{{response.requestDate}}</td>
+	        		<td>{{response.user.profile.regNum}}</td>
+	        		<td>{{response.user.first_name}}</td>
+	        		<td>{{response.user.last_name}}</td>
+	        		<td>{{response.user.profile.course}}</td>
+	        		<td id="status{{response.pk}}">{{response.get_status_display}}</td>
+	        		<td>
+	        			<button class="ui blue button viewResponse"
+	        					data-regno="{{response.user.profile.regNum}}"
+	        					data-name="{{response.user.first_name}} {{response.user.last_name}}"
+	        					data-pk="{{response.pk}}"
+	        					data-username = "{{response.user.username}}">
+						 	View Response
+						</button>
+					</td>
+					<td>
+	        			<button class="ui green button acceptRequest"
+	        					id="acceptbtn{{response.pk}}"
+	        					data-pk="{{response.pk}}"
+	        					{% ifequal response.status 3 %}disabled{% endifequal %}>
+						 	Accept
+						</button>
+					</td>
+					<td>
+	        			<button class="ui red button rejectRequest"
+	        					id="rejectbtn{{response.pk}}"
+	        					data-pk="{{response.pk}}"
+	        					{% ifequal response.status 2 %}disabled{% endifequal %}>
+						 	Reject
+						</button>
+					</td>
+	        	</tr>
+	        	{% endfor %}
+	        </tbody>
+	        </table>
+	        
+	    </div>
+	</div>
+</div>
+<div class="ui modal" id="responseModal">
+	  <i class="close icon"></i>
+	  <div class="header">
+	    Response
+	  </div>
+	  <div class="content">
+		  <div class="ui inverted grid">
+		  		<div class="two wide column"></div>
+		  		<div class="twelve wide column">
+
+		            <div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Regno : </div>
+							    </div>
+								<div class="middle floated content" id="regNo">
+								  
+							    </div>
+							</div>
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Name : </div>
+							    </div>
+								<div class="middle floated content" id="fullname">
+								  
+							    </div>
+							</div>
+						</div>
+						<br>
+					{% for question in questions %}
+		            <div class="field">
+		                <h4 class="ui header">Q. {{question.question}}</h4>
+    					<p id="ques{{question.pk}}"></p>
+		            </div>
+		            <br>
+		            {% endfor %}
+		  		</div>
+		  </div>
+	  </div>
+	  <div class="actions">
+	  </div>
+	</div>
+{% endblock %}
+
+{% block script %}
+
+<script src="{% static 'assets/js.cookie.js' %}"></script>
+
+<script type="text/javascript">
+
+	//Ajax setup
+	$(document).ready(function(){
+	  var csrftoken = Cookies.get('csrftoken');
+	  function csrfSafeMethod(method) {
+	      // these HTTP methods do not require CSRF protection
+	      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	  }
+	  $.ajaxSetup({
+	      beforeSend: function(xhr, settings) {
+	          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+	              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	          }
+	      }
+	  });
+	});
+
+	$(document).ready(function() {
+        $('#responseTable').DataTable({
+            "info": false,
+            // "responsive" : true
+        });
+
+    });
+
+	$('.viewResponse').click(function(event){
+		$('#responseModal').modal('show');
+		document.getElementById("regNo").innerHTML =  $(this).attr("data-regno");
+		document.getElementById("fullname").innerHTML =  $(this).attr("data-name");
+		var username = $(this).attr("data-username");
+		getResponses(username);
+		// updateResponses("123");
+	});
+
+	$('.acceptRequest').click(function(event){
+		var requestId = $(this).attr("data-pk");
+		updateResponse(requestId, 3)
+		
+	});
+
+	$('.rejectRequest').click(function(event){
+
+		updateResponse($(this).attr("data-pk"), 2)
+		
+	});
+
+	function getResponses(username){
+        var eventpk = {{event.pk}}
+        var finalurl = '/events/getresponse/?format=json'
+        $.ajax({
+        type:"POST",
+        cache:false,
+        url:finalurl,
+        data:{
+          'eventpk': eventpk,
+          'username' : username
+        },
+        dataType: 'json',
+        success:function(data){
+          if(data)
+          {
+            console.log(data);
+            if (data.is_absent) {
+              alert("wrong info");
+            }
+            else{
+              // alert("present");
+              for(var index in data) {
+				  console.log( index + " : " + data[index]);
+				   // var RE = /^\d+(\.\d{0,2})?$/
+					  // if(!RE.test(t1marks)){
+					  //   alert("please enter only positive numbers till 2 decimal digits for t1");
+					  //    return false;
+					  // }
+
+				document.getElementById(index).innerHTML =  data[index];
+				}
+            }
+          }
+          else
+          {
+            alert("No data came");
+          }
+        },
+        error: function(data){
+          alert("Error occured");
+        }
+      });
+      }
+
+	function updateResponse(requestId, status){
+		var finalurl = '/events/updateresponse/?format=json'
+      	$.ajax({
+            url: finalurl,
+            type: 'PUT',    
+            data:{
+	          'requestId' : requestId,
+	          'status' : status
+	        },
+            dataType: 'json',
+            success: function(result) {
+                console.log("success PUT");
+                updateRow(requestId, status);
+            },
+            error: function(data){
+	          console.log("Error occured");
+	          
+	        }
+        });
+      }
+
+      function updateRow(requestId, status)
+      {
+      	if(status == 3)
+      	{
+      		console.log("approved");
+			document.getElementById("acceptbtn" + requestId).disabled = true;
+			document.getElementById("rejectbtn" + requestId).disabled = false;
+			document.getElementById("status" + requestId).innerHTML = "Approved";
+      	}
+      	else if(status == 2)
+      	{
+      		document.getElementById("rejectbtn" + requestId).disabled = true;
+      		document.getElementById("acceptbtn" + requestId).disabled = false;
+			document.getElementById("status" + requestId).innerHTML = "Rejected";
+      	}
+      }
+</script>
+{% endblock %}

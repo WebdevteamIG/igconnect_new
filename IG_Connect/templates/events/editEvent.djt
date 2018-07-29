@@ -1,0 +1,105 @@
+{% extends "events/base.djt" %}
+{% load staticfiles %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<div class="ui fluid container">
+
+	<div class="ui two column stackable grid" style="margin-top: 50px;">
+	    <div class="four wide column">
+	        <center>
+	        <div class="ui large buttons">
+	          <a href="/"><button class="ui facebook button">Home</button></a>
+	          <div class="or"></div>
+	          <a href="/events/"><button class="ui youtube button">Back</button></a>
+	        </div>
+	        </center>
+	    </div>
+	    <div class="eight wide column">
+	        <div class="ui fluid inverted segment">
+	            <form action="/events/editevent/{{event.pk}}/" method="post" class="ui inverted form">
+	            {% csrf_token %}
+
+	            <div class="field">
+	                <label>Event Name</label>
+	                <input type="text" name="eventName" maxlength="100" value="{{event.eventName}}" required>
+	            </div>
+
+	            <div class="field">
+	                <label>Description</label>
+	                <textarea name="description" rows="4" maxlength="2000" required>{{event.description}}</textarea>
+	            </div>
+
+	            <div class="field">
+	                <label>Timings</label>
+	                <input type="text" name="timings" maxlength="100" value="{{event.timings}}" required>
+	            </div>
+
+	            <div class="field">
+	                <label>Organiser</label>
+	                <input type="text" name="organiser" maxlength="100" value="{{event.organiser}}" required>
+	            </div>
+
+	            <div class="field">
+	                <label>Start Date</label>
+	                <input type="date" name="startDate" value="{{startdate}}">
+	            </div>
+	            <div class="field">
+	                <label>End Date</label>
+	                <input type="date" name="endDate" value="{{enddate}}">
+	            </div>
+
+			    <div class="inline inverted field">			      
+			      	<label style="color: white;">Event Published : </label>
+				    <div class="ui toggle checkbox">
+				      <input type="checkbox" name="eventPublished" tabindex="0"{% if event.isPublished %} checked{% endif %}>
+				      <label> </label>
+				    </div>
+			    </div>
+
+			    <div class="inline inverted field">			      
+			      	<label style="color: white;">Registeration Open : </label>
+				    <div class="ui toggle checkbox">
+				      <input type="checkbox" name="registerationOpen" tabindex="0"{% if event.isRegisterationOpen %} checked{% endif %}>
+				      <label> </label>
+				    </div>
+			    </div>
+
+			    <div class="inline inverted field">			      
+			      	<label style="color: white;">Approved User List Published : </label>
+				    <div class="ui toggle checkbox">
+				      <input type="checkbox" name="userListPublished" tabindex="0"{% if event.isApprovedUserListPublished %} checked{% endif %}>
+				      <label> </label>
+				    </div>
+			    </div>
+
+			    <div class="inline inverted field">			      
+			      	<label style="color: white;">Event Ended : </label>
+				    <div class="ui toggle checkbox">
+				      <input type="checkbox" name="eventEnded" tabindex="0"{% if event.isEventEnded %} checked{% endif %}>
+				      <label> </label>
+				    </div>
+			    </div>
+
+	            <br><br>
+	            <center>
+	            <button class="ui red button" type="submit">
+	                <i class="plus icon"></i> Save
+	            </button>
+	            </center>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}
