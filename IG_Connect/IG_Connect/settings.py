@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'updates',
     'inventory',
-    'experience'
+    'experience',
+    'register',
 ]
 
 MIDDLEWARE = [
