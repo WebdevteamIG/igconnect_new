@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^borrow/',include('inventory.urls',namespace='inventory')),
     url(r'^events/',include('events.urls',namespace='events')),
     url(r'^exp/', include('experience.urls', namespace='experience')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

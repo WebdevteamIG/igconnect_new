@@ -23,8 +23,20 @@
 			<div class="row">
 				<div class="column">
 					<div class="ui segment">
-						<h2>{{event.eventName}}</h2>
+						<h2>{{event.name}}</h2>
 						<div class="ui divider"></div>
+						{% if event.cost %}
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Participation Cost :</div>
+							    </div>
+								<div class="right floated content">
+								  {{event.cost}}
+							    </div>
+							</div>
+						</div>
+						{%endif%}
 						<div class="ui middle aligned animated selection list" >
 							<div class="item">
 								<div class="left floated content">
@@ -48,6 +60,16 @@
 						<div class="ui middle aligned animated selection list" >
 							<div class="item">
 								<div class="left floated content">
+							      <div class="header">Venue :</div>
+							    </div>
+								<div class="right floated content">
+								  {{event.venue}}
+							    </div>
+							</div>
+						</div>
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
 							      <div class="header">Organiser :</div>
 							    </div>
 								<div class="right floated content">
@@ -57,12 +79,13 @@
 						</div>
 						
 						<br>
+						
 
 						<h4 class="ui horizontal divider header">
 						  <i class="call icon"></i>
 						  Contact Details
 						</h4>
-						{%if event.contact_members%}
+						{%if event.contact_members.all %}
 							<div class="ui middle aligned animated selection list" >
 							{%for contact in event.contact_members.all %}
 								<div class="item">
@@ -87,26 +110,12 @@
 						{% elif event.isRegisterationOpen %}
 						<a href="/events/register/{{event.pk}}" class="ui button fluid green">Register Now</a>
 						<br>
-						<!-- <p><strong>Minimum Members: </strong>{{event.minTeamSize}} &nbsp
-						<strong>Maximum Members: </strong>{{event.maxTeamSize}}</p> -->
-						<!--
-						<p><strong>Prize Money: </strong>{{event.prize_money}}</p>
-						 -->
 						{% else %}
-						<button class="ui button fluid red" disabled>Registerations closed</button>
+						<button class="ui button fluid red" disabled>Registerations Closed</button>
 						{%endif%}
 						<br>
 						<div class="ui divider"></div>
-						<!-- <div class="ui equal width grid">
-							<div class="equal width row">
-								<div class="column">
-									<a class="ui fluid blue basic button" href="https://www.facebook.com/technozion.nitw"> <i class="facebook icon"></i> Like Our Page</a>
-								</div>
-								<div class="column">
-						  			<a class="ui fluid red basic button" href="mailto: vivek@technozion.org"> <i class="mail icon"></i>Mail Us</a>
-						  		</div>
-							</div>
-						</div> -->
+
 						
 					</div>
 				</div>
@@ -118,7 +127,9 @@
 				<div class="ui top attached tabular menu">
 				
 				  <a class="ui active item" data-tab="desc">Description</a>
-				  <!-- <a class="ui item" data-tab="participants">Paticipants</a> -->
+				  {%for content in event.contents.all%}
+			  	<a class="ui item" data-tab="cont_{{content.pk}}">{{content.title}}</a>
+					{%endfor%}
 				</div>
 
 				<div class="ui bottom attached active tab segment" data-tab="desc">
@@ -126,9 +137,14 @@
 				  {{event.description}}
 				  {%endautoescape%}
 				</div>
-				<!-- <div class="ui bottom attached tab segment" data-tab="participants">
-				  
-				</div> -->
+				{%for content in event.contents.all%}
+				<div class="ui bottom attached tab segment" data-tab="cont_{{content.pk}}">
+				  {%autoescape off%}
+				  {{content.content}}
+				  {%endautoescape%}
+				</div>
+				{%endfor%}
+
 			</div>
 		</div>
 	</div> 

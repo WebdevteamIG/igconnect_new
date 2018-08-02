@@ -28,12 +28,17 @@ def addEvent(request) :
 	response= {}
 	if request.method == 'POST' :
 		event = Event()
-		event.eventName = request.POST['eventName']
+		event.name = request.POST['name']
 		event.description = request.POST['description']
 		event.timings = request.POST['timings']
+		event.venue = request.POST['venue']
 		event.organiser = request.POST['organiser']
+		event.cost = request.POST['cost']
+		if request.FILES.get('logo'):
+			event.logo = request.FILES.get('logo')
+		if request.FILES.get('banner_image'):
+			event.banner_image = request.FILES.get('banner_image')
 		event.startdate = datetime.strptime(request.POST['startDate'], '%Y-%m-%d')
-		event.enddate = datetime.strptime(request.POST['endDate'], '%Y-%m-%d')
 		event.save()
 		return redirect('/events/manageevent/%d'%event.pk)
 	return render(request,'events/addEvent.djt',response)
@@ -58,12 +63,13 @@ def editEvent(request,id) :
 	response= {}
 	event = Event.objects.get(id=id)
 	if request.method == 'POST' :
-		event.eventName = request.POST['eventName']
+		event.name = request.POST['name']
 		event.description = request.POST['description']
 		event.timings = request.POST['timings']
+		event.venue = request.POST['venue']
 		event.organiser = request.POST['organiser']
+		event.cost = request.POST['cost']
 		event.startdate = datetime.strptime(request.POST['startDate'], '%Y-%m-%d')
-		event.enddate = datetime.strptime(request.POST['endDate'], '%Y-%m-%d')
 		if request.POST.get('eventPublished'):
 			event.isPublished = True
 		else:
@@ -84,6 +90,11 @@ def editEvent(request,id) :
 		else:
 			event.isEventEnded = False
 
+		if request.FILES.get('logo'):
+			event.logo = request.FILES.get('logo')
+		if request.FILES.get('banner_image'):
+			event.banner_image = request.FILES.get('banner_image')
+
 		event.save()
 		return redirect('/events/manageevent/%d'%event.pk)
 
@@ -91,7 +102,6 @@ def editEvent(request,id) :
 	response['event'] = event
 	response['questions'] = questions
 	response['startdate'] = event.startdate.strftime("%Y-%m-%d")
-	response['enddate'] = event.enddate.strftime("%Y-%m-%d")
 	return render(request,'events/editEvent.djt',response)
 
 @login_required(login_url='/auth/login')
@@ -114,11 +124,15 @@ def viewEvent(request,id) :
 	response= {}
 	try:
 		event = Event.objects.get(id=id)
-		response['event'] = event
-		if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
-			regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
-			response['regRequest'] = regRequest
-		return render(request,'events/EventPage.djt',response)
+		# Displaying event only if event is published or the user is superuser
+		if event.isPublished or request.user.is_superuser:
+			response['event'] = event
+			if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
+				regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
+				response['regRequest'] = regRequest
+			return render(request,'events/EventPage.djt',response)
+		else:
+			raise
 	except:
 		return redirect('/events')
 
@@ -127,21 +141,21 @@ def registerEvent(request,id) :
 	response= {}
 	try:
 		event = Event.objects.get(id=id)
+		# Raising exception if event is not published.
+		if not event.isPublished:
+			raise
+
 		questions = EventQuestion.objects.filter(event = event)
 
-		# get registeration status if exist
 		isUserRegistered = False
-
+		# get registeration status if exist
 		if EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
 			regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
 			isUserRegistered = True
 			for question in questions:
 				question.response = EventQuestionResponse.objects.get(question = question, user = request.user).response
-
 		if event.isRegisterationOpen:
 			if request.method == 'POST' :
-				#Get answers and create new object if not exist or update
-				print("post")
 
 				#validating that all answers are present
 				valid = True
@@ -168,10 +182,15 @@ def registerEvent(request,id) :
 
 						for question in questions:
 							quesResponse = EventQuestionResponse()
+							quesResponse.registerationRequest = regRequest
 							quesResponse.question = question
 							quesResponse.user = request.user
 							quesResponse.response = question.response
 							quesResponse.save()
+
+						# Now user is registered for this event so changing the flag.
+						isUserRegistered = True
+
 					response['message'] = "Response saved successfully."
 				else:
 					response['message'] = "Unable to save response"
@@ -180,7 +199,7 @@ def registerEvent(request,id) :
 		response['questions'] = questions
 		if isUserRegistered:
 			if regRequest.status == 1:
-				regRequest.message = "Your response has been saved."
+				regRequest.message = "Registeration for this event is closed. Your response has been saved."
 			elif regRequest.status == 2:
 				regRequest.message = "Your request to participate in this event is declined."
 			elif regRequest.status == 3:

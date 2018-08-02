@@ -31,7 +31,7 @@
 	    </div>
 	    <div class="fourteen wide column">
 	    	<div class="ui fluid center aligned 	segment">
-	        	<h3>{{event.eventName}}</h3>
+	        	<h3>{{event.name}}</h3>
 
 	        </div>
 	        <table class="ui unstackable striped celled  padded inverted table" id="responseTable">

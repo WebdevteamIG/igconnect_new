@@ -14,18 +14,18 @@
 	        <div class="ui large buttons">
 	          <a href="/"><button class="ui facebook button">Home</button></a>
 	          <div class="or"></div>
-	          <a href="/events/"><button class="ui youtube button">Back</button></a>
+	          <a href="/events/manageevent/{{event.pk}}"><button class="ui youtube button">Back</button></a>
 	        </div>
 	        </center>
 	    </div>
 	    <div class="eight wide column">
 	        <div class="ui fluid inverted segment">
-	            <form action="/events/editevent/{{event.pk}}/" method="post" class="ui inverted form">
+	            <form action="/events/editevent/{{event.pk}}/" method="post" class="ui inverted form" enctype="multipart/form-data">
 	            {% csrf_token %}
 
 	            <div class="field">
 	                <label>Event Name</label>
-	                <input type="text" name="eventName" maxlength="100" value="{{event.eventName}}" required>
+	                <input type="text" name="name" maxlength="100" value="{{event.name}}" required>
 	            </div>
 
 	            <div class="field">
@@ -39,18 +39,25 @@
 	            </div>
 
 	            <div class="field">
+	                <label>Venue</label>
+	                <input type="text" name="venue" maxlength="255" value="{{event.venue}}" required>
+				</div>
+
+	            <div class="field">
 	                <label>Organiser</label>
 	                <input type="text" name="organiser" maxlength="100" value="{{event.organiser}}" required>
 	            </div>
 
 	            <div class="field">
+	                <label>Participation Cost<small> ( Blank for free events )</small></label>
+	                <input type="text" name="cost" maxlength="100" value="{{event.cost}}">
+				</div>
+
+	            <div class="field">
 	                <label>Start Date</label>
 	                <input type="date" name="startDate" value="{{startdate}}">
 	            </div>
-	            <div class="field">
-	                <label>End Date</label>
-	                <input type="date" name="endDate" value="{{enddate}}">
-	            </div>
+
 
 			    <div class="inline inverted field">			      
 			      	<label style="color: white;">Event Published : </label>
@@ -83,6 +90,37 @@
 				      <label> </label>
 				    </div>
 			    </div>
+
+			    <div class="field">
+					<label>Logo</label>
+					<div class="ui grid">
+						<div class="seven wide column">
+							<button type="button" id="logoButton" class="ui icon blue button">
+							    <i class="cloud icon"></i>
+							    <input type="file" name="logo" id="logo">
+							</button>	
+						</div>
+						<div class="two wide column"></div>
+						<div class="seven wide column">
+							<img class="ui medium rounded image" {% if event.logo %} src="{{event.logo.url}}" {% else %} src="{% static 'main/logo.jpg' %}" {% endif %} style="max-height: 80%; max-width: 60%;">
+						</div>
+					</div>
+				</div>
+				<div class="field">
+					<label>Banner</label>
+					<div class="ui grid">
+						<div class="seven wide column">
+							<button type="button" id="bannerButton" class="ui icon blue button">
+							    <i class="cloud icon"></i>
+							    <input type="file" name="banner_image" id="banner_image">
+							</button>	
+						</div>
+						<div class="two wide column"></div>
+						<div class="seven wide column">
+							<img class="ui medium rounded image" {% if event.banner_image %} src="{{event.banner_image.url}}" {% else %} src="{% static 'main/banner.jpg' %}" {% endif %} style="max-height: 80%; max-width: 60%;">
+						</div>
+					</div>
+				</div>
 
 	            <br><br>
 	            <center>

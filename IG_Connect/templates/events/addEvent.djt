@@ -20,12 +20,12 @@
 	    </div>
 	    <div class="eight wide column">
 	        <div class="ui fluid inverted segment">
-	            <form action="/events/addevent/" method="post" class="ui inverted form">
+	            <form action="/events/addevent/" method="post" class="ui inverted form" enctype="multipart/form-data">
 	            {% csrf_token %}
 
 	            <div class="field">
 	                <label>Event Name</label>
-	                <input type="text" name="eventName" maxlength="100" required>
+	                <input type="text" name="name" maxlength="100" required>
 	            </div>
 
 	            <div class="field">
@@ -38,19 +38,50 @@
 	                <input type="text" name="timings" maxlength="100" required>
 	            </div>
 
+				<div class="field">
+	                <label>Venue</label>
+	                <input type="text" name="venue" maxlength="255" required>
+				</div>
+				
 	            <div class="field">
 	                <label>Organiser</label>
 	                <input type="text" name="organiser" maxlength="100" required>
-	            </div>
+				</div>
+				
+				<div class="field">
+	                <label>Participation Cost<small> ( Blank for free events )</small></label>
+	                <input type="text" name="cost" maxlength="100">
+				</div>
 
 	            <div class="field">
 	                <label>Start Date</label>
 	                <input type="date" name="startDate">
+				</div>
+				
+				<div class="field">
+	                <label>Logo</label>
+	                <div class="ui grid">
+						<div class="seven wide column">
+							<button type="button" id="logoButton" class="ui icon blue button">
+							    <i class="cloud icon"></i>
+							    <input type="file" name="logo" id="logo">
+							</button>	
+						</div>
+					</div>
+				</div>
+				
+				<div class="field">
+	                <label>Banner</label>
+	                <div class="ui grid">
+						<div class="seven wide column">
+							<button type="button" id="bannerButton" class="ui icon blue button">
+							    <i class="cloud icon"></i>
+							    <input type="file" name="banner_image" id="banner_image">
+							</button>	
+						</div>
+					</div>
 	            </div>
-	            <div class="field">
-	                <label>End Date</label>
-	                <input type="date" name="endDate">
-	            </div>
+	            
 	            <br><br>
 	            <center>
 	            <button class="ui red button" type="submit">
