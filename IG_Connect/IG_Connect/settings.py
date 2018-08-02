@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'updates',
     'inventory',
     'experience',
+    'register',
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',

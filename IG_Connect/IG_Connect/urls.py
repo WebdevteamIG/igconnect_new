@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^events/',include('events.urls',namespace='events')),
     url(r'^exp/', include('experience.urls', namespace='experience')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^register/', include('register.urls', namespace='register')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

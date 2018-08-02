@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>title</title>
+</head>
+<body>
+<form method="POST" action="/register/title/">
+	{% csrf_token %}
+	workshop: <select name="title">
+	{% for i in form %}
+		<option>{{ i.title}}</option>
+	{% endfor %}
+	</select><br>
+	name: <input type="text" name="name"><br><br>
+	year: <input type="text" name="year"><br><br>
+	phone: <input type="text" name="phone"><br><br>
+	email: <input type="email" name="email"><br><br>
+	regno: <input type="text" name="regno"><br><br>
+	<button type="submit">Submit</button>
+</form>
+</body>
+</html>
