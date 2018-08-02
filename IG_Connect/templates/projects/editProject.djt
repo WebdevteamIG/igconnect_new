@@ -9,7 +9,7 @@
 			<div class="three wide column"></div>
 			<div class="ten wide column">
 				<div class="ui raised segment" style="margin-bottom: 30px; background-color:darkgrey;">
-				<center><h2>Add Project Details</h2></center><br><hr><hr><br>
+				<center><h2>Edit Project Details</h2></center><br><hr><hr><br>
 				<form class="ui form" method="post" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div class="field">
@@ -18,58 +18,58 @@
 					</div>
 					<div class="field">
 					    <label>Short Description</label>
-					    <input type="text" name="shortDesc" value="{{project.shortDesc}}">
+					    <input type="text" name="shortDesc" value="{{project.shortDesc}}" maxlength="100">
 					</div>
 					<div class="field">
 						<label>Objective</label>
-						<textarea name="objective" rows="4">{{project.objective}}</textarea>
+						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
 					</div>
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui dropdown" id="contibutorsSelectBox">
 					      <option value="">Select Category</option>
 					      {% for person in contributors %}
-					      	<option value="{{person.username}}" 
-					      	{% if person in project.contributorsList.all %} selected {% endif %}
-					      	>{{person.first_name}}</option>
+					      	<option value="{{person.user.username}}" 
+					      	{% if person.user in project.contributorsList.all %} selected {% endif %}
+					      	>{{person.user.first_name}}-{{person.regNum}}</option>
 					      {% endfor %}
 					 	</select>
 					</div>
 					<div class="field">
 						<label>Driving Force / Background</label>
-						<textarea name="drivingForce" rows="4">{{project.drivingForce}}</textarea>
+						<textarea name="drivingForce" rows="4" maxlength="1000">{{project.drivingForce}}</textarea>
 					</div>
 					<div class="field">
 						<label>Branches Involved</label>
-						<input type="text" name="branches" value="{{project.branchList}}">
+						<input type="text" name="branches" value="{{project.branchList}}" maxlength="200">
 					</div>
 					<div class="field">
 						<label>Technology / Materials Used</label>
-						<textarea name="materials" rows="2">{{project.desc.materialUsed}}</textarea>
+						<textarea name="materials" rows="2" maxlength="1000">{{project.desc.materialsUsed}}</textarea>
 					</div>
 					<div class="field">
 						<label>Development Phases</label>
-						<textarea name="phases" rows="4">{{project.desc.developmentPhases}}</textarea>
+						<textarea name="phases" rows="4" maxlength="5000">{{project.desc.developmentPhases}}</textarea>
 					</div>
 					<div class="field">
 						<label>End Users</label>
-						<input type="text" name="endusers" value="{{project.endusers}}">
+						<input type="text" name="endusers" value="{{project.endusers}}" maxlength="255">
 					</div>
 					<div class="field">
 						<label>Impact</label>
-						<textarea name="impact" rows="4">{{project.impact}}</textarea>
+						<textarea name="impact" rows="4" maxlength="500">{{project.impact}}</textarea>
 					</div>
 					<div class="field">
 						<label>Awards</label>
-						<textarea name="awards" rows="4">{{project.awards}}</textarea>
+						<textarea name="awards" rows="4" maxlength="1000">{{project.awards}}</textarea>
 					</div>
 					<div class="field">
 						<label>Plans</label>
-						<textarea name="plans" rows="4">{{project.plans}}</textarea>
+						<textarea name="plans" rows="4" maxlength="1000">{{project.plans}}</textarea>
 					</div>
 					<div class="field">
 						<label>Project url</label>
-						<input type="url" name="projecturl" value="{{ project.projecturl}}">
+						<input type="text" name="projecturl" value="{{ project.projecturl}}">
 					</div>
 					<div class="field">
 						<label>Project Picture</label>

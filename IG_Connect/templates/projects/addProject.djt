@@ -23,7 +23,7 @@
 					{% csrf_token %}
 					<div class="field">
 					    <label>Project Name</label>
-					    <input type="text" name="projectName" placeholder="Project Name" maxlength="200">
+					    <input type="text" name="projectName" placeholder="Project Name" maxlength="195">
 					</div>
 					<div class="field">
 					    <label>Short Description</label>
@@ -31,60 +31,60 @@
 					</div>
 					<div class="field">
 						<label>Objective</label>
-						<textarea name="objective" rows="4"></textarea>
+						<textarea name="objective" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui dropdown">
 					      <option value="">Select Category</option>
 					      {% for person in contributors %}
-					      	<option value="{{person.username}}">{{person.first_name}}</option>
+					      	<option value="{{person.user.username}}">{{person.user.first_name}}-{{person.regNum}}</option>
 					      {% endfor %}
 					 	</select>
 					</div>
 					<div class="field">
 						<label>Driving Force / Background</label>
-						<textarea name="drivingForce" rows="4"></textarea>
+						<textarea name="drivingForce" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Branches Involved</label>
-						<input type="text" name="branches" placeholder="CSE, ECE, ....">
+						<input type="text" name="branches" maxlength="200" placeholder="CSE, ECE, ....">
 					</div>
 					<div class="field">
 						<label>Technology / Materials Used</label>
-						<textarea name="materials" rows="2"></textarea>
+						<textarea name="materials" rows="2" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Development Phases</label>
-						<textarea name="phases" rows="4"></textarea>
+						<textarea name="phases" rows="4"  maxlength="5000"></textarea>
 					</div>
 					<div class="field">
 						<label>End Users</label>
-						<input type="text" name="endusers">
+						<input type="text" name="endusers" maxlength="255">
 					</div>
 					<div class="field">
 						<label>Impact</label>
-						<textarea name="impact" rows="4"></textarea>
+						<textarea name="impact" rows="4" maxlength="500"></textarea>
 					</div>
 					<div class="field">
 						<label>Awards</label>
-						<textarea name="awards" rows="4"></textarea>
+						<textarea name="awards" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Plans</label>
-						<textarea name="plans" rows="4"></textarea>
+						<textarea name="plans" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Project url( Enter github link, or any site url if available)</label>
-						<input type="url" name="projecturl">
+						<input type="text" name="projecturl"  maxlength="500">
 					</div>
 					<div class="field">
 						<label>Project Picture</label>
 						<div class="ui grid">
 							<div class="seven wide column">
-								<button type="button" id="teampicbutton" class="ui icon blue button">
+								<button type="button" id="projectPicbutton" class="ui icon blue button">
 								    <i class="cloud icon"></i>
-								    <input type="file" name="teampicture" id="teampicture">
+								    <input type="file" name="projectPicture" id="projectPicture">
 								</button>	
 							</div>
 						</div>

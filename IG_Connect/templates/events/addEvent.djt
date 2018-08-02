@@ -1,0 +1,72 @@
+{% extends "events/base.djt" %}
+{% load staticfiles %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<div class="ui fluid container">
+
+	<div class="ui two column stackable grid" style="margin-top: 50px;">
+	    <div class="four wide column">
+	        <center>
+	        <div class="ui large buttons">
+	          <a href="/"><button class="ui facebook button">Home</button></a>
+	          <!-- <div class="or"></div> -->
+	          <!-- <a href="/borrow/listRequests"><button class="ui youtube button">Requests Page</button></a> -->
+	        </div>
+	        </center>
+	    </div>
+	    <div class="eight wide column">
+	        <div class="ui fluid inverted segment">
+	            <form action="/events/addevent/" method="post" class="ui inverted form">
+	            {% csrf_token %}
+
+	            <div class="field">
+	                <label>Event Name</label>
+	                <input type="text" name="eventName" maxlength="100" required>
+	            </div>
+
+	            <div class="field">
+	                <label>Description</label>
+	                <textarea name="description" rows="4" maxlength="2000" required></textarea>
+	            </div>
+
+	            <div class="field">
+	                <label>Timings</label>
+	                <input type="text" name="timings" maxlength="100" required>
+	            </div>
+
+	            <div class="field">
+	                <label>Organiser</label>
+	                <input type="text" name="organiser" maxlength="100" required>
+	            </div>
+
+	            <div class="field">
+	                <label>Start Date</label>
+	                <input type="date" name="startDate">
+	            </div>
+	            <div class="field">
+	                <label>End Date</label>
+	                <input type="date" name="endDate">
+	            </div>
+	            <br><br>
+	            <center>
+	            <button class="ui red button" type="submit">
+	                <i class="plus icon"></i> Add Event
+	            </button>
+	            </center>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}

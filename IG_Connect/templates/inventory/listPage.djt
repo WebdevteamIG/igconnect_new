@@ -68,10 +68,28 @@
 
 <body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 
+<!-- <div class="ui inverted menu" style="font-size:15px;">
+    <a class="item" href="/">Home</a>
+    <a class="item" href="/projects">Projects</a>
+    <a class="item" href="/borrow/borrowedItems">My Items</a>
+    {% if request.user.is_superuser %}
+    <a class="item" href="/borrow/addItem">Add Item</a>
+    {% endif %}
+    <center><a href="/"> <h3 style="padding: 10px 400px; color:white;"> Innovation Garage </h4> </a></center>
+    <div class="right menu">
+        {% if not request.user.is_authenticated %}
+        <a class="item" href="/auth/login">Login</a>
+        <a class="item" href="/auth/signup">Signup</a>
+        {% else %}
+        <a class="item" href="/auth/profile/{{request.user.profile.regNum}}">Profile</a>
+        <a class="item" href="/auth/logout">Logout</a>
+        {% endif %}
+    </div>
+</div> -->
 <div class="ui fluid container">
 
-<div class="ui grid" style="margin-top: 50px;">
-    <div class="four wide column">
+<div class="ui two column stackable grid" style="margin-top: 50px;">
+    <div class="three wide column">
         <center>
         <a href="/"><button class="ui teal button"><i class="home icon"></i>HOME</button></a>
         {% if request.user.is_superuser %}
@@ -83,9 +101,20 @@
         </center>
     </div>
 
-    {% if request.user.profile.isApproved %}
-
+    <!-- <div class="one wide column"></div> -->
     <div class="ten wide column">
+
+        {% if not request.user.profile.isApproved %}
+        <div class="eight wide column">
+            <div class="ui message">
+              <div class="header">
+                Approval Needed
+              </div>
+              <p>You have to pay the minimum amount of fee and get your account approved. Kindly contact administrator.</p>
+            </div>
+        </div>
+        {% endif %}
+
         {% if not allowed %}
         <div class="ui message">
           <div class="header">
@@ -104,7 +133,7 @@
         </div>
 
         <div id="bookHolder">
-        <table class="ui celled padded inverted table" id="bookTable">
+        <table class="ui unstackable celled padded inverted table" id="bookTable">
             <thead>
                 <tr>
                     <th class="d">Name of Item</th>
@@ -130,7 +159,7 @@
                         </td>
                         <td>
                             {% ifequal item.status 1 %}
-                                {% if allowed %}
+                                {% if allowed and request.user.profile.isApproved %}
                                 <a href="/borrow/requestItem/{{item.id}}">
                                 <button class="small ui teal button"> Make Request</button>
                                 </a>
@@ -160,7 +189,7 @@
         </div>
 
         <div id="equipmentHolder">
-        <table class="ui celled padded inverted table" id="equipmentTable">
+        <table class="ui unstackable celled padded inverted table" id="equipmentTable">
             <thead>
                 <tr>
                     <th class="d">Name of Item</th>
@@ -188,7 +217,7 @@
                         </td>
                         <td>
                             {% ifequal item.status 1 %}
-                                {% if allowed %}
+                                {% if allowed and request.user.profile.isApproved %}
                                 <a href="/borrow/requestItem/{{item.id}}">
                                 <button class="small ui teal button"> Make Request</button>
                                 </a>
@@ -217,19 +246,6 @@
         </div>
 
     </div>
-
-    {% else %}
-
-    <div class="eight wide column">
-        <div class="ui message">
-          <div class="header">
-            Approval Needed
-          </div>
-          <p>You have to pay the minimum amount of fee and get your account approved. Kindly contact administrator.</p>
-        </div>
-    </div>
-
-    {% endif %}
 </div>
 
 </div>
@@ -239,7 +255,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#bookTable').DataTable({
-            "info": false
+            "info": false,
+            // "responsive" : true
         });
 
         $('#equipmentTable').DataTable({

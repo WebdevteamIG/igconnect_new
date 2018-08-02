@@ -1,0 +1,139 @@
+{% extends "events/base.djt" %}
+{% load staticfiles %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<div class="ui fluid container">
+
+	<div class="ui two column stackable grid" style="margin-top: 50px;">
+	    <div class="four wide column">
+	        <center>
+	        <div class="three wide column"> 
+	        	<a href="/events/editevent/{{event.pk}}">
+	        		<button class="ui facebook button">Edit Event</button>
+	        	</a>
+				<br><br>
+				<button class="ui blue button" id="addQuestion">
+					<i class="list layout icon"></i>
+				 	Add Question
+				</button>
+				<br><br>
+				<a href="/events/manageevent/responses/{{event.pk}}">
+	        		<button class="ui facebook button">View Responses</button>
+	        	</a>
+			</div>
+	        </center>
+	    </div>
+	    <div class="eight wide column">
+	        <table class="ui unstackable striped celled  padded inverted table">
+	        <thead>
+	        	<tr>
+                    <th colspan="2" class="d"><center>Event Details</center></th>
+                </tr>
+            </thead>
+            <tbody>
+	        	<tr>
+	        		<th>Event Name :</th>
+	        		<td>{{event.eventName}}</td>
+	        	</tr>
+	       
+	        	<tr>
+	        		<th>Timing</th>
+	        		<td>{{event.timings}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>Organiser</th>
+	        		<td>{{event.organiser}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>Start Date</th>
+	        		<td>{{event.startdate}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>End Date</th>
+	        		<td>{{event.enddate}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>Published</th>
+	        		<td>{{event.isPublished}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>Registeration Open</th>
+	        		<td>{{event.isRegisterationOpen}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>Approved User List Published</th>
+	        		<td>{{event.isApprovedUserListPublished}}</td>
+	        	</tr>
+	        	<tr>
+	        		<th>Event Ended</th>
+	        		<td>{{event.isEventEnded}}</td>
+	        	</tr>
+	        </tbody>
+	        </table>
+	        <div class="ui fluid segment">
+	        	<h3>Description</h3>
+	        	<p>
+	        		{{event.description}}
+	        	</p>
+	        </div>
+	        <div class="ui fluid segment">
+	        	<h3>Questions</h3>
+	        	<ul>
+	        		{% for question in questions %}
+	        		<li>
+	        			{{question.question}}
+	        			<br>
+	        			{{question.description}}
+	        		</li>
+	        		{% endfor %}
+	        	</ul>
+	        </div>
+	    </div>
+	</div>
+</div>
+<div class="ui modal">
+	  <i class="close icon"></i>
+	  <div class="header">
+	    Add Question
+	  </div>
+	  <div class="content">
+		  <div class="ui inverted grid">
+		  		<div class="two wide column"></div>
+		  		<div class="twelve wide column">
+		  			<form action="/events/addQuestion/{{event.pk}}/" method="post" class="ui form">
+		            {% csrf_token %}
+			            <div class="field">
+			                <label>Question</label>
+			                <input type="text" name="question" maxlength="300" required>
+			            </div>
+			            <div class="field">
+			                <label>Description</label>
+			                <input type="text" name="quesDescription" maxlength="1000">
+			            </div>
+			            <br><br>
+			            <center>
+			            <button class="ui red button" type="submit">
+			                <i class="plus icon"></i> Add Question
+			            </button>
+			            </center>
+		            </form>		    
+		  		</div>
+		  </div>
+	  </div>
+	  <div class="actions">
+	  </div>
+	</div>
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+	$('#addQuestion').click(function(){
+		$('.ui.modal').modal('show');
+	});
+</script>
+{% endblock %}

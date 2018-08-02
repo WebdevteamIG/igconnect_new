@@ -53,7 +53,7 @@
 
 <div class="ui fluid container">
 
-<div class="ui grid" style="margin-top: 50px;">
+<div class="ui stackable grid" style="margin-top: 50px;">
     <div class="four wide column">
         <center>
         <div class="ui large buttons">

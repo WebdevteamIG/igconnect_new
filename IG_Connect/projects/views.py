@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth.models import User
 from .models import *
+from authentication.models import *
 import datetime
 
 def projects(request):
@@ -44,9 +45,11 @@ def addProject(request):
 			project.impact = request.POST['impact']
 			project.awards = request.POST['awards']
 			project.plans = request.POST['plans']
-			project.teampic = request.FILES.get('teampicture')
+			if request.FILES:
+				project.teampic = request.FILES.get('projectPicture')
 			project.projecturl = request.POST["projecturl"]
 			project.save()
+
 			for contributor in request.POST.getlist('contributorList') :
 				person = User.objects.get(username=contributor)
 				project.contributorsList.add(person)
@@ -66,7 +69,9 @@ def addProject(request):
 
 			return redirect('/projects')
 
-	response['contributors'] = User.objects.all().exclude(username=request.user.username); 
+	# response['contributors'] = User.objects.all().exclude(username=request.user.username);
+	response['contributors'] = Userprofile.objects.all().exclude(user=request.user)
+	 
 	return render(request,'projects/addProject.djt',response)
 
 @login_required(login_url='/auth/login')
@@ -74,6 +79,10 @@ def editProject(request,projectname) :
 	response = {}
 	try:
 		project = Project.objects.get(projectName=projectname)
+		if project.user != request.user:
+			print "illegal access to project"
+			raise Exception('Illegal Access')
+
 		if request.method == 'POST' :
 			project.shortDesc = request.POST['shortDesc']
 			project.objective = request.POST['objective']
@@ -83,13 +92,23 @@ def editProject(request,projectname) :
 			project.impact = request.POST['impact']
 			project.awards = request.POST['awards']
 			project.plans = request.POST['plans']
-			project.teampic = request.FILES.get('teampicture')
+			if request.FILES:
+				project.teampic = request.FILES.get('projectPicture')
 			project.projecturl = request.POST['projecturl']
 			project.save()
 
 			for contributor in request.POST.getlist('contributorList') :
 				person = User.objects.get(username=contributor)
 				project.contributorsList.add(person)
+
+			try:
+				projectDesc = ProjectDescription.objects.get(project = project)
+			except:
+				projectDesc = ProjectDescription()
+				projectDesc.project = project
+			projectDesc.materialsUsed = request.POST['materials'] #Technology/Material Used
+			projectDesc.developmentPhases = request.POST['phases']
+			projectDesc.save()
 
 			#projectpics = request.FILES.getlist('projectpictures')
 			#for pic in projectpics :
@@ -99,11 +118,22 @@ def editProject(request,projectname) :
 			#	imgObj.save()
 		else :
 			response['project'] = project
-			response['contributors'] = User.objects.all().exclude(username=request.user.username)
+			# response['contributors'] = User.objects.all().exclude(username=request.user.username)
+			response['contributors'] = Userprofile.objects.all().exclude(user=request.user)
 			return render(request,'projects/editProject.djt',response)
 	except:
 		print( "Project Doesn't exist Error" )
 	
 	return redirect('/projects')
+
+@login_required(login_url='/auth/login')
+def deleteProject(request,projectname) :
+	response = {}
+	try:
+		print( "Delete called" )
+		project = Project.objects.get(projectName=projectname)
+		project.delete()
+	except:
+		print( "Project Doesn't exist Error" )
 	
-		
+	return redirect('/projects')

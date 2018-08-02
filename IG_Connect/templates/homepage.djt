@@ -157,10 +157,10 @@ $(window).scroll(function() {
                 <a class="nav-link" id="contact_btn" href="#foot">CONTACT&nbsp;US</a>
                 <div class="nav-border"></div>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" id="about_btn" href="/exp">EXPERIENCES</a>
                 <div class="nav-border"></div>
-            </li>
+            </li> -->
             {% if request.user.is_superuser %}
             <li class="nav-item">
                 <a class="nav-link" href="/borrow/initialApproval">Admin Portal</a>
@@ -212,13 +212,19 @@ $(window).scroll(function() {
 <div class="header">
 	
 	<div class="inner text-center">
-					<header class="ig-badge">
-					<span class="badge is-hidden">
-						<h2>INNOVATION</h2>
-						<h1>GARAGE </h1>
-						</span>
-					</header>
-
+                    <div class="row" id="badgePadding">
+                    </div>
+                    <div class="row ig-badge">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6">
+        					<header>
+        					   <span class="badge is-hidden">
+        						<h2>INNOVATION</h2>
+        						<h1>GARAGE </h1>
+        						</span>
+        					</header>
+                        </div>
+                    </div>
 					<div class="row flex">
 
 						<div class="col-sm-4 is-hidden" id="innovate">

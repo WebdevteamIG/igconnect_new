@@ -55,33 +55,14 @@
 	<div class="ui inverted menu" style="font-size:15px;">
 		<a class="item" href="/">Home</a>
 		<a class="item" href="/projects">Projects</a>
-		<!-- <a class="item" href="/exp">Experiences</a> -->
-		<!-- <center><a href="/"> <h3 style="padding: 10px 400px; color:white;"> Innovation Garage </h4> </a></center>
-		<div class="right menu">
-			{% if not request.user.is_authenticated %}
-			<a class="item" href="/auth/login">Login</a>
-			<a class="item" href="/auth/signup">Signup</a>
-			{% else %}
-			<a class="item" href="/auth/profile/{{request.user.profile.regNum}}">Profile</a>
-			<a class="item" href="/auth/logout">Logout</a>
-			{% endif %} -->
 		</div>
 	</div>
 
 	{% block content %}
 	{% endblock %}
+	
+	{% block script %}
+	{% endblock %}
 </body>
-
-<script type="text/javascript">
-// $(document).ready(function(){
-//     $('.ui .item').on('click', function() {
-//         $('.ui .item').removeClass('active');
-//         $(this).addClass('active');
-//     });             
-// });
-</script>
-
 </html>
 
-{% block script %}
-{% endblock %}

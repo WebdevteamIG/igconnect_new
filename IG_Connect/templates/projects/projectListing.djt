@@ -1,11 +1,30 @@
 {% extends "projects/header.djt" %}
 {% load staticfiles %}
 
+{% block head %}
+<!-- for Datatable -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.15/js/dataTables.semanticui.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css">
+<!-- ///////////// -->
+
+<style>
+.projectDetails{
+	/*border-bottom: 1px solid black;*/
+}
+</style>
+{% endblock %}
+
 {% block content %}
 
 <div class="ui container">
 
-	<div class="ui grid">
+	<div class="ui stackable grid">
 		{% if request.user.is_authenticated %}
 		<div class="three wide column"> 
 			<br><br>
@@ -23,72 +42,55 @@
 			<div class="two wide column"> </div>
 		{% endif %}
 		<div class="twelve wide column">
-			<div class="ui raised segment">
+				<div class="">
+				<table class="ui striped padded table" id="projectsTable">
+		            <thead>
+		                <tr>
+		                    <th class="center aligned">List of projects</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            	{% for project in projects %}
+		            	<tr>		            		
+		            		<td>
+		            			<a href="/projects/show/{{project.projectName}}/" style="color: black;">
+									<div class="ui stackable grid projectDetails">
+										<div class="sixteen wide column">
+											<br><center><h2><u>{{project.projectName}}</u></h2></center>
+										</div>
+										
+										<!-- <div class="one wide column"></div> -->
+										<div class="nine wide column">
+											<p style="padding-left: 10%;">
+												<b>Short Desc :</b>
+													{{project.shortDesc}}
+												<br><br>
+												<b>Technology / Materials Used : </b>
+													{{project.desc.materialsUsed}}
+											</p>
+										</div>
+										<div class="four wide column"> 
+											<h4>Contributors&nbsp;: </h4>
+											<ul>
+												<li>{{project.user.first_name}}</li>
+												{% for c in project.contributorsList.all %}
+												<li>{{c.first_name}}</li>
+												{% endfor %}
+											</ul>
+										</div>
+											
+										</div>
+										<div class="one wide column"></div>
+										<br>										
+								</a>
+								<hr><hr>
+		            		</td>
 
-				{% for project in projects %}
+		            	</tr>
 
-				{% ifequal forloop.counter0|divisibleby:2 0 %}
-				<a href="/projects/show/{{project.projectName}}/" style="color: black;">
-					<div class="ui grid">
-						<div class="one wide column"></div>
-						<div class="ten wide column">
-							<br><center><h2>{{project.projectName}}</h2></center><br>
-							<p>
-								{{project.shortDesc}}
-							</p>
-							<div class="ui grid">
-								<div class="eight wide column"> </div>
-								<div class="six wide column"> 
-									<h4>Contributors : </h4>
-									<ul>
-										<li>{{project.user.first_name}}</li>
-										{% for c in project.contributorsList.all %}
-										<li>{{c.first_name}}</li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="one wide column"></div>
-						<div class="four wide column">
-							<img class="ui medium circular image" 
-							{% if project.teampic %} src="{{project.teampic.url}}" {% else %} src="{% static 'pictures/defaults/noTeampic.jpg' %}" {% endif %}  style="height:150px; margin-top:20px;">
-						</div>
-					</div>
-				</a>
-					{% if not forloop.last %}<hr><hr>{% endif %}			
-				{% else %}
-					<a href="/projects/show/{{project.projectName}}/" style="color: black;">
-					<div class="ui grid">
-						<div class="four wide column">
-							<img class="ui medium circular image" 
-							{% if project.teampic %} src="{{project.teampic.url}}" {% else %} src="{% static 'pictures/defaults/noTeampic.jpg' %}" {% endif %}  style="height:150px; margin-top:20px;">
-						</div>
-						
-						<div class="ten wide column">
-							<br><center><h2>{{project.projectName}}</h2></center><br>
-							<p>
-								{{project.shortDesc}}
-							</p>
-							<div class="ui grid">
-								<div class="eight wide column">  </div>
-								<div class="six wide column"> 
-									<h4>Contributors : </h4>
-									<ul>
-										<li>{{project.user.first_name}}</li>
-										{% for c in project.contributorsList.all %}
-										<li>{{c.first_name}}</li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					</a>
-						{% if not forloop.last %}<hr><hr>{% endif %}
-					{% endifequal %}
-					{% endfor %}
-
+		            	{% endfor %}
+		            </tbody>
+		        </table>
 			</div>
 		</div>
 	</div>
@@ -100,8 +102,8 @@
 	  </div>
 	  <div class="content">
 		  <div class="ui grid">
-		  		<div class="three wide column"></div>
-		  		<div class="ten wide column">
+		  		<div class="two wide column"></div>
+		  		<div class="twelve wide column">
 		  			<table class="ui celled striped table">
 					  <thead>
 					    <tr><th colspan="2">Projects</th></tr>
@@ -110,7 +112,9 @@
 					  	{% for project in myprojects %}	
 						  	<tr>
 						      <td class="collapsing" style=" font-size:20px;">
-						        <i class="file archive outline icon"></i> <b>{{project.projectName}}</b>
+						      	<a href="/projects/show/{{project.projectName}}/" style="color: black;">
+						        	<i class="file archive outline icon"></i> <b>{{project.projectName}}</b>
+						        </a>
 						      </td>
 						      <td class="collapsing">
 						      	<center>
@@ -120,7 +124,7 @@
 						      		</button>
 						      	</a>
 						      	</center>
-						      </td>
+						      </td>						      
 						    </tr>
 					    {% endfor %}
 					  </tbody>
@@ -137,7 +141,18 @@
 {% endblock %}
 
 {% block script %}
+
 <script type="text/javascript">
+
+
+	$(document).ready(function() {
+        $('#projectsTable').DataTable({
+            "info": false,
+            // "responsive" : true
+        });
+
+    });
+
 	$('#list').click(function(){
 		$('.ui.modal').modal('show');
 	});
