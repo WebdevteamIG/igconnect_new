@@ -711,6 +711,10 @@
   box-shadow: none;
 }
 
+.phase2hide{
+  display: none;
+ }
+
 /*--------------------
      Field Groups
 ---------------------*/

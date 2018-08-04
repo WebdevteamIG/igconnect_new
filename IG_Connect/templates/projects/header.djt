@@ -41,6 +41,7 @@
 	<script src="{% static 'main/semantic.js' %}"></script>
 	<script src="{% static 'main/components/form.js' %}"></script>
 	<script src="{% static 'main/components/transition.js' %}"></script>
+	<script src="{% static 'main/components/hide.js' %}"></script>
 	{% block head %}
 	{% endblock %}
 	<style>

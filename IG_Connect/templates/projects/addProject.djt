@@ -2,7 +2,11 @@
 {% load staticfiles %}
 
 {% block content %}
-
+<style type="text/css">
+	.phasehide{
+		display: none;
+	}
+</style>
 <div class="ui container">
 	
 		<div class="ui grid" style="margin:30px 0px 30px 0px;">
@@ -26,14 +30,6 @@
 					    <input type="text" name="projectName" placeholder="Project Name" maxlength="195">
 					</div>
 					<div class="field">
-					    <label>Short Description</label>
-					    <input type="text" name="shortDesc" maxlength="100">
-					</div>
-					<div class="field">
-						<label>Objective</label>
-						<textarea name="objective" rows="4" maxlength="1000"></textarea>
-					</div>
-					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui dropdown">
 					      <option value="">Select Category</option>
@@ -43,32 +39,16 @@
 					 	</select>
 					</div>
 					<div class="field">
-						<label>Driving Force / Background</label>
-						<textarea name="drivingForce" rows="4" maxlength="1000"></textarea>
-					</div>
-					<div class="field">
-						<label>Branches Involved</label>
-						<input type="text" name="branches" maxlength="200" placeholder="CSE, ECE, ....">
+					    <label>Short Description</label>
+					    <input type="text" name="shortDesc" maxlength="100">
 					</div>
 					<div class="field">
 						<label>Technology / Materials Used</label>
 						<textarea name="materials" rows="2" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
-						<label>Development Phases</label>
-						<textarea name="phases" rows="4"  maxlength="5000"></textarea>
-					</div>
-					<div class="field">
 						<label>End Users</label>
 						<input type="text" name="endusers" maxlength="255">
-					</div>
-					<div class="field">
-						<label>Impact</label>
-						<textarea name="impact" rows="4" maxlength="500"></textarea>
-					</div>
-					<div class="field">
-						<label>Awards</label>
-						<textarea name="awards" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Plans</label>
@@ -78,6 +58,31 @@
 						<label>Project url( Enter github link, or any site url if available)</label>
 						<input type="text" name="projecturl"  maxlength="500">
 					</div>
+					<button type="button" id="phaseButton" class="btn btn-success">Add More Info</button><br><br>
+					<div id="phase2" class="phasehide">
+					<div class="field">
+						<label>Objective</label>
+						<textarea name="objective" rows="4" maxlength="1000"></textarea>
+					</div>
+					<div class="field">
+						<label>Driving Force / Background</label>
+						<textarea name="drivingForce" rows="4" maxlength="1000"></textarea>
+					</div>
+					
+					<div class="field">
+						<label>Development Phases</label>
+						<textarea name="phases" rows="4"  maxlength="5000"></textarea>
+					</div>
+					
+					<div class="field">
+						<label>Impact</label>
+						<textarea name="impact" rows="4" maxlength="500"></textarea>
+					</div>
+					<div class="field">
+						<label>Awards</label>
+						<textarea name="awards" rows="4" maxlength="1000"></textarea>
+					</div>
+					
 					<div class="field">
 						<label>Project Picture</label>
 						<div class="ui grid">
@@ -88,6 +93,10 @@
 								</button>	
 							</div>
 						</div>
+					</div>
+					<div class="field">
+						<label>Branches Involved</label>
+						<input type="text" name="branches" maxlength="200" placeholder="CSE, ECE, ....">
 					</div>
 
 					<!--<div class="field">
@@ -103,6 +112,7 @@
 						</div>
 						<input type="file" name="projectpictures" id="projectpic" multiple hidden>
 					</div>-->
+					</div>
 					<hr><hr>
 					<div class="field">
 						<center>
@@ -117,6 +127,14 @@
 	
 </div>
 
+<script type="text/javascript">
+
+	var but = document.getElementById("phaseButton");
+	but.onclick = function(){
+		var element = document.getElementById("phase2");
+		element.classList.toggle("phasehide");
+	}
+</script>
 {% endblock %}
 
 {% block script %}
