@@ -1,1 +1,148 @@
-Hello
+{% extends "events/base.djt" %}
+{% load staticfiles %}
+
+
+{% block head %}
+<style type="text/css">
+
+    .masthead.segment {
+      min-height: 400px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 2em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+
+
+    @media only screen and (max-width: 700px) {
+
+      .masthead.segment {
+        min-height: 350px;
+      }
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+      }
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+    }
+
+
+  </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Events
+      </h1>
+      <h2>Somrthing</h2>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="pusher" >
+  
+<div class="ui container" style="padding-top: 10px;">
+  <br>
+  <div class="ui grid">
+      <div class="row">
+        <div class="three wide column"></div>
+        <div class="ten wide column">
+            <div class="ui fluid search">
+               <div class="ui icon input" style="width: 100%;">
+              <input class="prompt" type="text" placeholder="Search for an event ...">
+              <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="ui divider"></div>
+  <br>
+	<div class="ui four stackable special cards centered" id="mixitup">
+    {%if events%}
+      {% for event in events %}
+      {% if event.isPublished %}
+      <div class="filter mix card">
+        <div class="blurring dimmable image">
+          <div class="ui dimmer">
+            <div class="content">
+              <div class="center">
+                <a class="ui inverted button" href="/events/{{event.pk}}">View {{event.event_type|title}}</a>
+              </div>
+            </div>
+          </div>
+          <img class="ui medium image" src="{%if event.logo%}/media/{{event.logo}}{%else%}{%static 'main/logo.jpg' %}{%endif%}">
+        </div>
+        <center>
+        <div class="content" style="margin-top:10px;line-height:50px;">
+          <a class="header" href="/events/{{event.pk}}"><h3>{{ event.name }}</h3></a>
+          <div class="meta">
+            <a class="ui teal tag label">{{ event.startdate }}</a>
+          </div>
+          
+        </div>
+        </center>
+      </div>
+      {% endif %}
+      {% endfor %}
+    {%else%}
+      <br>
+       <h2>Events will be added soon. Stay Tuned</h2>
+    {%endif%}
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  $('.special.cards .image').dimmer({
+    on: 'hover'
+  });
+
+  $('.mix.card').mouseenter(function(){
+    $(this).transition({
+      animation : 'pulse',
+      reverse   : 'auto',
+      interval  : 100
+    })
+  ;
+  });
+
+  var content = [
+  {%for event in events%}
+  {title:"{{event.name}}", description:"{{event.description}}", url:" /events/{{event.pk}}"},
+  {%endfor%}
+  ]
+  $('.ui.search')
+    .search({
+      source: content,
+       searchFields   : ['title', 'description'],
+       searchFullText: true
+    });
+</script>
+
+{% endblock %}

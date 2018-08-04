@@ -114,9 +114,12 @@
 						<button class="ui button fluid red" disabled>Registerations Closed</button>
 						{%endif%}
 						<br>
-						<div class="ui divider"></div>
-
 						
+
+						{% if request.user.is_superuser %}
+						<a href="/events/manageevent/{{event.pk}}" class="ui button fluid green">Manage Event</a>
+						{% endif %}
+						<div class="ui divider"></div>
 					</div>
 				</div>
 			</div>

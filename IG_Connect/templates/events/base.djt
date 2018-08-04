@@ -41,18 +41,24 @@
 	<script src="{% static 'main/semantic.js' %}"></script>
 	<script src="{% static 'main/components/form.js' %}"></script>
 	<script src="{% static 'main/components/transition.js' %}"></script>
+	<script src="{% static 'main/components/dropdown.js' %}"></script>
+   <script src="{% static 'main/components/accordion.js' %}"></script>
 	{% block head %}
 	{% endblock %}
 	<style>
 	.focused {
 	    color: white !important;
 	}
+	#navbar{
+		margin: 0;
+		border-radius: 0;
+	}
 	</style>
 
 </head>
 <!-- rgba(27, 188, 191, 1) -->
-<body style="background-image: url({% static 'pictures/defaults/bg3.jpg' %})">
-	<div class="ui inverted menu" style="font-size:15px;">
+<body>
+	<div class="ui inverted menu" style="font-size:15px;" id="navbar">
 		<a class="item" href="/">Home</a>
 		<a class="item" href="/projects">Projects</a>
 		</div>
