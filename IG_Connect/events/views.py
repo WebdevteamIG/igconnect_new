@@ -122,19 +122,33 @@ def addQuestion(request,id) :
 
 def viewEvent(request,id) :
 	response= {}
-	try:
-		event = Event.objects.get(id=id)
-		# Displaying event only if event is published or the user is superuser
-		if event.isPublished or request.user.is_superuser:
-			response['event'] = event
-			if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
-				regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
-				response['regRequest'] = regRequest
-			return render(request,'events/EventPage.djt',response)
-		else:
-			raise
-	except:
-		return redirect('/events')
+	# try:
+	event = Event.objects.get(id=id)
+	# Displaying event only if event is published or the user is superuser
+	if event.isPublished or request.user.is_superuser:
+		if event.isEventEnded :
+			eventReqUser = EventRegisterationRequest.objects.filter(status=4)
+			title = "Participated Users"
+			if event.contents.filter(title = title).count() == 0:
+				content = Content()
+				content.title = title
+				content.content = "{% for request in eventReqUser%} <h1>{{request.user.Username}}</h1> {% endfor %} "
+				content.save()
+				event.contents.add(content)
+			else :
+				content = Content.objects.get(title=title)
+				content.content = "{% for request in eventReqUser%} <h1>{{request.user.Username}}</h1> {% endfor %} "
+				content.save()
+
+		response['event'] = event
+		if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
+			regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
+			response['regRequest'] = regRequest
+		return render(request,'events/EventPage.djt',response)
+	else:
+		raise
+	# except:
+	# 	return redirect('/events')
 
 @login_required(login_url='/auth/login')
 def registerEvent(request,id) :

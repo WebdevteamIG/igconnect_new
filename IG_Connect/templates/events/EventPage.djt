@@ -147,7 +147,6 @@
 				  {%endautoescape%}
 				</div>
 				{%endfor%}
-
 			</div>
 		</div>
 	</div> 
