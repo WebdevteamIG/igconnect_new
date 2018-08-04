@@ -11,7 +11,6 @@ class Form(models.Model):
     choice = models.BooleanField(default=False)
     date = models.DateField()
 
-
     def __str__(self):
         return self.title
 
@@ -22,7 +21,6 @@ class Registered(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     Regno = models.CharField(max_length=18)
-
 
     def __str__(self):
         return self.title.title + "_" + str(self.title.choice)

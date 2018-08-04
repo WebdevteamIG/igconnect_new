@@ -22,6 +22,11 @@
 <link href="https://fonts.googleapis.com/css?family=Itim|Righteous" rel="stylesheet">
 
 <link href = "{% static 'home/project_desc.css' %}" rel = "stylesheet">
+<style type="text/css">
+  .phasehide{
+    display: none;
+  }
+</style>
 <script>
 
 
@@ -53,7 +58,6 @@ $(window).scroll(function() {
   }
 });
 	
-	 
 
 });
 </script>
@@ -202,43 +206,48 @@ $(window).scroll(function() {
                                <td style="width: 70%;">{{project.objective}}</td>
                            </tr>
                            <tr>
-                               <td style="width: 30%;">Driving Force</td>
-                               <td style="width: 70%;">{{project.drivingForce}}</td>
-                           </tr>
-                           <tr>
-                               <td style="width: 30%;">Branches</td>
-                               <td style="width: 70%;">{{project.branchList}}</td>
-                           </tr>
-                           <tr>
                                <td style="width: 30%;">Materials Used</td>
                                <td style="width: 70%;">{{project.desc.materialsUsed}}</td>
-                           </tr>
-                            <tr>
-                               <td style="width: 30%;">Development Phases</td>
-                               <td style="width: 70%;">{{project.desc.developmentPhases}}</td>
-                           </tr>
-                           <tr>
-                               <td style="width: 30%;">Impact</td>
-                               <td style="width: 70%;">{{project.impact}}</td>
                            </tr>
                            <tr>
                                <td style="width: 30%;">EndUsers</td>
                                <td style="width: 70%;">{{project.endusers}}</td>
                            </tr>
                            <tr>
-                               <td style="width: 30%;">Plans</td>
-                               <td style="width: 70%;">{{project.plans}}</td>
-                           </tr>
-                           <tr>
-                               <td style="width: 30%;">Awards</td>
-                               <td style="width: 70%;">{{project.awards}}</td>
-                           </tr>
-                           <tr>
                                <td style="width: 30%;">project links</td>
                                <td style="width: 70%;">{{project.projecturl}}</td>
                            </tr>
+                           <div class="phase2">
+                           <tr class="phase2 phasehide">
+                               <td style="width: 30%;">Branches</td>
+                               <td style="width: 70%;">{{project.branchList}}</td>
+                           </tr>
+                            <tr class="phase2 phasehide">
+                               <td style="width: 30%;">Development Phases</td>
+                               <td style="width: 70%;">{{project.desc.developmentPhases}}</td>
+                           </tr>
+                           <tr class="phase2 phasehide">
+                               <td style="width: 30%;">Impact</td>
+                               <td style="width: 70%;">{{project.impact}}</td>
+                           </tr>
+                           
+                           <tr class="phase2 phasehide" >
+                               <td style="width: 30%;">Plans</td>
+                               <td style="width: 70%;">{{project.plans}}</td>
+                           </tr>
+                           <tr class="phase2 phasehide">
+                               <td style="width: 30%;">Awards</td>
+                               <td style="width: 70%;">{{project.awards}}</td>
+                           </tr>
+                           
+                           <tr class="phase2 phasehide">
+                               <td style="width: 30%;">Driving Force</td>
+                               <td style="width: 70%;">{{project.drivingForce}}</td>
+                           </tr>
+                         </div>
                        </tbody>
                    </table>
+                   <button style="width: 90px; height: 30px;" type="button" id="phaseButton" class="btn btn-success">More Info</button>
                 </div>
             </div>
         </div>
@@ -297,6 +306,16 @@ $(window).scroll(function() {
 </footer>
 
 <script type="text/javascript">
+
+ /* var but = document.getElementById("phaseButton");
+  but.onclick = function(){
+    var phase2 = document.getElementsByClassName("phase2");
+    phase2.classList.toggle("phasehide"); 
+  }*/
+
+  $("#phaseButton").click(function(){
+    $(".phase2").toggleClass("phasehide");
+  });
 
   $('#deleteProjectButton').click(function(){
     $('.ui.modal').modal('show');

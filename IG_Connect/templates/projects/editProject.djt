@@ -3,6 +3,12 @@
 
 {% block content %}
 
+<style type="text/css">
+	.phasehide{
+		display: none;
+	}
+</style>
+
 <div class="ui container">
 	
 		<div class="ui grid" style="margin:30px 0px 30px 0px;">
@@ -17,14 +23,6 @@
 					    <input type="text" name="projectName" value="{{project.projectName}}" disabled>
 					</div>
 					<div class="field">
-					    <label>Short Description</label>
-					    <input type="text" name="shortDesc" value="{{project.shortDesc}}" maxlength="100">
-					</div>
-					<div class="field">
-						<label>Objective</label>
-						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
-					</div>
-					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui dropdown" id="contibutorsSelectBox">
 					      <option value="">Select Category</option>
@@ -36,6 +34,28 @@
 					 	</select>
 					</div>
 					<div class="field">
+					    <label>Short Description</label>
+					    <input type="text" name="shortDesc" value="{{project.shortDesc}}" maxlength="100">
+					</div>
+					<div class="field">
+						<label>Technology / Materials Used</label>
+						<textarea name="materials" rows="2" maxlength="1000">{{project.desc.materialsUsed}}</textarea>
+					</div>
+					<div class="field">
+						<label>End Users</label>
+						<input type="text" name="endusers" value="{{project.endusers}}" maxlength="255">
+					</div>
+					<div class="field">
+						<label>Project url</label>
+						<input type="text" name="projecturl" value="{{ project.projecturl}}">
+					</div>
+					<button id="phaseButton" type="button" class="btn btn-success">Add More Info</button><br><br>
+					<div id="phase2" class="phasehide">
+					<div class="field">
+						<label>Objective</label>
+						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
+					</div>
+					<div class="field">
 						<label>Driving Force / Background</label>
 						<textarea name="drivingForce" rows="4" maxlength="1000">{{project.drivingForce}}</textarea>
 					</div>
@@ -43,18 +63,12 @@
 						<label>Branches Involved</label>
 						<input type="text" name="branches" value="{{project.branchList}}" maxlength="200">
 					</div>
-					<div class="field">
-						<label>Technology / Materials Used</label>
-						<textarea name="materials" rows="2" maxlength="1000">{{project.desc.materialsUsed}}</textarea>
-					</div>
+					
 					<div class="field">
 						<label>Development Phases</label>
 						<textarea name="phases" rows="4" maxlength="5000">{{project.desc.developmentPhases}}</textarea>
 					</div>
-					<div class="field">
-						<label>End Users</label>
-						<input type="text" name="endusers" value="{{project.endusers}}" maxlength="255">
-					</div>
+					
 					<div class="field">
 						<label>Impact</label>
 						<textarea name="impact" rows="4" maxlength="500">{{project.impact}}</textarea>
@@ -67,10 +81,7 @@
 						<label>Plans</label>
 						<textarea name="plans" rows="4" maxlength="1000">{{project.plans}}</textarea>
 					</div>
-					<div class="field">
-						<label>Project url</label>
-						<input type="text" name="projecturl" value="{{ project.projecturl}}">
-					</div>
+					
 					<div class="field">
 						<label>Project Picture</label>
 						<div class="ui grid">
@@ -100,6 +111,7 @@
 						</div>
 						<input type="file" name="projectpictures" id="projectpic" multiple hidden>
 					</div>-->
+					</div>
 					<hr><hr>
 					<div class="field">
 						<center>
@@ -117,6 +129,15 @@
 {% endblock %}
 
 {% block script %}
+
+<script type="text/javascript">
+	var but = document.getElementById("phaseButton");
+	but.onclick = function(){
+		var phase2 = document.getElementById("phase2");
+		phase2.classList.toggle("phasehide");
+	}
+</script>
+
 <script type="text/javascript">
 	$('select.dropdown').dropdown();
 
