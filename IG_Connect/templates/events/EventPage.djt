@@ -104,7 +104,12 @@
 							<h4>Contacts coming soon.</h4>
 						{%endif%}
 
-						{% if regRequest %}
+						{% if not event.isEventEnded %}
+
+						{% if not request.user.is_authenticated %}
+						<a class="ui button fluid green" href="/auth/signup">Login or Signup</a>
+
+						{% elif regRequest %}
 						<a href="/events/register/{{event.pk}}" class="ui button fluid green">Registeration Status</a>
 						<br>
 						{% elif event.isRegisterationOpen %}
@@ -114,7 +119,7 @@
 						<button class="ui button fluid red" disabled>Registerations Closed</button>
 						{%endif%}
 						<br>
-						
+						{%endif%}
 
 						{% if request.user.is_superuser %}
 						<a href="/events/manageevent/{{event.pk}}" class="ui button fluid green">Manage Event</a>

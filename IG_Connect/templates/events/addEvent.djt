@@ -1,4 +1,4 @@
-{% extends "events/base.djt" %}
+{% extends "events/adminbase.djt" %}
 {% load staticfiles %}
 
 {% block head %}

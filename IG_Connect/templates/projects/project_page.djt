@@ -315,6 +315,14 @@ $(window).scroll(function() {
 
   $("#phaseButton").click(function(){
     $(".phase2").toggleClass("phasehide");
+    var buttonContent = document.getElementById("phaseButton").innerHTML;
+    if(buttonContent == "More Info")
+    {
+      document.getElementById("phaseButton").innerHTML = "Less Info";
+    }
+    else{
+      document.getElementById("phaseButton").innerHTML = "More Info";
+    }
   });
 
   $('#deleteProjectButton').click(function(){
