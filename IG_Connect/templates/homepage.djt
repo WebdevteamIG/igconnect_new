@@ -146,6 +146,10 @@ $(window).scroll(function() {
             </li>
             {% endif %}
             <li class="nav-item">
+                <a class="nav-link" href="/events">EVENTS</a>
+                <div class="nav-border"></div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/projects">PROJECTS</a>
                 <div class="nav-border"></div>
             </li>
