@@ -8,6 +8,17 @@
 	text-align: center !important;
 }
 
+.userList{
+	font-family: cursive;
+	font-size: 20px;
+}
+
+.headh3{
+	font-family: monospace;
+	font-size: 30px;
+
+}
+
 </style>
 {% endblock %}
 

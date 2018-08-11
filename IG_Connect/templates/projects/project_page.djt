@@ -306,15 +306,18 @@ $(window).scroll(function() {
 </footer>
 
 <script type="text/javascript">
-
- /* var but = document.getElementById("phaseButton");
-  but.onclick = function(){
-    var phase2 = document.getElementsByClassName("phase2");
-    phase2.classList.toggle("phasehide"); 
-  }*/
+  
+  var iscolap = false;
 
   $("#phaseButton").click(function(){
     $(".phase2").toggleClass("phasehide");
+    if(iscolap){
+      $(this).html("More Info");
+      iscolap = !iscolap;
+    } else {
+      $(this).html("Colapse");
+      iscolap = !iscolap;
+    }
   });
 
   $('#deleteProjectButton').click(function(){

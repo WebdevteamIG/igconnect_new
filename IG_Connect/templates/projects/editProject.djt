@@ -49,7 +49,7 @@
 						<label>Project url</label>
 						<input type="text" name="projecturl" value="{{ project.projecturl}}">
 					</div>
-					<button id="phaseButton" type="button" class="btn btn-success">Add More Info</button><br><br>
+					<button id="phaseButton" type="button" class="btn btn-success">Add More</button><br><br>
 					<div id="phase2" class="phasehide">
 					<div class="field">
 						<label>Objective</label>
@@ -131,10 +131,19 @@
 {% block script %}
 
 <script type="text/javascript">
+
+	var iscolap = false;
 	var but = document.getElementById("phaseButton");
 	but.onclick = function(){
 		var phase2 = document.getElementById("phase2");
 		phase2.classList.toggle("phasehide");
+		if(iscolap){
+			but.innerHTML = "Add More";
+			iscolap = !iscolap;
+		} else {
+			but.innerHTML = "Colapse";
+			iscolap = !iscolap;
+		}
 	}
 </script>
 

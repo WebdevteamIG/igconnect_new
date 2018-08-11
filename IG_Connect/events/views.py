@@ -132,13 +132,20 @@ def viewEvent(request,id) :
 			if event.contents.filter(title = title).count() == 0:
 				content = Content()
 				content.title = title
-				content.content = "{% for request in eventReqUser%} <h1>{{request.user.Username}}</h1> {% endfor %} "
+				content.content = "<h3 class='headh3'>List of users participated</h3>\n<ul>"
+				for request in eventReqUser :
+					content.content += "<li class='userList'>" + request.user.first_name + ' ' + request.user.last_name + "</li>\n"
+				content.content += "</ul>"
 				content.save()
-				event.contents.add(content)
+				
 			else :
 				content = Content.objects.get(title=title)
-				content.content = "{% for request in eventReqUser%} <h1>{{request.user.Username}}</h1> {% endfor %} "
+				content.content = "<h3 class='headh3'>List of Participants</h3>\n<ol>"
+				for regRequest in eventReqUser :
+					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n"
+				content.content += "</ol>"
 				content.save()
+				
 
 		response['event'] = event
 		if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:

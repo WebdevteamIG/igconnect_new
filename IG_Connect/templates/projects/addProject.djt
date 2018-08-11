@@ -58,7 +58,7 @@
 						<label>Project url( Enter github link, or any site url if available)</label>
 						<input type="text" name="projecturl"  maxlength="500">
 					</div>
-					<button type="button" id="phaseButton" class="btn btn-success">Add More Info</button><br><br>
+					<button type="button" id="phaseButton" class="btn btn-success">Add More</button><br><br>
 					<div id="phase2" class="phasehide">
 					<div class="field">
 						<label>Objective</label>
@@ -129,10 +129,19 @@
 
 <script type="text/javascript">
 
+	var iscolap = false;
+
 	var but = document.getElementById("phaseButton");
 	but.onclick = function(){
 		var element = document.getElementById("phase2");
 		element.classList.toggle("phasehide");
+		if(iscolap){
+			but.innerHTML = "Add More";
+			iscolap = !iscolap;
+		} else {
+			but.innerHTML = "Colapse";
+			iscolap = !iscolap;
+		}
 	}
 </script>
 {% endblock %}
