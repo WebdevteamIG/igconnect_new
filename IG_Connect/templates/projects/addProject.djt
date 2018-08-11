@@ -58,7 +58,20 @@
 						<label>Project url( Enter github link, or any site url if available)</label>
 						<input type="text" name="projecturl"  maxlength="500">
 					</div>
-					<button type="button" id="phaseButton" class="btn btn-success">Add More</button><br><br>
+
+					<div class="field">
+						<label>Project Picture</label>
+						<div class="ui grid">
+							<div class="seven wide column">
+								<button type="button" id="projectPicbutton" class="ui icon blue button">
+								    <i class="cloud icon"></i>
+								    <input type="file" name="projectPicture" id="projectPicture">
+								</button>	
+							</div>
+						</div>
+					</div>
+
+					<button type="button" id="phaseButton" class="ui green button">Add More Info</button><br><br>
 					<div id="phase2" class="phasehide">
 					<div class="field">
 						<label>Objective</label>
@@ -83,17 +96,7 @@
 						<textarea name="awards" rows="4" maxlength="1000"></textarea>
 					</div>
 					
-					<div class="field">
-						<label>Project Picture</label>
-						<div class="ui grid">
-							<div class="seven wide column">
-								<button type="button" id="projectPicbutton" class="ui icon blue button">
-								    <i class="cloud icon"></i>
-								    <input type="file" name="projectPicture" id="projectPicture">
-								</button>	
-							</div>
-						</div>
-					</div>
+					
 					<div class="field">
 						<label>Branches Involved</label>
 						<input type="text" name="branches" maxlength="200" placeholder="CSE, ECE, ....">
@@ -142,6 +145,7 @@
 			but.innerHTML = "Colapse";
 			iscolap = !iscolap;
 		}
+
 	}
 </script>
 {% endblock %}

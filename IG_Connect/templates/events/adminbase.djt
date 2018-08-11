@@ -57,7 +57,7 @@
 
 </head>
 <!-- rgba(27, 188, 191, 1) -->
-<body>
+<body style="background-image:url({% static 'pictures/defaults/bg3.jpg' %});">
 	<div class="ui inverted menu" style="font-size:15px;" id="navbar">
 		<a class="item" href="/">Home</a>
 		<a class="item" href="/projects">Projects</a>

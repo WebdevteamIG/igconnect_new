@@ -124,8 +124,21 @@
 	        </div>
 	        {% endif %}
 
+	        
+
 			<div class="ui segment">
 				{% if event.isRegisterationOpen %}
+
+				{% if regRequest %}         			             
+		        <div class="eight wide column">
+		            <div class="ui message">
+		              <div class="header">
+		                Message
+		              </div>
+		              <p>{{regRequest.message}}</p>
+		            </div>
+		        </div>
+	            {% endif %}
 
 				<form action="/events/register/{{event.pk}}/" method="post" class="ui form">
 	            {% csrf_token %}
@@ -146,10 +159,25 @@
 	            </button>
 	            </center>
 	            </form>
-	            {% elif regRequest %}         			             
-		        <p>{{regRequest.message}}</p>
+	            {% elif regRequest %}
+	            <div class="eight wide column">
+		            <div class="ui message">
+		              <div class="header">
+		                Message
+		              </div>
+		              <p>{{regRequest.message}}</p>
+		            </div>
+		        </div>     			             
 	            {% else %}
-	            <p>Registeration for this event has been closed.</p>
+	            <div class="eight wide column">
+		            <div class="ui message">
+		              <div class="header">
+		                Message
+		              </div>
+		              <p>Registeration for this event has been closed.</p>
+		            </div>
+		        </div>
+	            
 	            {% endif %}
 			</div>
 		</div>

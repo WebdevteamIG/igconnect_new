@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render, render_to_response, redirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.shortcuts import render
 from datetime import datetime
@@ -8,6 +9,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from xlsxwriter.workbook import Workbook
 from .models import *
 
 def checkuserifsuperuser(user):
@@ -162,8 +164,8 @@ def registerEvent(request,id) :
 	response= {}
 	try:
 		event = Event.objects.get(id=id)
-		# Raising exception if event is not published.
-		if not event.isPublished:
+		# Raising exception if event is not published or event has ended
+		if not event.isPublished or event.isEventEnded:
 			raise
 
 		questions = EventQuestion.objects.filter(event = event)
@@ -212,7 +214,7 @@ def registerEvent(request,id) :
 						# Now user is registered for this event so changing the flag.
 						isUserRegistered = True
 
-					response['message'] = "Response saved successfully."
+					# response['message'] = "Response saved successfully."
 				else:
 					response['message'] = "Unable to save response"
 				
@@ -220,7 +222,7 @@ def registerEvent(request,id) :
 		response['questions'] = questions
 		if isUserRegistered:
 			if regRequest.status == 1:
-				regRequest.message = "Registeration for this event is closed. Your response has been saved."
+				regRequest.message = "Your registeration request is successfully submitted."
 			elif regRequest.status == 2:
 				regRequest.message = "Your request to participate in this event is declined."
 			elif regRequest.status == 3:
@@ -292,3 +294,44 @@ def updateRegRequest(request):
 		regRequest.status = status
 		regRequest.save()
 		return Response(data)
+
+@login_required(login_url='/auth/login')
+@user_passes_test(checkuserifsuperuser, login_url='/auth/login')
+def downloadResponses(request,id):
+	print "export"
+	event = Event.objects.get(id=id)
+	questions = EventQuestion.objects.filter(event = event)
+	regRequests = EventRegisterationRequest.objects.filter(event = event)
+
+	response={}
+	marksobj = []
+
+	response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+	response['Content-Disposition'] = 'attachment; filename=' + event.name +'_responses.xlsx'
+	book = Workbook(response, {'in_memory': True})
+	sheet = book.add_worksheet('Sheet1')       
+	bold = book.add_format({'bold': True, 'align':'center_across'})
+
+	row_num = 0
+	columns = [(u"Timestamp",20),(u"Reg No", 10),(u"First Name",15),(u"Last Name",15),(u"Course",10),(u"Status",10),]
+	
+	for question in questions:
+		columns.append(tuple((question.question, 50)))
+
+	for col_num in xrange(len(columns)):
+		sheet.write(row_num, col_num, columns[col_num][0], bold)
+		sheet.set_column(col_num, col_num, columns[col_num][1])
+
+	for req in regRequests:
+		# dataRow = [12, req.user.profile.regNum, req.user.first_name, req.user.last_name, req.user.profile.course, req.get_status_display]
+		dataRow = [req.requestDate.strftime('%Y-%m-%d %H:%M:%S'), req.user.profile.regNum, req.user.first_name, req.user.last_name, req.user.profile.course, req.get_status_display()]
+		for question in questions:
+			questionResponse = EventQuestionResponse.objects.get(question = question, user = req.user)
+			res =  questionResponse.response
+			dataRow.append(res)
+		row_num += 1
+		for col_num in xrange(len(dataRow)) :
+			sheet.write(row_num, col_num, dataRow[col_num])
+
+	book.close()
+	return response

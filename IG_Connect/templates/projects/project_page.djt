@@ -311,11 +311,12 @@ $(window).scroll(function() {
 
   $("#phaseButton").click(function(){
     $(".phase2").toggleClass("phasehide");
+
     if(iscolap){
       $(this).html("More Info");
       iscolap = !iscolap;
     } else {
-      $(this).html("Colapse");
+      $(this).html("Less Info");
       iscolap = !iscolap;
     }
   });

@@ -1,4 +1,4 @@
-{% extends "events/base.djt" %}
+{% extends "events/adminbase.djt" %}
 {% load staticfiles %}
 
 {% block head %}
@@ -27,6 +27,10 @@
 	        	</a>
 
 			</div>
+			<br>
+			<div class="one wide column">
+      		<a class="ui facebook button" href="/events/downloadresponse/{{event.pk}}" target="_blank">Download</a>
+      	</div>
 	        </center>
 	    </div>
 	    <div class="fourteen wide column">
@@ -88,6 +92,7 @@
 	        </table>
 	        
 	    </div>
+	    
 	</div>
 </div>
 <div class="ui modal" id="responseModal">
