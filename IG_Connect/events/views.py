@@ -124,19 +124,40 @@ def addQuestion(request,id) :
 
 def viewEvent(request,id) :
 	response= {}
-	try:
-		event = Event.objects.get(id=id)
-		# Displaying event only if event is published or the user is superuser
-		if event.isPublished or request.user.is_superuser:
-			response['event'] = event
-			if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
-				regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
-				response['regRequest'] = regRequest
-			return render(request,'events/EventPage.djt',response)
-		else:
-			raise
-	except:
-		return redirect('/events')
+	# try:
+	event = Event.objects.get(id=id)
+	# Displaying event only if event is published or the user is superuser
+	if event.isPublished or request.user.is_superuser:
+		if event.isEventEnded :
+			eventReqUser = EventRegisterationRequest.objects.filter(status=4)
+			title = "Participated Users"
+			if event.contents.filter(title = title).count() == 0:
+				content = Content()
+				content.title = title
+				content.content = "<h3 class='headh3'>List of users participated</h3>\n<ul>"
+				for request in eventReqUser :
+					content.content += "<li class='userList'>" + request.user.first_name + ' ' + request.user.last_name + "</li>\n"
+				content.content += "</ul>"
+				content.save()
+				
+			else :
+				content = Content.objects.get(title=title)
+				content.content = "<h3 class='headh3'>List of Participants</h3>\n<ol>"
+				for regRequest in eventReqUser :
+					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n"
+				content.content += "</ol>"
+				content.save()
+				
+
+		response['event'] = event
+		if request.user.is_authenticated() and EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
+			regRequest = EventRegisterationRequest.objects.get(event = event, user = request.user)
+			response['regRequest'] = regRequest
+		return render(request,'events/EventPage.djt',response)
+	else:
+		raise
+	# except:
+	# 	return redirect('/events')
 
 @login_required(login_url='/auth/login')
 def registerEvent(request,id) :

@@ -132,19 +132,20 @@
 
 <script type="text/javascript">
 
+	var iscolap = false;
+
 	var but = document.getElementById("phaseButton");
 	but.onclick = function(){
 		var element = document.getElementById("phase2");
 		element.classList.toggle("phasehide");
+		if(iscolap){
+			but.innerHTML = "Add More";
+			iscolap = !iscolap;
+		} else {
+			but.innerHTML = "Colapse";
+			iscolap = !iscolap;
+		}
 
-		var buttonContent = document.getElementById("phaseButton").innerHTML;
-	    if(buttonContent == "Add More Info")
-	    {
-	      document.getElementById("phaseButton").innerHTML = "Less Info";
-	    }
-	    else{
-	      document.getElementById("phaseButton").innerHTML = "Add More Info";
-	    }
 	}
 </script>
 {% endblock %}
