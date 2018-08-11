@@ -145,19 +145,14 @@
 			<div class="ui segment">
 				<div class="ui top attached tabular menu">
 				
-				  <a class="ui active item" data-tab="desc">Description</a>
+
 				  {%for content in event.contents.all%}
-			  	<a class="ui item" data-tab="cont_{{content.pk}}">{{content.title}}</a>
+			  	<a class="ui {%if forloop.counter == 1%}active{%endif%} item" data-tab="cont_{{content.pk}}">{{content.title}}</a>
 					{%endfor%}
 				</div>
 
-				<div class="ui bottom attached active tab segment" data-tab="desc">
-				  {%autoescape off%}
-				  {{event.description}}
-				  {%endautoescape%}
-				</div>
 				{%for content in event.contents.all%}
-				<div class="ui bottom attached tab segment" data-tab="cont_{{content.pk}}">
+				<div class="ui bottom attached {%if forloop.counter == 1%}active{%endif%} tab segment" data-tab="cont_{{content.pk}}">
 				  {%autoescape off%}
 				  {{content.content}}
 				  {%endautoescape%}
