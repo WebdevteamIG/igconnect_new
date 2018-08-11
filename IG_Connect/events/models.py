@@ -37,6 +37,7 @@ class Event(models.Model):
     organiser = models.CharField(max_length=100)
     unpaid_event = models.BooleanField(default=False)
     cost = models.CharField(max_length=100, null = True, blank=True)
+    softreq = models.CharField(max_length=255, null=True, blank=True)
     contact_members = models.ManyToManyField(ContactMember, blank=True)
     isPublished = models.BooleanField(default = False)
     isRegisterationOpen = models.BooleanField(default = False)
@@ -81,4 +82,21 @@ class EventQuestionResponse(models.Model):
 
 	def __str__(self):
 		return str(self.question) + '-' + self.user.username
+
+class EventMessage(models.Model):
+	status_choices = (
+		(1,'Submitted'),
+		(2,'Rejected'),
+		(3,'Approved'),
+		(4,'Participated'),
+	)
+
+	status = models.IntegerField(choices=status_choices, default=1)
+	event = models.ForeignKey(Event, on_delete=models.CASCADE)
+	message = RichTextUploadingField()
+
+	def __str__(self):
+		return self.event.name + str(self.status)
+
+
 

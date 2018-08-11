@@ -57,6 +57,11 @@
 	                <label>Start Date</label>
 	                <input type="date" name="startDate">
 				</div>
+
+				<div class="field">
+	                <label>Software or Equipments Required</label>
+	                <input type="text" name="softreq">
+				</div>
 				
 				<div class="field">
 	                <label>Logo</label>

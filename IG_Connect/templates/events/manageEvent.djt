@@ -65,6 +65,10 @@
 	        		<td>{{event.startdate}}</td>
 	        	</tr>
 	        	<tr>
+	        		<th>Software Required</th>
+	        		<td>{{event.softreq}}</td>
+	        	</tr>
+	        	<tr>
 	        		<th>Published</th>
 	        		<td>{{event.isPublished}}</td>
 	        	</tr>
