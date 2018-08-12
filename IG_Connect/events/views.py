@@ -131,7 +131,7 @@ def viewEvent(request,id) :
 	# Displaying event only if event is published or the user is superuser
 	if event.isPublished or request.user.is_superuser:
 		if event.isEventEnded :
-			eventReqUser = EventRegisterationRequest.objects.filter(status=4)
+			eventReqUser = EventRegisterationRequest.objects.filter(event=event,status=4)
 			title = "Participated Users"
 			if event.contents.filter(title = title).count() == 0:
 				content = Content()
@@ -141,14 +141,15 @@ def viewEvent(request,id) :
 					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
 				content.content += "</ol>"
 				content.save()
+				event.contents.add(content)
 				
 			else :
-				content = Content.objects.get(title=title)
+				content = event.contents
 				content.content = "<h3 class='headh3'>List of Participants</h3>\n<ol>"
 				for regRequest in eventReqUser :
 					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
 				content.content += "</ol>"
-				content.save()
+				event.save()
 				
 
 		response['event'] = event
