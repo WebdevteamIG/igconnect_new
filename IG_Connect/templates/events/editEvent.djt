@@ -58,6 +58,11 @@
 	                <input type="date" name="startDate" value="{{startdate}}">
 	            </div>
 
+	            <div class="field">
+	                <label>Software or Equipments Required</label>
+	                <input type="text" name="softreq" value="{{event.softreq}}">
+				</div>
+
 
 			    <div class="inline inverted field">			      
 			      	<label style="color: white;">Event Published : </label>

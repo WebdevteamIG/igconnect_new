@@ -36,6 +36,7 @@ def addEvent(request) :
 		event.venue = request.POST['venue']
 		event.organiser = request.POST['organiser']
 		event.cost = request.POST['cost']
+		event.softreq = request.POST['softreq']
 		if request.FILES.get('logo'):
 			event.logo = request.FILES.get('logo')
 		if request.FILES.get('banner_image'):
@@ -71,6 +72,7 @@ def editEvent(request,id) :
 		event.venue = request.POST['venue']
 		event.organiser = request.POST['organiser']
 		event.cost = request.POST['cost']
+		event.softreq = request.POST['softreq']
 		event.startdate = datetime.strptime(request.POST['startDate'], '%Y-%m-%d')
 		if request.POST.get('eventPublished'):
 			event.isPublished = True
@@ -129,24 +131,25 @@ def viewEvent(request,id) :
 	# Displaying event only if event is published or the user is superuser
 	if event.isPublished or request.user.is_superuser:
 		if event.isEventEnded :
-			eventReqUser = EventRegisterationRequest.objects.filter(status=4)
+			eventReqUser = EventRegisterationRequest.objects.filter(event=event,status=4)
 			title = "Participated Users"
 			if event.contents.filter(title = title).count() == 0:
 				content = Content()
 				content.title = title
-				content.content = "<h3 class='headh3'>List of users participated</h3>\n<ul>"
-				for request in eventReqUser :
-					content.content += "<li class='userList'>" + request.user.first_name + ' ' + request.user.last_name + "</li>\n"
-				content.content += "</ul>"
-				content.save()
-				
-			else :
-				content = Content.objects.get(title=title)
-				content.content = "<h3 class='headh3'>List of Participants</h3>\n<ol>"
+				content.content = "<h3 class='headh3'>List of users participated</h3>\n<ol>"
 				for regRequest in eventReqUser :
-					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n"
+					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
 				content.content += "</ol>"
 				content.save()
+				event.contents.add(content)
+				
+			else :
+				content = event.contents
+				content.content = "<h3 class='headh3'>List of Participants</h3>\n<ol>"
+				for regRequest in eventReqUser :
+					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
+				content.content += "</ol>"
+				event.save()
 				
 
 		response['event'] = event
@@ -221,14 +224,27 @@ def registerEvent(request,id) :
 		response['event'] = event
 		response['questions'] = questions
 		if isUserRegistered:
-			if regRequest.status == 1:
-				regRequest.message = "Your registeration request is successfully submitted."
-			elif regRequest.status == 2:
-				regRequest.message = "Your request to participate in this event is declined."
-			elif regRequest.status == 3:
-				regRequest.message = "Your request to participate in this event is approved."
-			elif regRequest.status == 4:
-				regRequest.message = "You have participated in this event."
+			if EventMessage.objects.filter(event=event, status=regRequest.status).count() == 0:
+				eventMessage = EventMessage()
+				eventMessage.status = regRequest.status
+				eventMessage.event = event
+				if eventMessage.status == 1:
+					eventMessage.message = "Your request has been Submitted"
+				elif eventMessage.status == 2:
+					eventMessage.message = "Your request has been Rejected please contact fb page"
+				elif eventMessage.status == 3:
+					eventMessage.message = "You have been Approved please Make sure you have following software installed " + event.softreq
+				elif eventMessage.status == 4:
+					eventMessage.message = "Event has been Ended \n You have successfully participated"
+				regRequest.message = eventMessage.message
+				eventMessage.save()
+			else:
+				status = regRequest.status
+				eventMessage = EventMessage.objects.get(event=event, status=status)
+				if status == 3:
+					eventMessage.message = "You have been Approved please Make sure you have following software installed " + event.softreq
+				regRequest.message = eventMessage.message
+
 			response['regRequest'] = regRequest
 		return render(request,'events/registerEvent.djt',response)
 	except:
