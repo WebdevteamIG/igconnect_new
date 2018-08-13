@@ -134,22 +134,25 @@ def viewEvent(request,id) :
 			eventReqUser = EventRegisterationRequest.objects.filter(event=event,status=4)
 			title = "Participated Users"
 			if event.contents.filter(title = title).count() == 0:
+				print "new participation list"
 				content = Content()
 				content.title = title
-				content.content = "<h3 class='headh3'>List of users participated</h3>\n<ol>"
+				content.content = "<h5 class='headh3'>List of users participated</h5>\n<ol>"
 				for regRequest in eventReqUser :
 					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
 				content.content += "</ol>"
 				content.save()
 				event.contents.add(content)
+				event.save()
 				
 			else :
-				content = event.contents
-				content.content = "<h3 class='headh3'>List of Participants</h3>\n<ol>"
+				print "old participation list"
+				content = event.contents.get(title = title)
+				content.content = "<h5 class='headh3'>List of Participants :-</h5>\n<ol>"
 				for regRequest in eventReqUser :
 					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
 				content.content += "</ol>"
-				event.save()
+				content.save()
 				
 
 		response['event'] = event
@@ -172,7 +175,7 @@ def registerEvent(request,id) :
 			raise
 
 		questions = EventQuestion.objects.filter(event = event)
-
+		formOpen = False
 		isUserRegistered = False
 		# get registeration status if exist
 		if EventRegisterationRequest.objects.filter(event = event, user = request.user).count() > 0:
@@ -181,6 +184,7 @@ def registerEvent(request,id) :
 			for question in questions:
 				question.response = EventQuestionResponse.objects.get(question = question, user = request.user).response
 		if event.isRegisterationOpen:
+			formOpen = True
 			if request.method == 'POST' :
 
 				#validating that all answers are present
@@ -220,32 +224,40 @@ def registerEvent(request,id) :
 					# response['message'] = "Response saved successfully."
 				else:
 					response['message'] = "Unable to save response"
-				
+		
+
 		response['event'] = event
 		response['questions'] = questions
+
 		if isUserRegistered:
 			if EventMessage.objects.filter(event=event, status=regRequest.status).count() == 0:
 				eventMessage = EventMessage()
 				eventMessage.status = regRequest.status
 				eventMessage.event = event
 				if eventMessage.status == 1:
-					eventMessage.message = "Your request has been Submitted"
+					eventMessage.message = "Your registeration request has been Submitted."
 				elif eventMessage.status == 2:
-					eventMessage.message = "Your request has been Rejected please contact fb page"
+					eventMessage.message = "Your request to participate in the event is declined."
 				elif eventMessage.status == 3:
-					eventMessage.message = "You have been Approved please Make sure you have following software installed " + event.softreq
+					eventMessage.message = "Your request to participate in event is approved."
 				elif eventMessage.status == 4:
-					eventMessage.message = "Event has been Ended \n You have successfully participated"
-				regRequest.message = eventMessage.message
+					eventMessage.message = "You have participated in this event."
+
 				eventMessage.save()
 			else:
 				status = regRequest.status
 				eventMessage = EventMessage.objects.get(event=event, status=status)
-				if status == 3:
-					eventMessage.message = "You have been Approved please Make sure you have following software installed " + event.softreq
-				regRequest.message = eventMessage.message
-
+				
+			regRequest.message = eventMessage.message
+			if (regRequest.status == 1 or regRequest.status == 2) and event.isRegisterationOpen == True:
+				formOpen = True
+			else:
+				formOpen = False
 			response['regRequest'] = regRequest
+
+		#this flag is used to check if form should be displayed or not.
+		if formOpen:
+			response['formOpen'] = formOpen
 		return render(request,'events/registerEvent.djt',response)
 	except:
 		return redirect('/events')
@@ -258,6 +270,15 @@ def viewResponses(request,id) :
 		event = Event.objects.get(id=id)
 		questions = EventQuestion.objects.filter(event = event)
 		regRequests = EventRegisterationRequest.objects.filter(event = event)
+		if questions.filter(question__icontains='team name').count() > 0:
+			response['teamName'] = True
+			teamNameQues = questions.get(question__icontains='team name')
+			for regReq in regRequests:
+				try:
+					regReq.teamName = EventQuestionResponse.objects.get(question = teamNameQues, user = regReq.user).response
+				except:
+					regReq.teamName = None
+
 		response['event'] = event
 		response['questions'] = questions
 		response['regRequests'] = regRequests
@@ -329,7 +350,7 @@ def downloadResponses(request,id):
 	bold = book.add_format({'bold': True, 'align':'center_across'})
 
 	row_num = 0
-	columns = [(u"Timestamp",20),(u"Reg No", 10),(u"First Name",15),(u"Last Name",15),(u"Course",10),(u"Status",10),]
+	columns = [(u"Timestamp",20),(u"Reg No", 10),(u"Contact", 10),(u"First Name",15),(u"Last Name",15),(u"Course",10),(u"Status",10),]
 	
 	for question in questions:
 		columns.append(tuple((question.question, 50)))
@@ -340,7 +361,7 @@ def downloadResponses(request,id):
 
 	for req in regRequests:
 		# dataRow = [12, req.user.profile.regNum, req.user.first_name, req.user.last_name, req.user.profile.course, req.get_status_display]
-		dataRow = [req.requestDate.strftime('%Y-%m-%d %H:%M:%S'), req.user.profile.regNum, req.user.first_name, req.user.last_name, req.user.profile.course, req.get_status_display()]
+		dataRow = [req.requestDate.strftime('%Y-%m-%d %H:%M:%S'), req.user.profile.regNum, req.user.profile.contact,req.user.first_name, req.user.last_name, req.user.profile.course, req.get_status_display()]
 		for question in questions:
 			questionResponse = EventQuestionResponse.objects.get(question = question, user = req.user)
 			res =  questionResponse.response

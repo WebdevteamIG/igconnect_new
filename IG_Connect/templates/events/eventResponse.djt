@@ -47,6 +47,9 @@
                     <th>Last Name</th>
                     <th>Course</th>
                     <th>Status</th>
+                    {% if teamName %}
+                    <th>Team Name</th>
+                    {% endif %}
                     <th>Response</th>
                     <th>Accept</th>
                     <th>Reject</th>
@@ -61,13 +64,16 @@
 	        		<td>{{response.user.last_name}}</td>
 	        		<td>{{response.user.profile.course}}</td>
 	        		<td id="status{{response.pk}}">{{response.get_status_display}}</td>
+	        		{% if teamName %}
+                    <td>{{response.teamName}}</td>
+                    {% endif %}
 	        		<td>
 	        			<button class="ui blue button viewResponse"
 	        					data-regno="{{response.user.profile.regNum}}"
 	        					data-name="{{response.user.first_name}} {{response.user.last_name}}"
 	        					data-pk="{{response.pk}}"
 	        					data-username = "{{response.user.username}}">
-						 	View Response
+						 	View
 						</button>
 					</td>
 					<td>

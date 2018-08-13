@@ -15,7 +15,7 @@
 
 .headh3{
 	font-family: monospace;
-	font-size: 30px;
+	/*font-size: 30px;*/
 
 }
 

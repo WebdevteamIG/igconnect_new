@@ -127,7 +127,7 @@
 	        
 
 			<div class="ui segment">
-				{% if event.isRegisterationOpen %}
+				{% if formOpen %}
 
 				{% if regRequest %}         			             
 		        <div class="eight wide column">
@@ -135,7 +135,11 @@
 		              <div class="header">
 		                Message
 		              </div>
-		              <p>{{regRequest.message}}</p>
+		              <p>
+		              {%autoescape off%}
+		              {{regRequest.message}}
+		              {%endautoescape%}
+		              </p>
 		            </div>
 		        </div>
 	            {% endif %}
@@ -165,7 +169,7 @@
 		              <div class="header">
 		                Message
 		              </div>
-		              <p>{{regRequest.message}}</p>
+		              <p>{%autoescape off%}{{regRequest.message}}{%endautoescape%}</p>
 		            </div>
 		        </div>     			             
 	            {% else %}
