@@ -8,11 +8,22 @@ from projects.models import *
 from .models import *
 import datetime
 
+def checkuserifsuperuser(user):
+    if user.is_superuser:
+        return True
+    else:
+        return False
+
+
+@login_required(login_url='/auth/login')
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def dashboard(request) :
 	response = {}
 	response['updates'] = NewsUpdate.objects.all()
 	return render(request,'updates/dashboard.djt',response)
 
+@login_required(login_url='/auth/login')
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def addNews(request) :
 	response = {}
 	if request.method == 'POST' :
@@ -41,6 +52,8 @@ def addNews(request) :
 
 	return render(request,'updates/addNews.djt',response)
 
+@login_required(login_url='/auth/login')
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def publishNews(request,id) :
 	response = {}
 	news = NewsUpdate.objects.get(id=id)
@@ -49,6 +62,8 @@ def publishNews(request,id) :
 	news.save()
 	return redirect('/updates')
 
+@login_required(login_url='/auth/login')
+@user_passes_test(checkuserifsuperuser, login_url='/')
 def unPublishNews(request,id) :
 	response = {}
 	news = NewsUpdate.objects.get(id=id)
