@@ -25,8 +25,23 @@ def signin(request):
         return redirect('/')
     if request.method == 'POST':
         user_name = request.POST['user_name']
+        try:
+            user = User._default_manager.get(username__iexact = user_name.lower())
+            print user
+            username = user.username
+        except:
+            print "username invalid"
+            try:
+                user = User.objects.filter(email = user_name).last()
+                print user
+                print user.username
+                username = user.username
+            except:
+                print "Even email invalid"
+                return render(request, 'authentication/login.djt', {'error' : 'User-Name/Password Invalid'})
         password = request.POST['password']
-        user = authenticate(username = user_name, password = password)
+        print username
+        user = authenticate(username = username, password = password)
         if user == None :
             return render(request, 'authentication/login.djt', {'error' : 'User-Name/Password Invalid'})
         elif user.is_active == False :
@@ -118,7 +133,7 @@ def forgotPassword(request) :
                 newpass = username+str(rnum)
 
                 message = 'Hi, \n your new password is : '+ newpass
-                sender = "speakerstedxnitw@gmail.com"
+                sender = "ig-nitw@student.nitw.ac.in"
                 receiver = user.email
                 rlist = []
                 rlist.append(receiver)
@@ -174,8 +189,8 @@ def contactUs(request) :
         Content = Content + 'Email : ' + email + '\n\n'
         Content = Content + 'Message : ' + message + '\n\n'
         
-        receiver = "priyam@thelakshyafoundation.org"
-        sender = "speakerstedxnitw@gmail.com"
+        receiver = "ig-nitw@student.nitw.ac.in"
+        sender = "ig-nitw@student.nitw.ac.in"
         rlist = []
         rlist.append(receiver)
         try:

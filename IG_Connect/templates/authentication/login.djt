@@ -54,7 +54,7 @@
                 <br><br><br>
                 <form method="POST" action="">
                     {% csrf_token %}
-                    <input type="text" name="user_name" placeholder="Your Username" class='text' required>
+                    <input type="text" name="user_name" placeholder="Your Username / Email" class='text' required>
                     <br><br>
                     <input type="password" name="password" placeholder="Your Password" class='text' required>
                     <br><br>
@@ -63,7 +63,7 @@
                     </p>
                 </form>
 
-                <a href="/auth/forgotPassword">
+                <a href="/password_reset">
                 <p style="color:white; padding-left:10%;">Forgot Password</p>
                 </a>
             </div>
