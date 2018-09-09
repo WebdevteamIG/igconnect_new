@@ -137,3 +137,18 @@ def deleteProject(request,projectname) :
 		print( "Project Doesn't exist Error" )
 	
 	return redirect('/projects')
+
+# def ProjectLike(request):
+# 	response = {}
+
+# 	projectLike = ProjectLike.objects.filter(project.pk=).count()
+# 	response['count'] = projectLike
+
+# 	return 
+
+# def addLike(request):
+# 	if(request.method == "PUT")
+# 	projectLike = ProjectLike()
+# 	projectLike.project = request.POST["project"]
+# 	projectLike.user = request.POST["user"]
+

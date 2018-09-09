@@ -42,3 +42,12 @@ class ProjectDescription(models.Model):
 
 	def __str__(self) :
 		return self.project.projectName
+
+class ProjectLike(models.Model):
+	project = models.ForeignKey(Project, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.project.projectName + "-" + self.user.Username
+
+
