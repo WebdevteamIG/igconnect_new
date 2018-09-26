@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x)&ib*ru1jqu_*6hng7g1+c@n&)se96r^pr9p3uid#+jb!uj_1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -92,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'ig_db',
         'USER': 'root',
-        'PASSWORD': 'priyam123',
+        'PASSWORD': 'Innovate@123',
     }
 }
 
@@ -101,7 +101,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ig-nitw@student.nitw.ac.in'
-EMAIL_HOST_PASSWORD = 'WRONGPASSWORD'
+EMAIL_HOST_PASSWORD = 'nitwfablabig'
 EMAIL_PORT = 587
 
 
