@@ -1,0 +1,191 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Innovation Garage</title>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<meta name="author" content="IG WebDev Team">
+	<meta name="description" content="Innovation Garage NIT WARANGAL Website">
+	<meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+
+	<script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+	<script src="{% static 'main/semantic.js' %}"></script>
+	<script src="{% static 'main/components/form.js' %}"></script>
+	<script src="{% static 'main/components/transition.js' %}"></script>
+	<script src="{% static 'main/components/dropdown.js' %}"></script>
+   <script src="{% static 'main/components/accordion.js' %}"></script>
+	{% block head %}
+	{% endblock %}
+	<style>
+	@font-face {
+    font-family: "VFont";
+    src: url(/static/fonts/gothambold1.ttf) format("truetype");
+	}
+	.focused {
+	    color: white !important;
+	}
+	#navbar{
+		z-index: 1000;
+		margin: 0;
+		border-radius: 0;
+		border:none;
+		width: 100%;
+	}
+	
+	.smalltext{
+	  font-size: 0.8em;
+	  text-transform: uppercase !important;
+	}	
+	#navbar .item{
+		padding: 15px 25px !important;
+		font-family: "VFont";
+	  color:white !important;
+	}
+	#navbar .item:hover{
+		background-color: #ededed;
+		color: black !important;
+	}
+	
+	</style>
+
+</head>
+
+
+<!-- rgba(27, 188, 191, 1) -->
+<body>
+	<div class="ui menu topmenu" style="background-color: rgba(12, 16, 19, 0.9);" id="navbar">
+		<a class="smalltext item" href="/">Home</a>
+        
+		</div>
+	</div>
+	<br>
+	<h4 class="ui horizontal divider header">Subhadra Puvvada Undergraduate Research Award
+						</h4>
+	<br><br>
+	<div class="ui fluid  grid container">
+		<div class="two wide column"></div>
+		<div class="twelve wide column"> 
+        	
+			<div class="ui segment">
+				
+				<form action="/events/register/spura/" method="post" class="ui form">
+	            {% csrf_token %}
+
+	            
+	            <div class="field">
+	                <label>Student 1 Details</label>
+	                <small>Name, Dept, Year, Roll</small>
+	                <input type="text" name="stud1" maxlength="1000" value="{%if awardResponse %}{{awardResponse.stud1}}{%endif%}" required>
+	            </div>
+	            
+	            <div class="field">
+	                <label>Student 2 Details</label>
+	                <small>Name, Dept, Year, Roll (NA if not applicable)</small>
+	                <input type="text" name="stud2" maxlength="1000" value="{%if awardResponse %}{{awardResponse.stud2}}{%endif%}" required>
+	            </div>
+	            
+	            <div class="field">
+	                <label>Student 3 Details</label>
+	                <small>Name, Dept, Year, Roll (NA if not applicable)</small>
+	                <input type="text" name="stud3" maxlength="1000" value="{%if awardResponse %}{{awardResponse.stud3}}{%endif%}" required>
+	            </div>
+	            
+	            <div class="field">
+	                <label>Student 4 Details</label>
+	                <small>Name, Dept, Year, Roll (NA if not applicable)</small>
+	                <input type="text" name="stud4" maxlength="1000" value="{%if awardResponse %}{{awardResponse.stud4}}{%endif%}" required>
+	            </div>
+	            
+	            <div class="field">
+	                <label>Title of the paper</label>
+	                <!-- <small>[]</small> -->
+					<textarea required name="titleofpaper" rows="2" maxlength="2000">{%if awardResponse %}{{awardResponse.titleofpaper}}{%endif%}</textarea>
+
+	            </div>
+	            
+	            <div class="field">
+					<label>Broad Field</label>
+					<textarea required name="broadfield" rows="5" maxlength="5000">{%if awardResponse %}{{awardResponse.broadfield}}{%endif%}</textarea>
+				</div>
+	            
+	            <div class="field">
+	                <label>Abstract</label>
+	                <small>(100 words)</small>
+					<textarea required name="abstract" rows="5" maxlength="1500">{%if awardResponse %}{{awardResponse.abstract}}{%endif%}</textarea>
+
+	            </div>
+	            
+	            <div class="field">
+	                <label>Conclusion</label>
+	                <small>(150 words)</small>
+					<textarea required name="conclusion" rows="5" maxlength="3000">{%if awardResponse %}{{awardResponse.conclusion}}{%endif%}</textarea>
+
+	            </div>
+	            
+	            <div class="field">
+	                <label>Google doc link of paper</label>
+					<textarea required name="googledoc" rows="5" maxlength="5000">{%if awardResponse %}{{awardResponse.googledoc}}{%endif%}</textarea>
+
+	            </div>
+	            
+	            <div class="field">
+	                <label>Why do you think you should get this award?</label>
+					<textarea required name="whyaward" rows="5" maxlength="5000">{%if awardResponse %}{{awardResponse.whyaward}}{%endif%}</textarea>
+	            </div>
+	            
+	            <div class="field">
+	                <label>Suggest ways in which we can improve</label>
+	                <small>optional (NA if not applicable)	</small>
+					<textarea required name="suggestions" rows="5" maxlength="1000">{%if awardResponse %}{{awardResponse.suggestions}}{%endif%}</textarea>
+
+	            </div>
+	            
+	            
+	            <br><br>
+	            <center>
+		            <button class="ui green button" type="submit">
+		                <i class="plus icon"></i>
+		                Register
+		            </button>
+	            </center>
+	            </form>
+	            
+			</div>
+		</div>
+	</div>
+	<div class="ui segment">
+	<div class="row">
+		
+	</div>
+	</div>
+</body>
+</html>

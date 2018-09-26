@@ -98,5 +98,21 @@ class EventMessage(models.Model):
 	def __str__(self):
 		return self.event.name + str(self.status)
 
+class AwardResponse(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	stud1 = models.CharField(max_length=1000)
+	stud2 = models.CharField(max_length=1000)
+	stud3 = models.CharField(max_length=1000)
+	stud4 = models.CharField(max_length=1000)
+	titleofpaper = models.TextField()
+	broadfield = models.TextField()
+	abstract = models.TextField()
+	conclusion = models.TextField()
+	googledoc = models.TextField()
+	whyaward = models.TextField()
+	suggestions = models.TextField()
+
+	def __str__(self):
+		return self.user.first_name
 
 
