@@ -13,4 +13,8 @@ urlpatterns = [
 	url(r'^getresponse/$',views.getResponse,name='getResponse'),
 	url(r'^updateresponse/$',views.updateRegRequest,name='updateRegRequest'),
 	url(r'^downloadresponse/(?P<id>[0-9]+)/$',views.downloadResponses,name='downloadResponses'),
+	#award
+	url(r'^spura/$',views.spura,name='spura'),
+	url(r'^register/spura/$',views.registerspura,name='spura'),
+
 ]

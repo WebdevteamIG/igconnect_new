@@ -372,3 +372,32 @@ def downloadResponses(request,id):
 
 	book.close()
 	return response
+
+def spura(request):
+	response = {}
+	return render(request,'events/spura.djt',response)
+@login_required(login_url='/auth/login')
+def registerspura(request):
+	response = {}
+	if request.method == 'POST' :
+		try:
+			awardResponse = AwardResponse.objects.get(user = request.user)
+		except:
+			awardResponse = AwardResponse()
+			awardResponse.user = request.user
+		awardResponse.stud1 = request.POST['stud1']
+		awardResponse.stud2 = request.POST['stud2']
+		awardResponse.stud3 = request.POST['stud3']
+		awardResponse.stud4 = request.POST['stud4']
+		awardResponse.titleofpaper = request.POST['titleofpaper']
+		awardResponse.broadfield = request.POST['broadfield']
+		awardResponse.abstract = request.POST['abstract']
+		awardResponse.conclusion = request.POST['conclusion']
+		awardResponse.googledoc = request.POST['googledoc']
+		awardResponse.whyaward = request.POST['whyaward']
+		awardResponse.suggestions = request.POST['suggestions']
+		awardResponse.save()
+	if AwardResponse.objects.filter(user = request.user).count() > 0:
+		awardResponse = AwardResponse.objects.get(user = request.user)
+		response['awardResponse'] = awardResponse
+	return render(request,'events/spuraregister.djt',response)
