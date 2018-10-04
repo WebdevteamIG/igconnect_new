@@ -57,13 +57,15 @@ def requestItem(request,id) :
 		item = Item.objects.get(id=id)
 		item.status = 2
 		item.save()
+		print "item modified"
 
 		requestObj = ItemRequest()
 		requestObj.user = request.user
 		requestObj.item = item
 		requestObj.dateOfRequest = datetime.datetime.now().strftime("%Y-%m-%d")
-		requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
+		# requestObj.approvalDate = datetime.datetime.now().strftime("%Y-%m-%d")
 		requestObj.save()
+		print
 
 		logObj = requestActionLog()
 		logObj.item = item

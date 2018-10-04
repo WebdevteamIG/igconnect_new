@@ -23,8 +23,8 @@ class ItemRequest(models.Model) :
 	user = models.ForeignKey(User,related_name='requestedItem')
 	dateOfRequest = models.DateField(auto_now=False, auto_now_add=False)
 	item = models.ForeignKey(Item,related_name='correspondingRequest')
-	approvalDate = models.DateField(auto_now=False, auto_now_add=False)
-	returnDate = models.DateField(auto_now=False, auto_now_add=False)
+	approvalDate = models.DateField(auto_now=False, auto_now_add=False, null = True)
+	returnDate = models.DateField(auto_now=False, auto_now_add=False, null = True)
 
 	def __str__(self) :
 		return (self.user.username + "-" + self.item.itemName)

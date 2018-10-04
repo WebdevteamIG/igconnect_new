@@ -129,10 +129,10 @@
 
         <div class="ui two item menu">
           <a class="item active" id="equipment">Equipments</a>
-          <a class="item" id="book">Books</a>
+          <!-- <a class="item" id="book">Books</a> -->
         </div>
 
-        <div id="bookHolder">
+        <!-- <div id="bookHolder">
         <table class="ui unstackable celled padded inverted table" id="bookTable">
             <thead>
                 <tr>
@@ -186,7 +186,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        </div>
+        </div> -->
 
         <div id="equipmentHolder">
         <table class="ui unstackable celled padded inverted table" id="equipmentTable">
@@ -254,33 +254,33 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#bookTable').DataTable({
-            "info": false,
-            // "responsive" : true
-        });
+        // $('#bookTable').DataTable({
+        //     "info": false,
+        //     // "responsive" : true
+        // });
 
         $('#equipmentTable').DataTable({
-            "info": false
+            "info": true
         });
 
     } );
 
-    $('#bookHolder').hide();
+    // $('#bookHolder').hide();
     $('#equipmentHolder').show();
 
-    $('#equipment').click(function(){
-        $(this).addClass('active');
-        $('#book').removeClass('active');
-        $('#bookHolder').hide();
-        $('#equipmentHolder').show();
-    });
+    // $('#equipment').click(function(){
+    //     $(this).addClass('active');
+    //     // $('#book').removeClass('active');
+    //     // $('#bookHolder').hide();
+    //     $('#equipmentHolder').show();
+    // });
 
-    $('#book').click(function(){
-        $(this).addClass('active');
-        $('#equipment').removeClass('active');
-        $('#bookHolder').show();
-        $('#equipmentHolder').hide();
-    });
+    // $('#book').click(function(){
+    //     $(this).addClass('active');
+    //     $('#equipment').removeClass('active');
+    //     $('#bookHolder').show();
+    //     $('#equipmentHolder').hide();
+    // });
 </script>
 
 </html>
