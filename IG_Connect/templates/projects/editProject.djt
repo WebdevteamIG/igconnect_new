@@ -24,7 +24,7 @@
 					</div>
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
-					    <select multiple="multiple" name="contributorList" class="ui dropdown" id="contibutorsSelectBox">
+					    <select multiple="multiple" name="contributorList" class="ui search dropdown" id="contibutorsSelectBox">
 					      <option value="">Select Category</option>
 					      {% for person in contributors %}
 					      	<option value="{{person.user.username}}" 
