@@ -70,7 +70,7 @@ def addProject(request):
 			return redirect('/projects')
 
 	# response['contributors'] = User.objects.all().exclude(username=request.user.username);
-	response['contributors'] = Userprofile.objects.all().exclude(user=request.user)
+	response['contributors'] = Userprofile.objects.all().exclude(user=request.user).order_by('user__first_name')
 	 
 	return render(request,'projects/addProject.djt',response)
 

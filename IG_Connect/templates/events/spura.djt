@@ -1,0 +1,198 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Innovation Garage</title>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<meta name="author" content="IG WebDev Team">
+	<meta name="description" content="Innovation Garage NIT WARANGAL Website">
+	<meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+
+	<script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+	<script src="{% static 'main/semantic.js' %}"></script>
+	<script src="{% static 'main/components/form.js' %}"></script>
+	<script src="{% static 'main/components/transition.js' %}"></script>
+	<script src="{% static 'main/components/dropdown.js' %}"></script>
+   <script src="{% static 'main/components/accordion.js' %}"></script>
+	{% block head %}
+	{% endblock %}
+	<style>
+	@font-face {
+    font-family: "VFont";
+    src: url(/static/fonts/gothambold1.ttf) format("truetype");
+	}
+	.focused {
+	    color: white !important;
+	}
+	#navbar{
+		z-index: 1000;
+		margin: 0;
+		border-radius: 0;
+		border:none;
+		width: 100%;
+	}
+	
+	.smalltext{
+	  font-size: 0.8em;
+	  text-transform: uppercase !important;
+	}	
+	#navbar .item{
+		padding: 15px 25px !important;
+		font-family: "VFont";
+	  color:white !important;
+	}
+	#navbar .item:hover{
+		background-color: #ededed;
+		color: black !important;
+	}
+	</style>
+
+</head>
+
+
+<!-- rgba(27, 188, 191, 1) -->
+<body>
+	<div class="ui menu topmenu" style="background-color: rgba(12, 16, 19, 0.9);" id="navbar">
+		<a class="smalltext item" href="/">Home</a>
+        
+		</div>
+	</div>
+	
+
+	
+	<div class="ui stackable four column padded centered grid container" style="height:100%">
+		<div class="six wide centered column eventcolumn" style="background: url('/static/main/banner.png');">
+			<div class="row">
+				<div class="column">
+					<img class="ui small centered circular image" src="/static/pictures/award.jpg">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="column">
+					<div class="ui segment">
+						<h2>Subhadra Puvvada Undergraduate Research Award</h2>
+						<div class="ui divider"></div>
+						
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Start Date :</div>
+							    </div>
+								<div class="right floated content">
+								  Sept. 15, 2018
+							    </div>
+							</div>
+						</div>
+						<div class="ui middle aligned animated selection list" >
+							<div class="item">
+								<div class="left floated content">
+							      <div class="header">Organiser :</div>
+							    </div>
+								<div class="right floated content">
+								  Mr.Prabhakara Puvvada
+							    </div>
+							</div>
+						</div>
+						
+						<br>
+						
+
+						<h4 class="ui horizontal divider header">
+						  <i class="call icon"></i>
+						  Contact Details
+						</h4>
+						<div class="ui middle aligned animated selection list" >
+							
+								<div class="item">
+									<div class="right floated content">
+									  7097352255
+								      <a href="tel: 7097352255"> <i class="call icon"></i></a>
+								      <a href="#"> <i class="facebook icon"></i></a>
+								    </div>
+								    <div class="left floated content">
+								      <div class="header">Ravi Prakash</div>
+								    </div>
+								</div>
+							
+							</div>
+						
+						
+						<a href="/events/register/spura" class="ui button fluid green">Register Now</a>
+						<br>
+						
+						<br>
+						
+						<div class="ui divider"></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="ten wide centered column">
+			<div class="ui segment">
+				<div class="ui top attached tabular menu">
+				
+
+				  
+			  	<a class="ui active item" data-tab="cont_8">Description</a>
+					
+				</div>
+
+				
+				<div class="ui bottom attached active tab segment" data-tab="cont_8">
+				  
+				  <p>&quot; Subhadra Puvvada Undergraduate Research Award&quot; has been created with the goal of inculcating and promoting the spirit of scientific research amongst the undergraduate community of NITW. The award has been made possible by the generous contribution from Mr.Prabhakara Puvvada, a NITW alumni and Innovation Garage, and the student community is grateful for it.</p>
+
+<p>The award aims to identify the students who have done considerable research work in any field of their interest pertaining to Science&amp;Technology and have been able to publish a research paper out of the work. The publication can be in a reputed conference/journal with the student being mentioned as a contributing author. The student/team would be awarded a cash prize as determined by the screening committee.</p>
+
+<p>With time we are inclined to improve and streamline the process and constructive feedback is welcomed. We hope the award, which is one of its kind in the history of NIT Warangal, is able to achieve the goal.</p>
+				  
+				</div>
+				
+			</div>
+		</div>
+	</div> 
+
+	
+	
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.top.attached.menu .item').tab();
+	});
+</script>
+
+</body>
+</html>
+
