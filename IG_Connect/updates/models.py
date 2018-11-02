@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Link(models.Model) :
@@ -21,3 +22,15 @@ class NewsUpdate(models.Model) :
 
 	def __str__(self):
 		return self.title
+
+def get_picture_path(instance,filename):
+    return 'updates/pictures/{0}/{1}'.format(instance.name,filename)
+
+class FbUpdate(models.Model):
+	title = models.CharField(max_length=255)
+	content = RichTextUploadingField()
+	picture = models.ImageField(upload_to=get_picture_path, null=True, blank=True)
+	
+
+
+
