@@ -217,6 +217,10 @@ $(window).scroll(function() {
                                <td style="width: 30%;">project links</td>
                                <td style="width: 70%;">{{project.projecturl}}</td>
                            </tr>
+                           <tr>
+                               <td style="width: 30%;">Short description</td>
+                               <td style="width: 70%;">{{project.shortDesc}}</td>
+                           </tr>
                            <div class="phase2">
                            <tr class="phase2 phasehide">
                                <td style="width: 30%;">Branches</td>

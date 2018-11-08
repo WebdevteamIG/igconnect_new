@@ -6,18 +6,12 @@
 	<title>Register</title>
 </head>
 <body>
-	<form method="POST" action="/register/">
+	<form method="POST" action="/reg">
 		{% csrf_token %}
-		<p>Is payment present</p>
-		yes: <input type="checkbox" name="yes"><br>
-		date:<input type="date" name="date"><br>
-		title: <input type="text" name="title"><br>
-		<button type="submit">submit</button>
-		{% if choice %}
-			<p>Form created with payment with title: {{ title }}</p>
-		{% else %}
-			<p>Form created without payment with title: {{ title}}</p>
-		{% endif %}
+		<label>Name: </label><input type="text" name="name">
+		<label>CTC: </label><input type="number" step="0.01" name="ctc">
+		<label>decription: </label><textarea name="description"></textarea>
+
 	</form>
 </body>
 </html>

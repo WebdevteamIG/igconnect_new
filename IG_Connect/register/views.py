@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from .models import *
+import requests
 
 # Create your views here.
 
@@ -37,4 +38,7 @@ def register(request):
         return redirect('/register/title')
     return render(request, 'register/form.html', response)
 
-
+def send_info(request):
+    msg= 'Company:' + name + '\nCTC:' + Ctc + '\nComment:' + comments 
+    access_token = 'EAADfd1ZAZAWckBAHAjfGaSCT20sf95eqBeyVrbj9oA3CrUYdSuikPyDhenw9RTUEDjmtyFyn6C5EHgAjaxHjlYfohukza5WtmVmd8Gairg3D7Kvh8BIJyCfMNAANilsJhX4tI6rPzXhbifhYb63d6ZArX2yZADoG518B60p20gZDZD'
+    access_token = 'access_token=' + access_token   

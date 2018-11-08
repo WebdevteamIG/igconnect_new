@@ -34,6 +34,10 @@
 					 	</select>
 					</div>
 					<div class="field">
+						<label>Objective</label>
+						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
+					</div>
+					<div class="field">
 					    <label>Short Description</label>
 					    <input type="text" name="shortDesc" value="{{project.shortDesc}}" maxlength="100">
 					</div>
@@ -52,10 +56,6 @@
 
 					<button id="phaseButton" type="button" class="ui green button">More Info</button><br><br>
 					<div id="phase2" class="phasehide">
-					<div class="field">
-						<label>Objective</label>
-						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
-					</div>
 					<div class="field">
 						<label>Driving Force / Background</label>
 						<textarea name="drivingForce" rows="4" maxlength="1000">{{project.drivingForce}}</textarea>

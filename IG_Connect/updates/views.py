@@ -50,6 +50,7 @@ def addNews(request) :
 
 		return redirect('/updates')
 
+
 	return render(request,'updates/addNews.djt',response)
 
 @login_required(login_url='/auth/login')
@@ -70,3 +71,7 @@ def unPublishNews(request,id) :
 	news.isPublished = False
 	news.save()
 	return redirect('/updates')
+
+def fbScrape(request):
+	response = {}
+	

@@ -376,6 +376,8 @@ def downloadResponses(request,id):
 def spura(request):
 	response = {}
 	return render(request,'events/spura.djt',response)
+
+
 @login_required(login_url='/auth/login')
 def registerspura(request):
 	response = {}
