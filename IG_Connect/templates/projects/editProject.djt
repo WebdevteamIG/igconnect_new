@@ -25,13 +25,17 @@
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui search dropdown" id="contibutorsSelectBox">
-					      <option value="">Select Category</option>
+					      <option value="">Select Contributors</option>
 					      {% for person in contributors %}
 					      	<option value="{{person.user.username}}" 
 					      	{% if person.user in project.contributorsList.all %} selected {% endif %}
 					      	>{{person.user.first_name}}-{{person.regNum}}</option>
 					      {% endfor %}
 					 	</select>
+					</div>
+					<div class="field">
+						<label>Objective</label>
+						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
 					</div>
 					<div class="field">
 					    <label>Short Description</label>
@@ -52,10 +56,6 @@
 
 					<button id="phaseButton" type="button" class="ui green button">More Info</button><br><br>
 					<div id="phase2" class="phasehide">
-					<div class="field">
-						<label>Objective</label>
-						<textarea name="objective" rows="4" maxlength="1000">{{project.objective}}</textarea>
-					</div>
 					<div class="field">
 						<label>Driving Force / Background</label>
 						<textarea name="drivingForce" rows="4" maxlength="1000">{{project.drivingForce}}</textarea>

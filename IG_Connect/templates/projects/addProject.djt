@@ -32,15 +32,19 @@
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui search dropdown">
-					      <option value="">Select Category</option>
+					      <option value="">Select Contributors</option>
 					      {% for person in contributors %}
 					      	<option value="{{person.user.username}}">{{person.user.first_name}}-{{person.regNum}}</option>
 					      {% endfor %}
 					 	</select>
 					</div>
 					<div class="field">
+						<label>Objective</label>
+						<textarea name="objective" rows="4" maxlength="2000"></textarea>
+					</div>
+					<div class="field">
 					    <label>Short Description</label>
-					    <input type="text" name="shortDesc" maxlength="100">
+					    <input type="text" name="shortDesc" maxlength="1000">
 					</div>
 					<div class="field">
 						<label>Technology / Materials Used</label>
@@ -49,10 +53,6 @@
 					<div class="field">
 						<label>End Users</label>
 						<input type="text" name="endusers" maxlength="255">
-					</div>
-					<div class="field">
-						<label>Plans</label>
-						<textarea name="plans" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Project url( Enter github link, or any site url if available)</label>
@@ -74,8 +74,8 @@
 					<button type="button" id="phaseButton" class="ui green button">Add More Info</button><br><br>
 					<div id="phase2" class="phasehide">
 					<div class="field">
-						<label>Objective</label>
-						<textarea name="objective" rows="4" maxlength="1000"></textarea>
+						<label>Plans</label>
+						<textarea name="plans" rows="4" maxlength="1000"></textarea>
 					</div>
 					<div class="field">
 						<label>Driving Force / Background</label>

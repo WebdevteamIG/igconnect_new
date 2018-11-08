@@ -25,3 +25,11 @@ class Registered(models.Model):
     def __str__(self):
         return self.title.title + "_" + str(self.title.choice)
 
+class SendInfo(models.Model):
+    name = models.CharField(max_length=255)
+    ctc = models.IntegerField()
+    comments = models.TextField()
+
+    def __str__(self):
+        return self.name
+        

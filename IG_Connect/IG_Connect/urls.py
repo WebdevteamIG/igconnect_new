@@ -7,7 +7,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', authentication.views.index),
+    url(r'^main$', authentication.views.igconnect),
+    url(r'^$', authentication.views.home),
     url(r'^auth/', include('authentication.urls', namespace = 'authentication')),
     url(r'^projects/', include('projects.urls', namespace = 'projects')),
     url(r'^updates/',include('updates.urls', namespace = 'updates')),

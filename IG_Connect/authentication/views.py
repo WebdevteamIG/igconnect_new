@@ -14,11 +14,15 @@ import datetime
 from django.core.mail import send_mail
 import smtplib
 
-def index(request):
+def igconnect(request):
     response = {}
     news = NewsUpdate.objects.filter(isPublished=True)
     response['updates'] = news
     return render(request,'homepage.djt',response)
+
+def home(request):
+    response = {}
+    return render(request,'test.djt',response)
 
 def signin(request):
     if request.user.is_authenticated() and request.user.is_active == True :
