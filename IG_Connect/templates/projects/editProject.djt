@@ -25,7 +25,7 @@
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui search dropdown" id="contibutorsSelectBox">
-					      <option value="">Select Category</option>
+					      <option value="">Select Contributors</option>
 					      {% for person in contributors %}
 					      	<option value="{{person.user.username}}" 
 					      	{% if person.user in project.contributorsList.all %} selected {% endif %}

@@ -32,7 +32,7 @@
 					<div class="field">
 					    <label>Contributors ( Select Multiple )</label>
 					    <select multiple="multiple" name="contributorList" class="ui search dropdown">
-					      <option value="">Select Category</option>
+					      <option value="">Select Contributors</option>
 					      {% for person in contributors %}
 					      	<option value="{{person.user.username}}">{{person.user.first_name}}-{{person.regNum}}</option>
 					      {% endfor %}
