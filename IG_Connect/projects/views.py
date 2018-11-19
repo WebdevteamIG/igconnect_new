@@ -11,7 +11,7 @@ from authentication.models import *
 import datetime
 
 def projects(request):
-	projects = Project.objects.all();
+	projects = Project.objects.all()
 	response = {}
 	response['projects'] = projects
 	if request.user.is_authenticated : 
@@ -138,17 +138,15 @@ def deleteProject(request,projectname) :
 	
 	return redirect('/projects')
 
-# def ProjectLike(request):
-# 	response = {}
-
-# 	projectLike = ProjectLike.objects.filter(project.pk=).count()
-# 	response['count'] = projectLike
-
-# 	return 
-
-# def addLike(request):
-# 	if(request.method == "PUT")
-# 	projectLike = ProjectLike()
-# 	projectLike.project = request.POST["project"]
-# 	projectLike.user = request.POST["user"]
+def projectLike(request, projectname):
+	user = request.user
+	project = Project.objects.get(projectName=projectname)
+	newLike = ProjectLike()
+	newLike.user = user
+	newLike.project = project
+	newLike.save()
+	project.likecount+=1
+	project.save()
+	print project.likecount
+	return redirect("/projects")
 

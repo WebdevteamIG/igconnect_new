@@ -86,10 +86,9 @@
 								</a>
 								<hr><hr>
 		            		</td>
-		            		<td><a class="ui primary button" name="{{project}}">Like&nbsp;{{count}}</a></td>
-
+		            		<td><a href="./likesub/{{project}}" class="ui primary button" name="{{project}}">Like&nbsp;{{project.likecount}}
+		            		</a></td>
 		            	</tr>
-
 		            	{% endfor %}
 		            </tbody>
 		        </table>

@@ -153,6 +153,8 @@ def viewEvent(request,id) :
 					content.content += "<li class='userList'><a href=/auth/profile/"+ regRequest.user.profile.regNum + ">" + regRequest.user.first_name + ' ' + regRequest.user.last_name + "</a></li>\n<br>"
 				content.content += "</ol>"
 				content.save()
+				event.contents.add(content)
+				event.save()
 				
 
 		response['event'] = event
