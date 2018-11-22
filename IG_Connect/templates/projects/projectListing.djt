@@ -86,8 +86,13 @@
 								</a>
 								<hr><hr>
 		            		</td>
-		            		<td><a href="./likesub/{{project}}" class="ui primary button" name="{{project}}">Like&nbsp;{{project.likecount}}
-		            		</a></td>
+		            		<td>
+		            			{%if project in likes %}
+		            				<a href="./dislikesub/{{project}}" class="ui primary button">Dislike&nbsp;{{project.likecount}}</a>
+		            			{%else%}
+		            				<a href="./likesub/{{project}}" class="ui primary button">Like&nbsp;{{project.likecount}}</a>
+		            			{%endif%}
+		            		</td>
 		            	</tr>
 		            	{% endfor %}
 		            </tbody>
@@ -157,5 +162,8 @@
 	$('#list').click(function(){
 		$('.ui.modal').modal('show');
 	});
+
+
+
 </script>
 {% endblock %}

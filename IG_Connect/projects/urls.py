@@ -8,4 +8,5 @@ urlpatterns = [
 	url(r'^deleteProject/(?P<projectname>[^/]+)/$',views.deleteProject,name='deleteProject'),
 	url(r'^show/(?P<projectname>[^/]+)/$',views.show_project,name='show_project'),
 	url(r'^likesub/(?P<projectname>[^/]+)/$', views.projectLike, name='project_like'),
+	url(r'^dislikesub/(?P<projectname>[^/]+)/$', views.projectdislike, name='project_dislike'),
 ]

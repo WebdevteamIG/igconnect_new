@@ -11,8 +11,13 @@ from authentication.models import *
 import datetime
 
 def projects(request):
-	projects = Project.objects.all()
 	response = {}
+	projects = Project.objects.all()
+	likes = ProjectLike.objects.filter(user=request.user)
+	a = []
+	for i in likes:
+		a.append(i.project)
+	response["likes"] = a
 	response['projects'] = projects
 	if request.user.is_authenticated : 
 		response['myprojects'] = Project.objects.filter(user=request.user)
@@ -150,3 +155,11 @@ def projectLike(request, projectname):
 	print project.likecount
 	return redirect("/projects")
 
+def projectdislike(request, projectname):
+	user = request.user
+	pro = Project.objects.get(projectName=projectname)
+	project = ProjectLike.objects.get(project=pro, user=user)
+	project.delete()
+	pro.likecount-=1
+	pro.save()
+	return redirect("/projects")
