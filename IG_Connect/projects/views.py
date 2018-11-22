@@ -13,11 +13,14 @@ import datetime
 def projects(request):
 	response = {}
 	projects = Project.objects.all()
-	likes = ProjectLike.objects.filter(user=request.user)
-	a = []
-	for i in likes:
-		a.append(i.project)
-	response["likes"] = a
+	try:
+		likes = ProjectLike.objects.filter(user=request.user)
+		a = []
+		for i in likes:
+			a.append(i.project)
+		response["likes"] = a
+	except:
+		pass
 	response['projects'] = projects
 	if request.user.is_authenticated : 
 		response['myprojects'] = Project.objects.filter(user=request.user)
@@ -143,6 +146,7 @@ def deleteProject(request,projectname) :
 	
 	return redirect('/projects')
 
+@login_required(login_url='/auth/login/')
 def projectLike(request, projectname):
 	user = request.user
 	project = Project.objects.get(projectName=projectname)
@@ -155,6 +159,7 @@ def projectLike(request, projectname):
 	print project.likecount
 	return redirect("/projects")
 
+@login_required(login_url='/auth/login/')
 def projectdislike(request, projectname):
 	user = request.user
 	pro = Project.objects.get(projectName=projectname)
