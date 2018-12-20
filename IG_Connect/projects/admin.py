@@ -8,3 +8,4 @@ from .models import *
 admin.site.register(Project)
 admin.site.register(ProjectDescription)
 admin.site.register(ProjectImage)
+admin.site.register(ProjectLike)
