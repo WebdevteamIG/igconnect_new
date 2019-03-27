@@ -26,6 +26,7 @@ class Project(models.Model) :
 	awards = models.TextField(max_length=1000)
 	plans = models.TextField(max_length=1000)
 	projecturl = models.URLField(default=None)
+	likecount = models.IntegerField(default=0)
 
 	def __str__(self) : 
 		return self.projectName
@@ -48,6 +49,4 @@ class ProjectLike(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.project.projectName + "-" + self.user.Username
-
-
+		return self.project.projectName 

@@ -119,7 +119,7 @@
                 </h2>
 
                 <div class="home-content__buttons">
-                    <a href="/main" class="btn btn--stroke" target="_blank">
+                    <a href="/main" class="btn btn--stroke">
                         Go to IGConnect
                     </a>
                     <a href="#contact" class="smoothscroll btn btn--stroke">
