@@ -114,11 +114,21 @@
 						{%else%}
 							<h4>Contacts coming soon.</h4>
 						{%endif%}
+					
+						{% if event.pk == 5 %}
+                                                <a href="https://goo.gl/forms/wxksJ5AKR5iF9iCf2" class="ui button fluid green">Register</a>
+ 
+
+						{% elif event.pk == 6 %}
+                                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe-tfkxlRdDjNjnPbrUA3yHpYGdhIVe-I2kXVrw4lvCjSKwAQ/viewform" class="ui button fluid green">Register</a>
+                                                {% else %}
+
+
 
 						{% if not event.isEventEnded %}
 
 						{% if not request.user.is_authenticated %}
-						<a class="ui button fluid green" href="/auth/signup">Login or Signup</a>
+						<a class="ui button fluid green" href="/auth/signup">Login or Signupp</a>
 
 						{% elif regRequest %}
 						<a href="/events/register/{{event.pk}}" class="ui button fluid green">Registeration Status</a>
@@ -131,7 +141,8 @@
 						{%endif%}
 						<br>
 						{%endif%}
-
+						
+						{%endif%}
 						{% if request.user.is_superuser %}
 						<a href="/events/manageevent/{{event.pk}}" class="ui button fluid green">Manage Event</a>
 						{% endif %}
