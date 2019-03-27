@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hardware Shop</title>
+</head>
+<body>
+<h1>Components</h1>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Buy now</th>
+		<th>Lend it</th>
+	</thead>
+	<tbody>
+		{% for component in components %}
+		<tr>
+			<td>{{component.name}}</td>
+			<td>{{component.price}}</td>
+			<form method="POST" action="/hardware/buynow/">
+				{% csrf_token %}
+				<input type="hidden" name="id" value="{{component.pk}}">
+				<td><input type="submit" value="Buy now"></td>
+			</form>
+			<form method="POST" action="/hardware/lend/">
+				{% csrf_token %}
+				<input type="hidden" name="id" value="{{component.pk}}">
+				<td><input type="submit" value="Lend" name=""></td>
+			</form>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+Lended Components : <a href="/hardware/lended/">Lended Components</a>
+</body>
+</html>
