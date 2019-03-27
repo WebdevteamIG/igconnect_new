@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hardware - Admin</title>
+</head>
+<body>
+<table>
+	<thead>
+		<th>Component Name</th>
+		<th>User lended</th>
+		<th>Date taken</th>
+		<th>Days for renewal</th>
+	</thead>
+	<tbody>
+		{% for date,comp in zipped %}
+		<tr>
+			<td>{{comp.component.name}}</td>
+			<td>{{comp.user.username}}</td>
+			<td>{{comp.dateTaken}}</td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;{{date.days}}</td>
+			<td><form method="POST" action="/hardware/return_item/">
+				{% csrf_token %}
+				<input type="hidden" name="item" value="{{comp.pk}}">
+				<input type="hidden" name="type" value="return">
+				<button type="submit">Return</button>
+			</form></td>
+			<td><form method="POST" action="/hardware/return_item/">
+				{% csrf_token %}
+				<input type="hidden" name="item" value="{{comp.pk}}">
+				<input type="hidden" name="type" value="renew">
+				<button type="submit">Renew</button>
+			</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<h1>Enter a new item</h1>
+<form method="POST" action="/hardware/return_item/">
+	{% csrf_token %}
+	Name :<br>
+	<input type="text" name="name"> <br>
+	price :<br>
+	<input type="number" name="price">
+	<input type="hidden" name="type" value="add">
+	<button type="submit">Submit</button>
+</form>
+</body>
+</html>

@@ -24,8 +24,8 @@ def buynow(request):
 		message = str(component.name) + '\n'
 		message+=str(component.price)
 		message+=str(user.username) + " has taken the above component on "
-		message+=str(datatime.datetime.now())
-		sender = "ig-nitw@student.nitw.ac.in"
+		message+=str(datetime.datetime.now())
+		sender = "ig-nitw@studexnt.nitw.ac.in"
 		receiver = 'ch1sai2teja3@gmail.com'
 		rlist = []
 		rlist.append(receiver)
@@ -56,12 +56,55 @@ def lendedComponents(request):
 		r = {}
 		days = datetime.datetime.now().date() - comp.dateTaken
 		days = days.total_seconds()/60/60/24
-		days = int(days)
+		days = 14 - int(days)
 		dates.append(r)
 		r["days"] = days
 	response["dates"] = dates
 	response["lended_comp"] = lended_comp
 	response["zipped"] = zip(dates, lended_comp)
 	return render(request, "hardware/lended.html", response)
+
+# admin
+# all users lended component
+# renewall date 
+# all users contact
+
+def admin(request):
+	response = {}
+	lended_comp = ComponentLending.objects.all()
+	response["lended_comp"] = lended_comp
+	dates = []
+	for comp in lended_comp:
+		r = {}
+		days = datetime.datetime.now().date() - comp.dateTaken
+		days = days.total_seconds()/60/60/24
+		days = 14 - int(days)
+		dates.append(r)
+		r["days"] = days
+	response["dates"] = dates
+	response["zipped"] = zip(dates, lended_comp)
+	return render(request, "hardware/admin.html", response)
+
+def return_item(request):
+	if request.POST["type"] == "return" :
+		ComponentLending.objects.get(pk=request.POST["item"]).delete()
+		return redirect("/hardware/admin")
+	if request.POST["type"] == "renew" :
+		component = ComponentLending.objects.get(pk=request.POST["item"])
+		component.dateTaken = datetime.datetime.now()
+		component.save()
+		return redirect("/hardware/admin")
+	if request.POST["type"] == "add"  :
+		component = Component()
+		component.name = request.POST["name"]
+		component.price = int(request.POST["price"])
+		component.save()		
+		return redirect("/hardware")
+
+
+
+
+
+
 
 
