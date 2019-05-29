@@ -9,7 +9,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<title>Hardware Shop</title>
-
 {% endblock %}
 
 {% block content %}
@@ -17,13 +16,16 @@
 <center>
 	<h1>Components  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Check Guidelines</button></h1>
 	<h3>    </h3>
+<div class="table-responsive">
 <table class="table table-bordered">
-	<thead>
+	
+	<thead class="info">
 		<th>Name</th>
 		<th>Price</th>
 		<th>Buy now</th>
 		<th>Lend it</th>
 	</thead>
+	<table class="table table-striped">
 	<tbody>
 		{% for component in components %}
 		<tr>
@@ -43,8 +45,10 @@
 		{% endfor %}
 	</tbody>
 </table>
+</table>
+</div>
 
-To check your Lended Components <a href="/hardware/lended/">Click Here!</a>
+<h3>To check your Lended Components <a href="/hardware/lended/">Click Here!</a></h3>
 </center>
 
 
