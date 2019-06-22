@@ -94,9 +94,14 @@ DATABASES = {
         'NAME': 'ig_db',
         'USER': 'root',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'PASSWORD': 'root',
 =======
         'PASSWORD': 'qwerty123',
+=======
+        'PASSWORD': 'root',
+        # 'PASSWORD': 'qwerty123',
+>>>>>>> 7d4027ed23c8d1632efd4211bc895f1d99d980e7
         # 'PASSWORD': 'Innovate@123',
 >>>>>>> 2d5500a540cd65083363462f3d30387fbc41bcb4
     }
