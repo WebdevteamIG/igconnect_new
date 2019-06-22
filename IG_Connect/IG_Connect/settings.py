@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'IG_Connect.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ig_db',
         'USER': 'root',
-        'PASSWORD': 'Innovate@123',
+        'PASSWORD': 'root',
     }
 }
 
