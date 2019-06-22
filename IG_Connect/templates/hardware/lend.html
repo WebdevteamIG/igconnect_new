@@ -1,4 +1,82 @@
-<!DOCTYPE html>
+{% extends "hardware/header.djt" %}
+{% load staticfiles %}
+
+
+{% block head %}
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>Hardware Shop</title>
+
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+<center>
+	<h1>Lending Component <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Check Guidelines</button></h1>
+	<h3>    </h3>
+<!-- <div class="table-responsive">
+	<table class="table table-bordered">
+	<thead class = "info">
+		<th>Name</th>
+		<th>Price</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{component.name}}</td>
+			<td>{{component.price}}</td>
+		</tr>
+	</tbody>
+	</table>
+</div> -->
+<h3><p>Please contact This guy </p></h3>
+</center>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title"><u>GUIDELINES</u></h2>
+      </div>
+      <div class="modal-body">
+        
+
+<h3>Given below are the guidelines for when components / equipment is(are) borrowed from The Hardware Shop at Innovation Garage:-</h3>
+<ul>
+<li><h5>For each component borrowed from The Hardware Shop, Rs. 100 (Rs. 50 + Rs. 50) (Fee + Caution Deposit) will have to be paid OR 5% of the MRP of the component (larger amount taken into consideration).</h5></li>
+<li><h5>The duration alloted is 2 weeks.</h5></li>
+<li><h5>The Caution Deposit will be returned once the component is given back. </h5></li>
+<li><h5>If the component is damaged, the borrower is liable to pay full MRP of the component to Innovation Garage.</h5></li>
+<li><h5><b>FINE:</b>
+For every week after the alloted 2 weeks, Rs. 10 will be deducted from the Caution Deposit.</h5></li>
+<li><h5><b>RENEWAL:</b>
+The component must be renewed for use every 2 weeks.</h5></li>
+<li><h5>The amount to be paid is the updated Fee.</h5></li>
+<li><h5>After each renewal Rs. 10 is added to the Fee.</h5></li>
+</ul>
+
+
+
+
+<center><h3>MODE OF PAYMENT: CASH / GOOGLE PAY</h3></center>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>Lending Component</title>
@@ -7,4 +85,4 @@
 {{component.name}}
 Has beend lend
 </body>
-</html>
+</html> -->

@@ -93,7 +93,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ig_db',
         'USER': 'root',
+<<<<<<< HEAD
         'PASSWORD': 'root',
+=======
+        'PASSWORD': 'qwerty123',
+        # 'PASSWORD': 'Innovate@123',
+>>>>>>> 2d5500a540cd65083363462f3d30387fbc41bcb4
     }
 }
 

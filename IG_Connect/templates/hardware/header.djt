@@ -1,0 +1,92 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Innovation Garage</title>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<meta name="author" content="IG WebDev Team">
+	<meta name="description" content="Innovation Garage NIT WARANGAL Website">
+	<meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/container.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/grid.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/image.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/menu.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/divider.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/segment.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/form.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/input.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/list.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/message.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/dropdown.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/accordion.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/button.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/icon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/sidebar.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/components/transition.css' %}">
+	
+	
+	<script src="{% static 'main/jquery-2.2.4.min.js' %}"></script>
+	<script src="{% static 'main/semantic.js' %}"></script>
+	<script src="{% static 'main/components/form.js' %}"></script>
+	<script src="{% static 'main/components/transition.js' %}"></script>
+	<script src="{% static 'main/components/hide.js' %}"></script>
+	{% block head %}
+	{% endblock %}
+	<style>
+	.focused {
+	    color: white !important;
+	}
+	</style>
+
+</head>
+<!-- rgba(27, 188, 191, 1) -->
+
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/hardware"><i class="glyphicon glyphicon-shopping-cart"></i> HardWare Shop</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a class="item" href="/"><span class="glyphicon glyphicon-home
+      	"></span> Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right ">
+
+        	<!-- This item to appear only when the user is not logged in. -->
+        	{% if not request.user.is_authenticated %}
+            <li><a href="/auth/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/auth/signup"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            {% else %}
+            <!-- This to appear when the user is loggid in. Will have things like settings ans stuff. -->
+            <li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            <li><a href="/auth/profile/{{request.user.profile.regNum}}"><i class="glyphicon glyphicon-user"></i></i></span> Profile</a></li>
+
+     		 {% endif %}
+        </ul>
+  </div>
+</nav>
+
+	{% block content %}
+	{% endblock %}
+</body>
+
+<script type="text/javascript">
+</script>
+
+</html>
+
+{% block script %}
+{% endblock %}
