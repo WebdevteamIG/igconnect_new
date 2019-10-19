@@ -67,6 +67,7 @@
                     <li><a class="smoothscroll"  href="#works" title="works">Works</a></li>
                     <!-- <li><a class="smoothscroll"  href="#outreach" title="outreach">Outreach</a></li> -->
                     <li><a class="smoothscroll"  href="#stats" title="stats">Stats</a></li>
+                    <li><a class="smoothscroll"  href="#startups" title="startups">Startups</a></li>
                     <li><a class="smoothscroll"  href="#contact" title="contact">Contact</a></li>
                 </ul>
     
@@ -534,6 +535,36 @@
                 </div>
         </div> 
     </section>
+
+        <!-- services
+    ================================================== -->
+    <section id='startups' class="s-services">
+
+        <div class="row section-header has-bottom-sep" data-aos="fade-up">
+            <div class="col-full">
+                <h3 class="subhead">Incubated Startups</h3>
+                <h1 class="display-2">Ideas that have become a reality</h1>
+            </div>
+        </div> <!-- end section-header -->
+
+        <div class="row services-list block-1-2 block-tab-full">
+
+            <div class="col-block service-item" data-aos="fade-up">
+                <div class="service-icon">
+                    <!--<i class="icon-wrench"></i>-->
+                    <img src="{% static 'images/startups/gbitstudios.png' %}"/>
+                </div>
+                <div class="service-text">
+                    <h3 class="h2">GBit Studios</h3>
+                    <p>GBit Studios is a student run startup comprised of individuals who share a common passion and love for making innovative games.
+                        <br>For more details visit <a href="https://www.gbitstudios.com" target="_blank">www.gbitstudios.com</a>
+                    </p>
+                </div>
+            </div>
+
+        </div> <!-- end services-list -->
+
+    </section> <!-- end s-services -->
 
     <!-- contact
     ================================================== -->
