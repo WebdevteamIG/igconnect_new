@@ -67,6 +67,7 @@
                     <li><a class="smoothscroll"  href="#works" title="works">Works</a></li>
                     <!-- <li><a class="smoothscroll"  href="#outreach" title="outreach">Outreach</a></li> -->
                     <li><a class="smoothscroll"  href="#stats" title="stats">Stats</a></li>
+                    <li><a class="smoothscroll"  href="#techteams" title="techteams">Teams</a></li>
                     <li><a class="smoothscroll"  href="#startups" title="startups">Startups</a></li>
                     <li><a class="smoothscroll"  href="#contact" title="contact">Contact</a></li>
                 </ul>
@@ -536,9 +537,51 @@
         </div> 
     </section>
 
-        <!-- services
+        <!-- techteams
     ================================================== -->
-    <section id='startups' class="s-services">
+    <section id='techteams' class="s-services">
+
+        <div class="row section-header has-bottom-sep" data-aos="fade-up">
+            <div class="col-full">
+                <h3 class="subhead">Technological Teams</h3>
+                <h1 class="display-2">We support interest groups to innovate new ideas</h1>
+            </div>
+        </div> <!-- end section-header -->
+
+        <div class="row services-list block-1-2 block-tab-full">
+
+            <div class="col-block service-item" data-aos="fade-up">
+                <div class="service-icon">
+                    <!--<i class="icon-wrench"></i>-->
+                    <img src="{% static 'images/techteams/nevronas.jpg' %}"/>
+                </div>
+                <div class="service-text">
+                    <h3 class="h2">Nevrónas</h3>
+                    <p>Nevrónas is a machine Learning research group, which tries to spread and embrace Machine Learning research culture. Formed in the year of 2018 by Innovation Garage, NITW, Nevrónas includes a group of students experienced in machine learning, pursuing collaborative research on Computer Vision, Natural Language Processing, Speech Processing and Information Retrieval.
+                        <br>For more details visit <a href="https://www.nevronas.in/" target="_blank">www.nevronas.in</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-block service-item" data-aos="fade-up">
+                <div class="service-icon">
+                    <!--<i class="icon-wrench"></i>-->
+                    <img src="{% static 'images/techteams/pistar.jpg' %}"/>
+                </div>
+                <div class="service-text">
+                    <h3 class="h2">Pi* Lab</h3>
+                    <p>Innovation Garage's Reinforcement Learning and Neuroscience Research Group.
+                    </p>
+                </div>
+            </div>
+
+        </div> <!-- end services-list -->
+
+    </section> <!-- end s-services -->
+
+    <!-- services
+    ================================================== -->
+    <section id='startups' class="s-services s-clients">
 
         <div class="row section-header has-bottom-sep" data-aos="fade-up">
             <div class="col-full">
@@ -556,7 +599,7 @@
                 </div>
                 <div class="service-text">
                     <h3 class="h2">GBit Studios</h3>
-                    <p>GBit Studios is a student run startup comprised of individuals who share a common passion and love for making innovative games.
+                    <p style="color: black;">GBit Studios is a student run startup comprised of individuals who share a common passion and love for making innovative games.
                         <br>For more details visit <a href="https://www.gbitstudios.com" target="_blank">www.gbitstudios.com</a>
                     </p>
                 </div>
