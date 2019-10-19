@@ -12,6 +12,11 @@
 	<meta name="description" content="Innovation Garage NIT WARANGAL Website">
 	<meta name="keywords" content="IG, Innovation Garage, NITW, IG NIT WARANGAL, IG Nitw">
 
+	<!-- favicons
+	================================================== -->
+	<link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
 	<link rel="stylesheet" type="text/css" href="{% static 'main/semantic.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'main/components/reset.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'main/components/site.css' %}">

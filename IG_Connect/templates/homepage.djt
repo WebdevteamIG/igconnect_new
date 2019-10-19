@@ -22,6 +22,10 @@
 <link href="https://fonts.googleapis.com/css?family=Itim|Righteous" rel="stylesheet">
 
 <link href = "{% static 'home/style-homepage.css' %}" rel = "stylesheet">
+<!-- favicons
+================================================== -->
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 
 <script>
 
@@ -136,7 +140,7 @@ $(window).scroll(function() {
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand d-flex mx-auto" href="#">IG connect</a>
+    <a class="navbar-brand d-flex mx-auto" href="/">IG connect</a>
     <div class="navbar-collapse collapse dual-collapse text-center">
         <ul class="navbar-nav mr-auto  ">
             {% if request.user.is_authenticated %}

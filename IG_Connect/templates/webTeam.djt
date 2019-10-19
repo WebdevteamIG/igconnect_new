@@ -21,6 +21,10 @@
 <link href="https://fonts.googleapis.com/css?family=Itim|Righteous" rel="stylesheet">
 
 <link href = "{% static 'home/style_teampage.css' %}" rel = "stylesheet">
+<!-- favicons
+================================================== -->
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 <script>
 	
 
