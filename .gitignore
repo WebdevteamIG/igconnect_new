@@ -3,3 +3,4 @@ env
 media/*
 documents/*
 IG_Connect/media/*
+.idea/*
