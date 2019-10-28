@@ -11,6 +11,11 @@
 
     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css">
+
+	<!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 <!-- ///////////// -->
 
 {% endblock %}

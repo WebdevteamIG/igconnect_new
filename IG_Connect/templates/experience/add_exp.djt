@@ -10,6 +10,10 @@
     		font-family: 'Ubuntu', sans-serif;
     	}
     </style>
+	<!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
 </head>
 <body style="background-image: url(/static/pictures/defaults/bg3.jpg);">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
