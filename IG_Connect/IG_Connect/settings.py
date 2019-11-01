@@ -95,7 +95,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'mysql_password',
         # 'PASSWORD': 'qwerty123',
-        # 'PASSWORD': 'Innovate@123',
+    # 'PASSWORD': 'Innovate@123',
     }
 }
 

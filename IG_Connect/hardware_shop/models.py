@@ -15,8 +15,8 @@ class Component(models.Model):
 		return self.name
 
 class ComponentLending(models.Model):
-	user = models.ForeignKey(User)
-	component = models.ForeignKey(Component)
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	component = models.ForeignKey(Component,on_delete=models.CASCADE)
 	dateTaken = models.DateField()
 
 	def __str__(self):

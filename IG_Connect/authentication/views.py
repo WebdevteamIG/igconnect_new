@@ -18,7 +18,7 @@ def igconnect(request):
     response = {}
     news = NewsUpdate.objects.filter(isPublished=True)
     response['updates'] = news
-    return render(request,'homepage.djt',response)
+    return render(request,'base.djt',response)
 
 def home(request):
     response = {}

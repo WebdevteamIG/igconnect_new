@@ -15,7 +15,7 @@ class Form(models.Model):
         return self.title
 
 class Registered(models.Model):
-    title = models.ForeignKey(Form)
+    title = models.ForeignKey(Form,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     year = models.CharField(max_length=3)
     phone = models.CharField(max_length=15)
