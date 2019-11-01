@@ -1,4 +1,4 @@
-{% extends "projects/header.djt" %}
+{% extends "base.djt" %}
 {% load staticfiles %}
 
 {% block head %}
@@ -13,11 +13,6 @@
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css">
 <!-- ///////////// -->
 
-<style>
-.projectDetails{
-	/*border-bottom: 1px solid black;*/
-}
-</style>
 {% endblock %}
 
 {% block content %}
@@ -142,6 +137,11 @@
 	  </div>
 	</div>
 
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
 
 {% endblock %}

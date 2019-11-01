@@ -118,9 +118,9 @@ $(window).scroll(function() {
 
 
 <body>
+<div class="container"> 
 
-
-<nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse" style="background-color: black;">
+<nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse" style="background-color: black; height: 75px;">
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".dual-collapse">
         <span class="navbar-toggler-icon"></span>
@@ -189,8 +189,6 @@ $(window).scroll(function() {
     </div>
     <div class="navline"></div>
 </nav>
-<br><br><br><br>
-
 
 <!-- <div class="background"> -->
 			{% block content %}
@@ -200,7 +198,6 @@ $(window).scroll(function() {
 
 
 
-<br><br><br><br>
 <footer class="footer" id ="foot">
   <div class="container">
     <div class="inner text-center">
