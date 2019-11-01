@@ -32,7 +32,7 @@ class Project(models.Model) :
 		return self.projectName
 
 class ProjectImage(models.Model):
-	project = models.ForeignKey(Project, related_name='images')
+	project = models.ForeignKey(Project, related_name='images',on_delete=models.CASCADE)
 	image = models.ImageField(upload_to=get_project_pic_path,null=True,blank=True)
 	##image_list = project.images.all()
 

@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'ig_db',
         'USER': 'root',
         'PASSWORD': 'root',
-        # 'PASSWORD': 'qwerty123',
+        'PASSWORD': 'qwerty123',
         # 'PASSWORD': 'Innovate@123',
     }
 }

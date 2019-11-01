@@ -45,7 +45,7 @@ class Userprofile(models.Model) :
 		return (self.user.first_name + "_" + self.regNum)
 
 class ParticipatedEvent(models.Model) :
-	user = models.ForeignKey(User, related_name='events')
+	user = models.ForeignKey(User, related_name='events',on_delete=models.CASCADE)
 	eventName = models.CharField(max_length=255)
 	eventDesc = models.TextField(max_length=1000)
 

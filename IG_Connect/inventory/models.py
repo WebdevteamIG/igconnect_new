@@ -20,9 +20,9 @@ class Item(models.Model) :
 		return self.itemName
 
 class ItemRequest(models.Model) :
-	user = models.ForeignKey(User,related_name='requestedItem')
+	user = models.ForeignKey(User,related_name='requestedItem',on_delete=models.CASCADE)
 	dateOfRequest = models.DateField(auto_now=False, auto_now_add=False)
-	item = models.ForeignKey(Item,related_name='correspondingRequest')
+	item = models.ForeignKey(Item,related_name='correspondingRequest',on_delete=models.CASCADE)
 	approvalDate = models.DateField(auto_now=False, auto_now_add=False, null = True)
 	returnDate = models.DateField(auto_now=False, auto_now_add=False, null = True)
 
@@ -30,8 +30,8 @@ class ItemRequest(models.Model) :
 		return (self.user.username + "-" + self.item.itemName)
 
 class requestActionLog(models.Model) :
-	item = models.ForeignKey(Item)
-	user = models.ForeignKey(User,related_name='logs')
+	item = models.ForeignKey(Item,on_delete=models.CASCADE)
+	user = models.ForeignKey(User,related_name='logs',on_delete=models.CASCADE)
 	dateOfAction = models.DateField(auto_now=False, auto_now_add=False)
 	content = models.CharField(max_length=255)
 
