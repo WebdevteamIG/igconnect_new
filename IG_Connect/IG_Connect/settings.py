@@ -103,8 +103,8 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ig-nitw@student.nitw.ac.in'
-EMAIL_HOST_PASSWORD = 'nitwfablabig'
+EMAIL_HOST_USER = 'chsaiteja@student.nitw.ac.in'
+EMAIL_HOST_PASSWORD = 'Saiteja127'
 EMAIL_PORT = 587
 
 

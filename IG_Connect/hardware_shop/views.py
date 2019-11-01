@@ -24,8 +24,8 @@ def buynow(request):
 		message = str(component.name) + '\n'
 		message+=str(component.price)
 		message+=str(user.username) + " has taken the above component on "
-		message+=str(datatime.datetime.now())
-		sender = "ig-nitw@student.nitw.ac.in"
+		message+=str(datetime.datetime.now())
+		sender = "chsaiteja@student.nitw.ac.in"
 		receiver = 'ch1sai2teja3@gmail.com'
 		rlist = []
 		rlist.append(receiver)
@@ -64,4 +64,14 @@ def lendedComponents(request):
 	response["zipped"] = zip(dates, lended_comp)
 	return render(request, "hardware/lended.html", response)
 
+def addItem(request):
+	response = {}
+	if request.method == "POST":
+		component = Component()
+		component.name = request.POST["name"]
+		component.available = True
+		component.price = int(request.POST["price"])
+		component.save()
+		response["message"] = "<span style='color:green;>Item added succesfully</span>"
+	return render(request, 'hardware/addItem.html', response)
 

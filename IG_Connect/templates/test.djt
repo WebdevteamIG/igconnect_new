@@ -44,7 +44,7 @@
     ================================================== -->
     <header class="s-header">
         <div class="header-logo">
-            <a class="site-logo" href="index.html">
+            <a class="site-logo" href="/">
                 <div style="float:left;">
                     <img class="header-logo-img" src="{% static 'images/favicon.png' %}" alt="Homepage" align="left" />
                 </div>
