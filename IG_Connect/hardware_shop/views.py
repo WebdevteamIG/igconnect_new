@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render,redirect
 from .models import *
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required,user_passes_test
 import smtplib
 import datetime
 
@@ -48,6 +49,7 @@ def lend(request):
 		response["component"] = component
 	return render(request, "hardware/lend.html", response)
 
+@login_required(login_url='/auth/login')
 def lendedComponents(request):
 	response = {}
 	lended_comp = ComponentLending.objects.filter(user=request.user)
