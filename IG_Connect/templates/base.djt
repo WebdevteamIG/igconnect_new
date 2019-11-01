@@ -187,8 +187,9 @@ $(window).scroll(function() {
      		 {% endif %}
         </ul>
     </div>
-    <div class="navline"></div>
+    <!-- <div class="navline"></div> -->
 </nav>
+<br><br><br><br><br>
 
 <!-- <div class="background"> -->
 			{% block content %}
