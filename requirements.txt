@@ -1,5 +1,5 @@
 appdirs==1.4.3
-Django==1.11.28
+Django==1.11.29
 django-ckeditor==5.6.1
 django-js-asset==1.1.0
 djangorestframework==3.9.1
