@@ -31,20 +31,16 @@ def signin(request):
         user_name = request.POST['user_name']
         try:
             user = User._default_manager.get(username__iexact = user_name.lower())
-            print user
+            print(user)
             username = user.username
         except:
-            print "username invalid"
+            print("username invalid")
             try:
                 user = User.objects.filter(email = user_name).last()
-                print user
-                print user.username
                 username = user.username
             except:
-                print "Even email invalid"
                 return render(request, 'authentication/login.djt', {'error' : 'User-Name/Password Invalid'})
         password = request.POST['password']
-        print username
         user = authenticate(username = username, password = password)
         if user == None :
             return render(request, 'authentication/login.djt', {'error' : 'User-Name/Password Invalid'})
@@ -84,35 +80,35 @@ def signup(request):
     if request.user.is_active == True and request.user.is_authenticated():
         return redirect('/')
     if request.method == 'POST':
-	if Userprofile.objects.filter(regNum=request.POST['regNum']).count() > 0 :
-            response = {}
-            response['error'] = 'This Registration Number Has Already Been Registered'
-            return render(request, 'authentication/signup.djt', response)
-	
-        username  = request.POST['username']
-        emailadr  = request.POST['email']
-        password  = request.POST['password1']
-        password2 = request.POST['password2']
-        first_name = request.POST['first_name']
-        last_name  = request.POST['last_name']
-        if password != password2 :
-            return render(request, 'authentication/signup.djt', {'error' : 'Passwords don\'t match'})
-        try:
-            user = User._default_manager.get(username__iexact = username.lower())
-            return render(request, 'authentication/signup.djt', {'error':'User-Name Already Exists'})
-        except User.DoesNotExist:
-            user = User.objects.create_user(username = username, email = emailadr, first_name = first_name, last_name = last_name)
-            user.set_password(password)
-            user.save()
-            profile = Userprofile()
-            profile.user = user
-            profile.regNum = request.POST['regNum']
-            profile.save()
-            user = authenticate(username = username, password = password)
-            login(request, user)
-            
-            return redirect('/auth/updateProfile')
-        # return redirect('/auth/login')
+        if Userprofile.objects.filter(regNum=request.POST['regNum']).count() > 0 :
+                response = {}
+                response['error'] = 'This Registration Number Has Already Been Registered'
+                return render(request, 'authentication/signup.djt', response)
+        
+                username  = request.POST['username']
+                emailadr  = request.POST['email']
+                password  = request.POST['password1']
+                password2 = request.POST['password2']
+                first_name = request.POST['first_name']
+                last_name  = request.POST['last_name']
+                if password != password2 :
+                    return render(request, 'authentication/signup.djt', {'error' : 'Passwords don\'t match'})
+                try:
+                    user = User._default_manager.get(username__iexact = username.lower())
+                    return render(request, 'authentication/signup.djt', {'error':'User-Name Already Exists'})
+                except User.DoesNotExist:
+                    user = User.objects.create_user(username = username, email = emailadr, first_name = first_name, last_name = last_name)
+                    user.set_password(password)
+                    user.save()
+                    profile = Userprofile()
+                    profile.user = user
+                    profile.regNum = request.POST['regNum']
+                    profile.save()
+                    user = authenticate(username = username, password = password)
+                    login(request, user)
+                    
+                    return redirect('/auth/updateProfile')
+            # return redirect('/auth/login')
         
     return render(request, 'authentication/signup.djt', None)
 
@@ -201,6 +197,5 @@ def contactUs(request) :
             send_mail('IG Connect Contact Us Message',Content,sender,rlist,fail_silently=False,)
             return redirect('/')
         except :
-            print 'error sending message'
             response['error'] = 'Error sending Message , Sorry !!!'
     return redirect('/')

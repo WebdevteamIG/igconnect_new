@@ -134,7 +134,6 @@ def viewEvent(request,id) :
 			eventReqUser = EventRegisterationRequest.objects.filter(event=event,status=4)
 			title = "Participated Users"
 			if event.contents.filter(title = title).count() == 0:
-				print "new participation list"
 				content = Content()
 				content.title = title
 				content.content = "<h5 class='headh3'>List of users participated</h5>\n<ol>"
@@ -146,7 +145,6 @@ def viewEvent(request,id) :
 				event.save()
 				
 			else :
-				print "old participation list"
 				content = event.contents.get(title = title)
 				content.content = "<h5 class='headh3'>List of Participants :-</h5>\n<ol>"
 				for regRequest in eventReqUser :
@@ -301,13 +299,10 @@ def getResponse(request):
 		return Response(data)
 
 	if request.method == 'POST' :
-		print request.POST
 		eventId =  request.POST['eventpk']
 		username = request.POST['username']
 		event = Event.objects.get(pk = eventId)
-		print event
 		user = User.objects.get(username = username)
-		print user
 		questions = EventQuestion.objects.filter(event = event)
 		for question in questions:
 			questionResponse = EventQuestionResponse.objects.get(question = question, user = user)
@@ -324,12 +319,10 @@ def getResponse(request):
 def updateRegRequest(request):
 	data = {}
 	if request.method == 'PUT' :
-		print request.POST
 		# print stserial.data
 		requestId =  request.POST['requestId']
 		status = request.POST['status']
 		regRequest = EventRegisterationRequest.objects.get(pk = requestId)
-		print regRequest
 		regRequest.status = status
 		regRequest.save()
 		return Response(data)
@@ -337,7 +330,6 @@ def updateRegRequest(request):
 @login_required(login_url='/auth/login')
 @user_passes_test(checkuserifsuperuser, login_url='/auth/login')
 def downloadResponses(request,id):
-	print "export"
 	event = Event.objects.get(id=id)
 	questions = EventQuestion.objects.filter(event = event)
 	regRequests = EventRegisterationRequest.objects.filter(event = event)

@@ -88,7 +88,6 @@ def editProject(request,projectname) :
 	try:
 		project = Project.objects.get(projectName=projectname)
 		if project.user != request.user:
-			print "illegal access to project"
 			raise Exception('Illegal Access')
 
 		if request.method == 'POST' :
@@ -156,7 +155,6 @@ def projectLike(request, projectname):
 	newLike.save()
 	project.likecount+=1
 	project.save()
-	print project.likecount
 	return redirect("/projects")
 
 @login_required(login_url='/auth/login/')

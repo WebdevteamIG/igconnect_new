@@ -57,7 +57,6 @@ def requestItem(request,id) :
 		item = Item.objects.get(id=id)
 		item.status = 2
 		item.save()
-		print "item modified"
 
 		requestObj = ItemRequest()
 		requestObj.user = request.user
@@ -75,7 +74,6 @@ def requestItem(request,id) :
 		logObj.save()
 
 	except Exception as e :
-		print e
 		return HttpResponse("There is no such Item, Sorry :) !!!")
 
 	return redirect('/borrow')
@@ -170,7 +168,7 @@ def approveUser(request,regNum) :
 		userProfile.isApproved = True
 		userProfile.save()
 	except :
-		print "error occured while approving user"
+		pass
 	return redirect('/borrow/initialApproval')
 
 @login_required(login_url='/auth/login')

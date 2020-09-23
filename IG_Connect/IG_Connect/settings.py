@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication.apps.AuthenticationConfig',
     'projects.apps.ProjectsConfig',
-    'events.apps.EventsConfig',
     'updates',
     'inventory',
     'experience',
@@ -51,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
-    'hardware_shop'
+    'hardware_shop',
+    'events'
 ]
 
 MIDDLEWARE = [
@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'IG_Connect.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ig_db',
-        'USER': 'root',
-        'PASSWORD': 'mysql_password',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+        #'USER': 'root',
+        #'PASSWORD': 'mysql_password',
         # 'PASSWORD': 'qwerty123',
     # 'PASSWORD': 'Innovate@123',
     }
