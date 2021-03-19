@@ -2,7 +2,7 @@ appdirs==1.4.3
 Django==1.11.29
 django-ckeditor==5.6.1
 django-js-asset==1.1.0
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 olefile==0.44
 packaging==16.8
 Pillow==6.2.0
